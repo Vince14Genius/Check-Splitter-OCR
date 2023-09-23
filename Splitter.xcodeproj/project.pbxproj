@@ -13,7 +13,7 @@
 		4E4B68C72ABD2FBB000CE063 /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C62ABD2FBB000CE063 /* Currencies.swift */; };
 		4E4B68C92ABD30A4000CE063 /* CurrencyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C82ABD30A4000CE063 /* CurrencyPicker.swift */; };
 		4E547BF52ABE44E100196B65 /* Stages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E547BF42ABE44E100196B65 /* Stages.swift */; };
-		4E7F30B92A9C007E00555493 /* OCRTestAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30B82A9C007E00555493 /* OCRTestAppApp.swift */; };
+		4E7F30B92A9C007E00555493 /* SplitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30B82A9C007E00555493 /* SplitterApp.swift */; };
 		4E7F30BB2A9C007E00555493 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30BA2A9C007E00555493 /* ContentView.swift */; };
 		4E7F30BD2A9C007F00555493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BC2A9C007F00555493 /* Assets.xcassets */; };
 		4E7F30C02A9C007F00555493 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */; };
@@ -21,6 +21,8 @@
 		4E7F30C92A9FE6D000555493 /* ImportedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30C82A9FE6D000555493 /* ImportedImageView.swift */; };
 		4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */; };
 		4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CC2A9FF79700555493 /* ImagePicker.swift */; };
+		4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */; };
+		4ECC77132ABF92BE00C88D6F /* OCRBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */; };
 		4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EC2AA42E15004B4ABF /* Item.swift */; };
 		4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */; };
 		4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */; };
@@ -35,8 +37,8 @@
 		4E4B68C62ABD2FBB000CE063 /* Currencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
 		4E4B68C82ABD30A4000CE063 /* CurrencyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPicker.swift; sourceTree = "<group>"; };
 		4E547BF42ABE44E100196B65 /* Stages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stages.swift; sourceTree = "<group>"; };
-		4E7F30B52A9C007E00555493 /* OCRTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4E7F30B82A9C007E00555493 /* OCRTestAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTestAppApp.swift; sourceTree = "<group>"; };
+		4E7F30B52A9C007E00555493 /* Splitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4E7F30B82A9C007E00555493 /* SplitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitterApp.swift; sourceTree = "<group>"; };
 		4E7F30BA2A9C007E00555493 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E7F30BC2A9C007F00555493 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -44,6 +46,8 @@
 		4E7F30C82A9FE6D000555493 /* ImportedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedImageView.swift; sourceTree = "<group>"; };
 		4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+OCR Processing.swift"; sourceTree = "<group>"; };
 		4E7F30CC2A9FF79700555493 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPropertyField.swift; sourceTree = "<group>"; };
+		4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRBottomBar.swift; sourceTree = "<group>"; };
 		4EF902EC2AA42E15004B4ABF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultLabel.swift; sourceTree = "<group>"; };
 		4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBarState.swift; sourceTree = "<group>"; };
@@ -77,6 +81,7 @@
 			children = (
 				4E4B68C02ABA7412000CE063 /* FloatingExpandedList.swift */,
 				4E4B68C32ABA7495000CE063 /* FloatingFocusedBar.swift */,
+				4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */,
 			);
 			path = Subviews;
 			sourceTree = "<group>";
@@ -84,7 +89,7 @@
 		4E7F30AC2A9C007E00555493 = {
 			isa = PBXGroup;
 			children = (
-				4E7F30B72A9C007E00555493 /* OCRTestApp */,
+				4E7F30B72A9C007E00555493 /* Splitter */,
 				4E7F30B62A9C007E00555493 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -92,16 +97,17 @@
 		4E7F30B62A9C007E00555493 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4E7F30B52A9C007E00555493 /* OCRTestApp.app */,
+				4E7F30B52A9C007E00555493 /* Splitter.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4E7F30B72A9C007E00555493 /* OCRTestApp */ = {
+		4E7F30B72A9C007E00555493 /* Splitter */ = {
 			isa = PBXGroup;
 			children = (
-				4E7F30B82A9C007E00555493 /* OCRTestAppApp.swift */,
+				4E7F30B82A9C007E00555493 /* SplitterApp.swift */,
 				4E7F30BA2A9C007E00555493 /* ContentView.swift */,
+				4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */,
 				4E4B68C22ABA743C000CE063 /* Floating Items List */,
 				4EF902F62AA54CB6004B4ABF /* View Elements */,
 				4EF902F42AA54C88004B4ABF /* Model */,
@@ -109,7 +115,7 @@
 				4E7F30BC2A9C007F00555493 /* Assets.xcassets */,
 				4E7F30BE2A9C007F00555493 /* Preview Content */,
 			);
-			path = OCRTestApp;
+			path = Splitter;
 			sourceTree = "<group>";
 		};
 		4E7F30BE2A9C007F00555493 /* Preview Content */ = {
@@ -155,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4E7F30B42A9C007E00555493 /* OCRTestApp */ = {
+		4E7F30B42A9C007E00555493 /* Splitter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4E7F30C32A9C007F00555493 /* Build configuration list for PBXNativeTarget "OCRTestApp" */;
+			buildConfigurationList = 4E7F30C32A9C007F00555493 /* Build configuration list for PBXNativeTarget "Splitter" */;
 			buildPhases = (
 				4E7F30B12A9C007E00555493 /* Sources */,
 				4E7F30B22A9C007E00555493 /* Frameworks */,
@@ -167,9 +173,9 @@
 			);
 			dependencies = (
 			);
-			name = OCRTestApp;
-			productName = OCRTestApp;
-			productReference = 4E7F30B52A9C007E00555493 /* OCRTestApp.app */;
+			name = Splitter;
+			productName = Splitter;
+			productReference = 4E7F30B52A9C007E00555493 /* Splitter.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -187,7 +193,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4E7F30B02A9C007E00555493 /* Build configuration list for PBXProject "OCRTestApp" */;
+			buildConfigurationList = 4E7F30B02A9C007E00555493 /* Build configuration list for PBXProject "Splitter" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -200,7 +206,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4E7F30B42A9C007E00555493 /* OCRTestApp */,
+				4E7F30B42A9C007E00555493 /* Splitter */,
 			);
 		};
 /* End PBXProject section */
@@ -228,12 +234,14 @@
 				4E547BF52ABE44E100196B65 /* Stages.swift in Sources */,
 				4E7F30C72A9FE5DF00555493 /* OCRPhotoModel.swift in Sources */,
 				4EF902F32AA54C52004B4ABF /* FloatingItemsList.swift in Sources */,
+				4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */,
 				4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */,
+				4ECC77132ABF92BE00C88D6F /* OCRBottomBar.swift in Sources */,
 				4E4B68C72ABD2FBB000CE063 /* Currencies.swift in Sources */,
 				4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */,
 				4E4B68C92ABD30A4000CE063 /* CurrencyPicker.swift in Sources */,
 				4EF902F82AA55134004B4ABF /* OCRResultButton.swift in Sources */,
-				4E7F30B92A9C007E00555493 /* OCRTestAppApp.swift in Sources */,
+				4E7F30B92A9C007E00555493 /* SplitterApp.swift in Sources */,
 				4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */,
 				4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */,
 				4E4B68C42ABA7495000CE063 /* FloatingFocusedBar.swift in Sources */,
@@ -371,10 +379,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OCRTestApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Splitter/Preview Content\"";
 				DEVELOPMENT_TEAM = S5LH6VYMA5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Splitter;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -385,7 +394,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Vince14Genius.OCRTestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Vince14Genius.Check-Splitter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -400,10 +409,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"OCRTestApp/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Splitter/Preview Content\"";
 				DEVELOPMENT_TEAM = S5LH6VYMA5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Splitter;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -414,7 +424,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.Vince14Genius.OCRTestApp;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Vince14Genius.Check-Splitter";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -425,7 +435,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4E7F30B02A9C007E00555493 /* Build configuration list for PBXProject "OCRTestApp" */ = {
+		4E7F30B02A9C007E00555493 /* Build configuration list for PBXProject "Splitter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4E7F30C12A9C007F00555493 /* Debug */,
@@ -434,7 +444,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4E7F30C32A9C007F00555493 /* Build configuration list for PBXNativeTarget "OCRTestApp" */ = {
+		4E7F30C32A9C007F00555493 /* Build configuration list for PBXNativeTarget "Splitter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4E7F30C42A9C007F00555493 /* Debug */,

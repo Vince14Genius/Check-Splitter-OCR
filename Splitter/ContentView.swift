@@ -62,11 +62,14 @@ struct ContentView: View {
                 ScrollView([.horizontal, .vertical]) {
                     let frameWidthRaw = uiImage.size.width * imageScale
                     let frameHeightRaw = uiImage.size.height * imageScale
-                    let frameWidth = isRotated ? frameHeightRaw : frameWidthRaw
-                    let frameHeight = isRotated ? frameWidthRaw : frameHeightRaw
-                    let frameSize = CGSizeMake(frameWidth, frameHeight)
+                    let frameSize = CGSizeMake(
+                        isRotated ? frameHeightRaw : frameWidthRaw,
+                        isRotated ? frameWidthRaw : frameHeightRaw
+                    )
                     ZStack {
-                        ImportedImageView(imageState: viewModel.imageState)
+                        Image(uiImage: uiImage)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
                         ZStack {
                             ForEach(ocrResults.indices, id: \.self) { i in
                                 let result = ocrResults[i]
@@ -84,58 +87,36 @@ struct ContentView: View {
                     }
                     .frame(width: frameWidthRaw, height: frameHeightRaw)
                 }
-            default:
-                ImportedImageView(imageState: viewModel.imageState)
+            case .loading:
+                Centered {
+                    ProgressView()
+                }
+            case .empty:
+                Centered {
+                    VStack {
+                        Image(systemName: "text.viewfinder")
+                            .font(.title)
+                            .padding(.bottom)
+                        Text("Scan a receipt from your Photo Library")
+                            .font(.headline)
+                        Text("Or enter items manually")
+                    }
+                }
+            case .failure:
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 40))
+                    .foregroundColor(.white)
             }
         }
         .background(Color(.secondarySystemBackground))
         .overlay(alignment: .bottom) {
-            VStack(spacing: 0) {
-                if !ocrResults.isEmpty {
-                    HStack(spacing: 0) {
-                        Button {
-                            isShowingOCRLabels.toggle()
-                        } label: {
-                            Image(systemName: isShowingOCRLabels ? "eye" : "eye.slash")
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                        }
-                        Divider()
-                        Button {
-                            zoomScale = zoomScale.next()
-                        } label: {
-                            Label("\(zoomScale.rawValue)x", systemImage: "plus.magnifyingglass")
-                                .padding(.horizontal, 12)
-                                .padding(.vertical, 8)
-                        }
-                    }
-                    .fixedSize(horizontal: false, vertical: true)
-                    .background(
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(.regularMaterial)
-                            .stroke(.primary.opacity(0.1))
-                    )
-                    .padding()
-                }
-                Divider()
-                HStack {
-                    if !ocrResults.isEmpty {
-                        ImagePicker(selection: $viewModel.imageSelection)
-                        Spacer()
-                        Button("Next") {
-                            
-                        }
-                        .buttonStyle(.borderedProminent)
-                        .disabled(items.isEmpty)
-                    } else {
-                        Spacer()
-                        ImagePicker(selection: $viewModel.imageSelection)
-                        Spacer()
-                    }
-                }
-                .padding()
-                .background(.regularMaterial)
-            }
+            OCRBottomBar(
+                items: items,
+                ocrResults: ocrResults,
+                isShowingOCRLabels: $isShowingOCRLabels,
+                zoomScale: $zoomScale,
+                viewModel: $viewModel
+            )
         }
         .overlay(alignment: .topLeading) {
             CurrencyPicker(currency: $currency)

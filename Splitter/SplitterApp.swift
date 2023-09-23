@@ -1,6 +1,6 @@
 //
-//  OCRTestAppApp.swift
-//  OCRTestApp
+//  SplitterApp.swift
+//  Check Splitter
 //
 //  Created by Vincent C. on 8/27/23.
 //
@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct OCRTestAppApp: App {
+struct SplitterApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
