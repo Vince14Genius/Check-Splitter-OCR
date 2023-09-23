@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+enum Stage: Hashable {
+    case totalCost, items, payers
+    
+    var completionRequiredStages: [Stage] {
+        switch self {
+        case .totalCost:
+            []
+        case .items:
+            [.totalCost]
+        case .payers:
+            [.totalCost, .items]
+        }
+    }
+}

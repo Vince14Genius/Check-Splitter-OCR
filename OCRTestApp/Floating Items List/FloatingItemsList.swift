@@ -10,6 +10,7 @@ import SwiftUI
 struct FloatingItemsList: View {
     @Binding var items: [Item]
     @Binding var state: FloatingBarState
+    let currency: Currency
     
     var body: some View {
         HStack {
@@ -18,7 +19,7 @@ struct FloatingItemsList: View {
             }
             VStack {
                 if case .focused(let item) = state {
-                    FloatingFocusedBar(item: item, items: $items, state: $state)
+                    FloatingFocusedBar(item: item, items: $items, state: $state, currency: currency)
                 } else {
                     HStack {
                         Text("\(items.count) items")
@@ -49,14 +50,14 @@ struct FloatingItemsList: View {
                     if items.isEmpty {
                         Text("No items yet.")
                     } else {
-                        FloatingExpandedList(items: $items, state: $state)
+                        FloatingExpandedList(items: $items, state: $state, currency: currency)
                     }
                 }
             }
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 16)
-                    .fill(.thickMaterial)
+                    .fill(.regularMaterial)
                     .stroke(.primary.opacity(0.1))
             )
         }

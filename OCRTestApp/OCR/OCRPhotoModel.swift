@@ -13,11 +13,37 @@ import CoreTransferable
     
     // MARK: - Imported Image
     
-    enum ImageState {
+    enum ImageState: Equatable {
         case empty
         case loading(Progress)
         case success(UIImage)
         case failure(Error)
+        
+        static func == (lhs: OCRPhotoModel.ImageState, rhs: OCRPhotoModel.ImageState) -> Bool {
+            switch lhs {
+            case .empty:
+                switch rhs {
+                case .empty: true
+                default: false
+                }
+            case .loading(_):
+                switch rhs {
+                case .loading(_): true
+                default: false
+                }
+            case .success(_):
+                switch rhs {
+                case .success(_): true
+                default: false
+                }
+            case .failure(_):
+                switch rhs {
+                case .failure(_): true
+                default: false
+                }
+            }
+        }
+        
     }
     
     enum TransferError: Error {

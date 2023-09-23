@@ -7,18 +7,48 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E4B68BF2ABA5DBF000CE063 /* Centered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68BE2ABA5DBF000CE063 /* Centered.swift */; };
+		4E4B68C12ABA7412000CE063 /* FloatingExpandedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C02ABA7412000CE063 /* FloatingExpandedList.swift */; };
+		4E4B68C42ABA7495000CE063 /* FloatingFocusedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C32ABA7495000CE063 /* FloatingFocusedBar.swift */; };
+		4E4B68C72ABD2FBB000CE063 /* Currencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C62ABD2FBB000CE063 /* Currencies.swift */; };
+		4E4B68C92ABD30A4000CE063 /* CurrencyPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C82ABD30A4000CE063 /* CurrencyPicker.swift */; };
+		4E547BF52ABE44E100196B65 /* Stages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E547BF42ABE44E100196B65 /* Stages.swift */; };
 		4E7F30B92A9C007E00555493 /* OCRTestAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30B82A9C007E00555493 /* OCRTestAppApp.swift */; };
 		4E7F30BB2A9C007E00555493 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30BA2A9C007E00555493 /* ContentView.swift */; };
 		4E7F30BD2A9C007F00555493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BC2A9C007F00555493 /* Assets.xcassets */; };
 		4E7F30C02A9C007F00555493 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */; };
+		4E7F30C72A9FE5DF00555493 /* OCRPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */; };
+		4E7F30C92A9FE6D000555493 /* ImportedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30C82A9FE6D000555493 /* ImportedImageView.swift */; };
+		4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */; };
+		4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CC2A9FF79700555493 /* ImagePicker.swift */; };
+		4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EC2AA42E15004B4ABF /* Item.swift */; };
+		4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */; };
+		4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */; };
+		4EF902F32AA54C52004B4ABF /* FloatingItemsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F22AA54C52004B4ABF /* FloatingItemsList.swift */; };
+		4EF902F82AA55134004B4ABF /* OCRResultButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F72AA55134004B4ABF /* OCRResultButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4E4B68BE2ABA5DBF000CE063 /* Centered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Centered.swift; sourceTree = "<group>"; };
+		4E4B68C02ABA7412000CE063 /* FloatingExpandedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingExpandedList.swift; sourceTree = "<group>"; };
+		4E4B68C32ABA7495000CE063 /* FloatingFocusedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingFocusedBar.swift; sourceTree = "<group>"; };
+		4E4B68C62ABD2FBB000CE063 /* Currencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Currencies.swift; sourceTree = "<group>"; };
+		4E4B68C82ABD30A4000CE063 /* CurrencyPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyPicker.swift; sourceTree = "<group>"; };
+		4E547BF42ABE44E100196B65 /* Stages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stages.swift; sourceTree = "<group>"; };
 		4E7F30B52A9C007E00555493 /* OCRTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OCRTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7F30B82A9C007E00555493 /* OCRTestAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRTestAppApp.swift; sourceTree = "<group>"; };
 		4E7F30BA2A9C007E00555493 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		4E7F30BC2A9C007F00555493 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRPhotoModel.swift; sourceTree = "<group>"; };
+		4E7F30C82A9FE6D000555493 /* ImportedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportedImageView.swift; sourceTree = "<group>"; };
+		4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+OCR Processing.swift"; sourceTree = "<group>"; };
+		4E7F30CC2A9FF79700555493 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4EF902EC2AA42E15004B4ABF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultLabel.swift; sourceTree = "<group>"; };
+		4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBarState.swift; sourceTree = "<group>"; };
+		4EF902F22AA54C52004B4ABF /* FloatingItemsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingItemsList.swift; sourceTree = "<group>"; };
+		4EF902F72AA55134004B4ABF /* OCRResultButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +62,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4E4B68C22ABA743C000CE063 /* Floating Items List */ = {
+			isa = PBXGroup;
+			children = (
+				4EF902F22AA54C52004B4ABF /* FloatingItemsList.swift */,
+				4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */,
+				4E4B68C52ABA750F000CE063 /* Subviews */,
+			);
+			path = "Floating Items List";
+			sourceTree = "<group>";
+		};
+		4E4B68C52ABA750F000CE063 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				4E4B68C02ABA7412000CE063 /* FloatingExpandedList.swift */,
+				4E4B68C32ABA7495000CE063 /* FloatingFocusedBar.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
 		4E7F30AC2A9C007E00555493 = {
 			isa = PBXGroup;
 			children = (
@@ -53,6 +102,10 @@
 			children = (
 				4E7F30B82A9C007E00555493 /* OCRTestAppApp.swift */,
 				4E7F30BA2A9C007E00555493 /* ContentView.swift */,
+				4E4B68C22ABA743C000CE063 /* Floating Items List */,
+				4EF902F62AA54CB6004B4ABF /* View Elements */,
+				4EF902F42AA54C88004B4ABF /* Model */,
+				4EF902F52AA54C9B004B4ABF /* OCR */,
 				4E7F30BC2A9C007F00555493 /* Assets.xcassets */,
 				4E7F30BE2A9C007F00555493 /* Preview Content */,
 			);
@@ -65,6 +118,38 @@
 				4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		4EF902F42AA54C88004B4ABF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				4EF902EC2AA42E15004B4ABF /* Item.swift */,
+				4E547BF42ABE44E100196B65 /* Stages.swift */,
+				4E4B68C62ABD2FBB000CE063 /* Currencies.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		4EF902F52AA54C9B004B4ABF /* OCR */ = {
+			isa = PBXGroup;
+			children = (
+				4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */,
+				4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */,
+			);
+			path = OCR;
+			sourceTree = "<group>";
+		};
+		4EF902F62AA54CB6004B4ABF /* View Elements */ = {
+			isa = PBXGroup;
+			children = (
+				4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */,
+				4EF902F72AA55134004B4ABF /* OCRResultButton.swift */,
+				4E7F30CC2A9FF79700555493 /* ImagePicker.swift */,
+				4E7F30C82A9FE6D000555493 /* ImportedImageView.swift */,
+				4E4B68BE2ABA5DBF000CE063 /* Centered.swift */,
+				4E4B68C82ABD30A4000CE063 /* CurrencyPicker.swift */,
+			);
+			path = "View Elements";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +222,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E7F30C92A9FE6D000555493 /* ImportedImageView.swift in Sources */,
 				4E7F30BB2A9C007E00555493 /* ContentView.swift in Sources */,
+				4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */,
+				4E547BF52ABE44E100196B65 /* Stages.swift in Sources */,
+				4E7F30C72A9FE5DF00555493 /* OCRPhotoModel.swift in Sources */,
+				4EF902F32AA54C52004B4ABF /* FloatingItemsList.swift in Sources */,
+				4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */,
+				4E4B68C72ABD2FBB000CE063 /* Currencies.swift in Sources */,
+				4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */,
+				4E4B68C92ABD30A4000CE063 /* CurrencyPicker.swift in Sources */,
+				4EF902F82AA55134004B4ABF /* OCRResultButton.swift in Sources */,
 				4E7F30B92A9C007E00555493 /* OCRTestAppApp.swift in Sources */,
+				4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */,
+				4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */,
+				4E4B68C42ABA7495000CE063 /* FloatingFocusedBar.swift in Sources */,
+				4E4B68C12ABA7412000CE063 /* FloatingExpandedList.swift in Sources */,
+				4E4B68BF2ABA5DBF000CE063 /* Centered.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

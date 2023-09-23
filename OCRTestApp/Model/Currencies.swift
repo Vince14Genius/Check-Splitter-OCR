@@ -1,5 +1,12 @@
+//
+//  Currencies.swift
+//  OCRTestApp
+//
+//  Created by Vincent C. on 9/21/23.
+//
+
 /// ISO 4217 currency codes
-enum Currencies: String, CaseIterable {
+enum Currency: String, CaseIterable {
     case aed
     case afn
     case all

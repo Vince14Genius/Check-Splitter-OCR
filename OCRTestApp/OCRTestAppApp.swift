@@ -12,6 +12,7 @@ struct OCRTestAppApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .monospacedDigit()
         }
     }
 }

@@ -17,9 +17,20 @@ struct ImportedImageView: View {
                 .resizable()
                 .aspectRatio(contentMode: .fit)
         case .loading:
-            ProgressView()
+            Centered {
+                ProgressView()
+            }
         case .empty:
-            Text("No image selected.")
+            Centered {
+                VStack {
+                    Image(systemName: "text.viewfinder")
+                        .font(.title)
+                        .padding(.bottom)
+                    Text("Scan a receipt from your Photo Library")
+                        .font(.headline)
+                    Text("Or enter items manually")
+                }
+            }
         case .failure:
             Image(systemName: "exclamationmark.triangle.fill")
                 .font(.system(size: 40))

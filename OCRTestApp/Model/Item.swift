@@ -21,7 +21,7 @@ extension Item {
         var replacementIndex: [Item].Index?
     }
     
-    init?(_ initiationValue: Initiation) {
+    init?(from initiationValue: Initiation) {
         guard
             let name = initiationValue.name,
             let price = initiationValue.price
