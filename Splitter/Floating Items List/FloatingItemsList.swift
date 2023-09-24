@@ -42,7 +42,6 @@ struct FloatingItemsList: View {
                     HStack {
                         Text("\(items.count) items")
                             .font(state == .expanded ? .title.bold() : .title)
-                            .foregroundStyle(shouldShowRedTitle ? .red : .primary)
                         
                         if case .expanded = state {
                             Spacer()
@@ -70,6 +69,7 @@ struct FloatingItemsList: View {
                         if items.isEmpty {
                             Spacer()
                             Text("No items yet.")
+                                .foregroundStyle(shouldShowRedTitle ? .red : .primary)
                             Spacer()
                         } else {
                             FloatingExpandedList(items: $items, state: $state, currency: currency)
