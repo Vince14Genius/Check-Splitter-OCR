@@ -11,7 +11,7 @@ struct OCRBottomBar: View {
     let items: [Item]
     let ocrResults: [OCRResult]
     @Binding var isShowingOCRLabels: Bool
-    @Binding var zoomScale: ZoomScale
+    @Binding var zoomScale: OCRResultsFrame.ZoomScale
     @Binding var viewModel: OCRPhotoModel
     
     var body: some View {
