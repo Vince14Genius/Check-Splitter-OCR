@@ -70,18 +70,23 @@ struct ItemPropertyField: View {
                 case .name:
                     if let name = item.name {
                         Text(name)
+                            .foregroundStyle(Color(.label))
                     } else {
-                        Text("")
+                        Text("Item Name")
+                            .foregroundStyle(Color(.secondaryLabel))
+                            .italic()
                     }
                 case .price(let currency):
                     if let price = item.price {
                         Text(price.formatted(.currency(code: currency.rawValue)))
+                            .foregroundStyle(Color(.label))
                     } else {
-                        Text("")
+                        Text("Price")
+                            .foregroundStyle(Color(.secondaryLabel))
+                            .italic()
                     }
                 }
             }
-            .foregroundStyle(Color(.label))
             .font(.headline)
             .padding(.vertical, 4)
             .padding(.horizontal, 8)
@@ -89,6 +94,7 @@ struct ItemPropertyField: View {
                 RoundedRectangle(cornerRadius: 6)
                     .fill(themeColor.opacity(0.3))
             )
+            .monospacedDigit()
         }
         .alert(editAlertTitle, isPresented: $isShowingEditAlert) {
             TextField(editAlertTitle, text: $textFieldValue)

@@ -26,7 +26,33 @@ struct FloatingExpandedList: View {
                     Divider()
                 }
             }
+            .padding(.bottom)
         }
+        .overlay(alignment: .bottom) {
+            NewItemButton(state: $state)
+        }
+    }
+}
+
+private struct NewItemButton: View {
+    @Binding var state: FloatingBarState
+    
+    var body: some View {
+        Button {
+            state = .focused(item: .init())
+        } label: {
+            HStack {
+                Spacer()
+                Image(systemName: "plus")
+                Spacer()
+            }
+            .padding(.vertical, 10)
+        }
+        .background(
+            RoundedRectangle(cornerRadius: 8)
+                .fill(.thinMaterial)
+                .stroke(.primary.opacity(0.1))
+        )
     }
 }
 
@@ -55,6 +81,7 @@ private struct ItemRowButton: View {
                         .fill(Color.accentColor)
                 )
                 .foregroundStyle(.background)
+                .monospacedDigit()
         }
     }
 }
