@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct OCRBottomBar: View {
-    let items: [Item]
-    let ocrResults: [OCRResult]
+    let isNextButtonEnabled: Bool
+    let isImageToolbarEnabled: Bool
     @Binding var isShowingOCRLabels: Bool
     @Binding var zoomScale: OCRResultsFrame.ZoomScale
     @Binding var viewModel: OCRPhotoModel
     
     var body: some View {
         VStack(spacing: 0) {
-            if !ocrResults.isEmpty {
+            if isImageToolbarEnabled {
                 HStack(spacing: 0) {
                     FloatingButton {
                         isShowingOCRLabels.toggle()
@@ -27,7 +27,7 @@ struct OCRBottomBar: View {
                     FloatingButton {
                         zoomScale = zoomScale.next()
                     } label: {
-                        Label("\(zoomScale.rawValue)x", systemImage: "plus.magnifyingglass")
+                        Label("\(zoomScale.rawValue.formatted(.number.precision(.fractionLength(1))))x", systemImage: "plus.magnifyingglass")
                     }
                 }
                 .fixedSize(horizontal: false, vertical: true)
@@ -40,19 +40,13 @@ struct OCRBottomBar: View {
             }
             Divider()
             HStack {
-                if !ocrResults.isEmpty {
-                    ImagePicker(selection: $viewModel.imageSelection)
-                    Spacer()
-                    Button("Next") {
-                        
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .disabled(items.isEmpty)
-                } else {
-                    Spacer()
-                    ImagePicker(selection: $viewModel.imageSelection)
-                    Spacer()
+                ImagePicker(selection: $viewModel.imageSelection)
+                Spacer()
+                Button("Next") {
+                    
                 }
+                .buttonStyle(.borderedProminent)
+                .disabled(!isNextButtonEnabled)
             }
             .padding()
             .background(.regularMaterial)

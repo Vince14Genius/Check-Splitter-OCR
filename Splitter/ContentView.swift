@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var floatingBarState: FloatingBarState = .minimized
     
     @State var items = [Item]()
+    @State var totalCost: Decimal?
     @AppStorage("currency", store: .standard) var currency: Currency = .usd
     
     @Environment(\.displayScale) private var displayScale
@@ -24,6 +25,10 @@ struct ContentView: View {
     
     private var imageScale: Double {
         1 / displayScale * zoomScale.rawValue
+    }
+    
+    private var isNextButtonEnabled: Bool {
+        !items.isEmpty && totalCost != nil
     }
     
     var body: some View {
@@ -72,8 +77,8 @@ struct ContentView: View {
         .background(Color(.secondarySystemBackground))
         .overlay(alignment: .bottom) {
             OCRBottomBar(
-                items: items,
-                ocrResults: ocrResults,
+                isNextButtonEnabled: isNextButtonEnabled,
+                isImageToolbarEnabled: !ocrResults.isEmpty,
                 isShowingOCRLabels: $isShowingOCRLabels,
                 zoomScale: $zoomScale,
                 viewModel: $viewModel
@@ -84,8 +89,11 @@ struct ContentView: View {
                 .padding()
         }
         .overlay(alignment: .topTrailing) {
-            FloatingItemsList(items: $items, state: $floatingBarState, currency: currency)
-                .padding()
+            VStack {
+                TotalCostField(value: $totalCost, currency: currency)
+                FloatingItemsList(items: $items, state: $floatingBarState, currency: currency)
+            }
+            .padding()
         }
         .onChange(of: viewModel.imageSelection) {
             ocrResults = []

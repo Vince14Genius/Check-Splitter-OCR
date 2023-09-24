@@ -98,6 +98,14 @@ struct ItemPropertyField: View {
         }
         .alert(editAlertTitle, isPresented: $isShowingEditAlert) {
             TextField(editAlertTitle, text: $textFieldValue)
+                .keyboardType({
+                    switch fieldType {
+                    case .name:
+                        .default
+                    case .price(_):
+                        .decimalPad
+                    }
+                }())
             Button("Cancel", role: .cancel) { textFieldValue = "" }
             Button("Done") { saveText(textFieldValue) }
         }

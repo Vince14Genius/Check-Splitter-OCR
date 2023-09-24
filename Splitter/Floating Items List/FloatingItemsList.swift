@@ -12,6 +12,24 @@ struct FloatingItemsList: View {
     @Binding var state: FloatingBarState
     let currency: Currency
     
+    private var shouldShowRedBorder: Bool {
+        switch state {
+        case .minimized:
+            items.isEmpty
+        case .expanded, .focused(_):
+            false
+        }
+    }
+    
+    private var shouldShowRedTitle: Bool {
+        switch state {
+        case .expanded:
+            items.isEmpty
+        case .minimized, .focused(_):
+            false
+        }
+    }
+    
     var body: some View {
         HStack {
             if state != .expanded {
@@ -24,6 +42,7 @@ struct FloatingItemsList: View {
                     HStack {
                         Text("\(items.count) items")
                             .font(state == .expanded ? .title.bold() : .title)
+                            .foregroundStyle(shouldShowRedTitle ? .red : .primary)
                         
                         if case .expanded = state {
                             Spacer()
@@ -46,11 +65,18 @@ struct FloatingItemsList: View {
                 }
                 
                 if case .expanded = state {
-                    Divider()
-                    if items.isEmpty {
-                        Text("No items yet.")
-                    } else {
-                        FloatingExpandedList(items: $items, state: $state, currency: currency)
+                    VStack {
+                        Divider()
+                        if items.isEmpty {
+                            Spacer()
+                            Text("No items yet.")
+                            Spacer()
+                        } else {
+                            FloatingExpandedList(items: $items, state: $state, currency: currency)
+                        }
+                    }
+                    .overlay(alignment: .bottom) {
+                        NewItemButton(state: $state)
                     }
                 }
             }
@@ -58,10 +84,10 @@ struct FloatingItemsList: View {
             .background(
                 RoundedRectangle(cornerRadius: 16)
                     .fill(.regularMaterial)
-                    .stroke(.primary.opacity(0.1))
+                    .stroke(shouldShowRedBorder ? Color.red : .primary.opacity(0.1))
             )
         }
-        .frame(maxWidth: 400)
+        .frame(maxWidth: 500)
     }
 }
 
