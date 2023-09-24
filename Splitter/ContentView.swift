@@ -55,7 +55,7 @@ struct ContentView: View {
     }
     
     var body: some View {
-        VStack {
+        ZStack {
             switch viewModel.imageState {
             case .success(let uiImage):
                 let isRotated = uiImage.imageOrientation == .right
@@ -86,6 +86,14 @@ struct ContentView: View {
                         .rotationEffect(isRotated ? .degrees(90) : .zero)
                     }
                     .frame(width: frameWidthRaw, height: frameHeightRaw)
+                }
+                if ocrResults.isEmpty {
+                    Text("No text detected from image.")
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 8)
+                                .fill(.regularMaterial)
+                        )
                 }
             case .loading:
                 Centered {
