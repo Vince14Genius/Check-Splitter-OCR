@@ -15,6 +15,13 @@ struct ItemPropertyField: View {
     
     let item: Item.Initiation
     let fieldType: FieldType
+    @Binding var state: FloatingBarState
+    
+    @State private var isShowingEditAlert = false
+    @State private var textFieldValue = ""
+    
+    @State private var isShowingNameEmptyAlert = false
+    @State private var isShowingPriceInvalidAlert = false
     
     private var themeColor: Color {
         switch fieldType {
@@ -25,8 +32,39 @@ struct ItemPropertyField: View {
         }
     }
     
+    private var editAlertTitle: String {
+        switch fieldType {
+        case .name:
+            "Edit Item Name"
+        case .price(_):
+            "Edit Price"
+        }
+    }
+    
+    private func saveText(_ text: String) {
+        defer { textFieldValue = "" }
+        var newItem = item
+        switch fieldType {
+        case .name:
+            guard !textFieldValue.isEmpty else {
+                isShowingNameEmptyAlert = true
+                return
+            }
+            newItem.name = textFieldValue
+        case .price(_):
+            guard let newPrice = Decimal(string: textFieldValue) else {
+                isShowingPriceInvalidAlert = true
+                return
+            }
+            newItem.price = newPrice
+        }
+        state = .focused(item: newItem)
+    }
+    
     var body: some View {
-        Button {} label: {
+        Button {
+            isShowingEditAlert = true
+        } label: {
             Group {
                 switch fieldType {
                 case .name:
@@ -52,6 +90,13 @@ struct ItemPropertyField: View {
                     .fill(themeColor.opacity(0.3))
             )
         }
+        .alert(editAlertTitle, isPresented: $isShowingEditAlert) {
+            TextField(editAlertTitle, text: $textFieldValue)
+            Button("Cancel", role: .cancel) { textFieldValue = "" }
+            Button("Done") { saveText(textFieldValue) }
+        }
+        .alert("Item name cannot be empty!", isPresented: $isShowingNameEmptyAlert) {}
+        .alert("Invalid price: not a number!", isPresented: $isShowingPriceInvalidAlert) {}
     }
 }
 

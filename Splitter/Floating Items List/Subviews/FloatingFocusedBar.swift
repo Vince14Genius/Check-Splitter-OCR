@@ -15,9 +15,9 @@ struct FloatingFocusedBar: View {
     
     var body: some View {
         HStack {
-            ItemPropertyField(item: item, fieldType: .name)
+            ItemPropertyField(item: item, fieldType: .name, state: $state)
             Spacer()
-            ItemPropertyField(item: item, fieldType: .price(currency))
+            ItemPropertyField(item: item, fieldType: .price(currency), state: $state)
             CancelButton(state: $state)
             ConfirmButton(item: item, items: $items, state: $state)
         }
