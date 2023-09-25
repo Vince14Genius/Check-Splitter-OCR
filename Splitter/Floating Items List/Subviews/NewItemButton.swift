@@ -19,13 +19,8 @@ struct NewItemButton: View {
                 Image(systemName: "plus")
                 Spacer()
             }
-            .padding(.vertical, 10)
+            .padding(.top, 10)
         }
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(.thinMaterial)
-                .stroke(.primary.opacity(0.1))
-        )
     }
 }
 

@@ -11,53 +11,55 @@ struct FloatingExpandedList: View {
     @Binding var items: [Item]
     @Binding var state: FloatingBarState
     let currency: Currency
+    let shouldShowRedTitle: Bool
     
     var body: some View {
-        ScrollView(.vertical) {
-            VStack {
-                ForEach(items.indices, id: \.self) { i in
-                    let item = items[i]
-                    HStack {
-                        ItemRowButton(item: item, replacementIndex: i, state: $state, currency: currency)
-                        Divider()
-                        ItemDeleteButton(item: item, items: $items)
+        VStack(spacing: 0) {
+            Divider()
+            ScrollView(.vertical) {
+                VStack {
+                    InstructionsBanner(text: "To create items, tap on item names and price numbers from your scanned receipt. Or do it manually here.")
+                        .padding(.top)
+                    if items.isEmpty {
+                        Text("No items yet.")
+                            .foregroundStyle(shouldShowRedTitle ? .red : .primary)
+                            .padding()
+                    } else {
+                        InnerList(items: $items, state: $state, currency: currency)
                     }
-                    .font(.title2)
-                    Divider()
                 }
             }
-            .padding(.bottom)
+            Divider()
+            NewItemButton(state: $state)
         }
+        .frame(maxHeight: 500)
+        .transition(
+            .scale(scale: 0, anchor: .topTrailing)
+            .combined(with: .opacity)
+        )
     }
 }
 
-private struct ItemRowButton: View {
-    let item: Item
-    let replacementIndex: [Item].Index
+private struct InnerList: View {
+    @Binding var items: [Item]
     @Binding var state: FloatingBarState
     let currency: Currency
     
     var body: some View {
-        Button {
-            state = .focused(item: .init(
-                name: item.name,
-                price: item.price,
-                replacementIndex: replacementIndex
-            ))
-        } label: {
-            Text(item.name)
-                .foregroundStyle(Color(.label))
-            Spacer()
-            Text(item.price.formatted(.currency(code: currency.rawValue)))
-                .padding(.vertical, 4)
-                .padding(.horizontal, 8)
-                .background(
-                    RoundedRectangle(cornerRadius: 6)
-                        .fill(Color.accentColor)
-                )
-                .foregroundStyle(.background)
-                .monospacedDigit()
+        VStack {
+            Divider()
+            ForEach(items.indices, id: \.self) { i in
+                let item = items[i]
+                HStack {
+                    ItemRowButton(item: item, replacementIndex: i, state: $state, currency: currency)
+                    Divider()
+                    ItemDeleteButton(item: item, items: $items)
+                }
+                .font(.title2)
+                Divider()
+            }
         }
+        .padding(.vertical)
     }
 }
 

@@ -12,82 +12,89 @@ struct FloatingItemsList: View {
     @Binding var state: FloatingBarState
     let currency: Currency
     
-    private var shouldShowRedBorder: Bool {
-        switch state {
-        case .minimized:
-            items.isEmpty
-        case .expanded, .focused(_):
-            false
+    var body: some View {
+        HStack {
+            Spacer(minLength: 0)
+            HStack {
+                if state == .minimized {
+                    Spacer()
+                }
+                InnerBar(items: $items, state: $state, currency: currency)
+            }
+            .frame(maxWidth: 500)
         }
     }
+}
+
+private struct InnerBar: View {
+    @Binding var items: [Item]
+    @Binding var state: FloatingBarState
+    let currency: Currency
     
-    private var shouldShowRedTitle: Bool {
+    private var shouldShowRedIndicator: Bool {
         switch state {
-        case .expanded:
+        case .expanded, .minimized:
             items.isEmpty
-        case .minimized, .focused(_):
+        case .focused(_):
             false
         }
     }
     
     var body: some View {
-        HStack {
-            if state != .expanded {
-                Spacer()
-            }
-            VStack {
-                if case .focused(let item) = state {
-                    FloatingFocusedBar(item: item, items: $items, state: $state, currency: currency)
-                } else {
-                    HStack {
-                        Text("\(items.count) items")
-                            .font(state == .expanded ? .title.bold() : .title)
-                        
-                        if case .expanded = state {
-                            Spacer()
-                        }
-                        
-                        Button {
-                            switch state {
-                            case .minimized:
-                                state = .expanded
-                            case .expanded:
-                                state = .minimized
-                            default: fatalError("Invalid floating button state")
-                            }
-                        } label: {
-                            Image(systemName: "chevron.down.circle")
-                                .rotationEffect(state == .expanded ? .degrees(180) : .zero)
-                        }
+        VStack(spacing: 8) {
+            if case .focused(let item) = state {
+                FloatingFocusedBar(
+                    item: item,
+                    items: $items,
+                    state: $state,
+                    currency: currency
+                )
+            } else {
+                HStack {
+                    Text("\(items.count) items")
+                        .font(state == .expanded ? .title.bold() : .title)
+                    if case .expanded = state {
+                        Spacer()
                     }
-                    .font(.title)
+                    FoldButton(state: $state)
                 }
-                
-                if case .expanded = state {
-                    VStack {
-                        Divider()
-                        if items.isEmpty {
-                            Spacer()
-                            Text("No items yet.")
-                                .foregroundStyle(shouldShowRedTitle ? .red : .primary)
-                            Spacer()
-                        } else {
-                            FloatingExpandedList(items: $items, state: $state, currency: currency)
-                        }
-                    }
-                    .overlay(alignment: .bottom) {
-                        NewItemButton(state: $state)
-                    }
-                }
+                .font(.title)
             }
-            .padding()
-            .background(
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(.regularMaterial)
-                    .stroke(shouldShowRedBorder ? Color.red : .primary.opacity(0.1))
-            )
+            
+            if case .expanded = state {
+                FloatingExpandedList(
+                    items: $items,
+                    state: $state,
+                    currency: currency,
+                    shouldShowRedTitle: shouldShowRedIndicator
+                )
+            }
         }
-        .frame(maxWidth: 500)
+        .padding()
+        .background(
+            RoundedRectangle(cornerRadius: 16)
+                .fill(.regularMaterial)
+                .stroke(shouldShowRedIndicator ? Color.red : .primary.opacity(0.1))
+        )
+    }
+}
+
+private struct FoldButton: View {
+    @Binding var state: FloatingBarState
+    
+    var body: some View {
+        Button {
+            switch state {
+            case .minimized:
+                state = .expanded
+            case .expanded:
+                state = .minimized
+            default: fatalError("Invalid floating button state")
+            }
+        } label: {
+            Image(systemName: "chevron.down.circle")
+                .rotationEffect(state == .expanded ? .degrees(180) : .zero)
+        }
     }
 }
 
