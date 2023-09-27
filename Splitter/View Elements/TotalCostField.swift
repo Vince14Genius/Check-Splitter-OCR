@@ -37,7 +37,7 @@ struct TotalCostField: View {
 //                .foregroundStyle(value == nil ? .red : Color(.label))
             }
             .background(
-                RoundedRectangle(cornerRadius: 16)
+                RoundedRectangle(cornerRadius: 12)
                     .fill(.regularMaterial)
                     .stroke(value == nil ? Color.red : .primary.opacity(0.1))
             )

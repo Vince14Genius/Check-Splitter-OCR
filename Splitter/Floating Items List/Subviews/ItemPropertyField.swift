@@ -22,6 +22,7 @@ struct ItemPropertyField: View {
     
     @State private var isShowingNameEmptyAlert = false
     @State private var isShowingPriceInvalidAlert = false
+    @State private var isShowingPriceZeroAlert = false
     
     private var themeColor: Color {
         switch fieldType {
@@ -56,7 +57,14 @@ struct ItemPropertyField: View {
                 isShowingPriceInvalidAlert = true
                 return
             }
-            newItem.price = newPrice
+            do {
+                try newItem.setPrice(to: newPrice)
+            } catch {
+                if case Item.AssignmentError.itemPriceZero = error {
+                    isShowingPriceZeroAlert = true
+                    return
+                }
+            }
         }
         state = .focused(item: newItem)
     }
@@ -111,6 +119,7 @@ struct ItemPropertyField: View {
         }
         .alert("Item name cannot be empty!", isPresented: $isShowingNameEmptyAlert) {}
         .alert("Invalid price: not a number!", isPresented: $isShowingPriceInvalidAlert) {}
+        .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
 }
 

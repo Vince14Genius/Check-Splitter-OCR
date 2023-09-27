@@ -18,6 +18,7 @@
 		4E6ABBB22AC0081E00054524 /* NewItemButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ABBB12AC0081E00054524 /* NewItemButton.swift */; };
 		4E6ABBB42AC0FEBE00054524 /* InstructionsBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ABBB32AC0FEBE00054524 /* InstructionsBanner.swift */; };
 		4E6ABBB62AC104C200054524 /* ItemRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ABBB52AC104C200054524 /* ItemRowButton.swift */; };
+		4E6ABBB92AC111F400054524 /* Stages+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E6ABBB82AC111F400054524 /* Stages+.swift */; };
 		4E7F30B92A9C007E00555493 /* SplitterApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30B82A9C007E00555493 /* SplitterApp.swift */; };
 		4E7F30BB2A9C007E00555493 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30BA2A9C007E00555493 /* ContentView.swift */; };
 		4E7F30BD2A9C007F00555493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BC2A9C007F00555493 /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		4E6ABBB12AC0081E00054524 /* NewItemButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewItemButton.swift; sourceTree = "<group>"; };
 		4E6ABBB32AC0FEBE00054524 /* InstructionsBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsBanner.swift; sourceTree = "<group>"; };
 		4E6ABBB52AC104C200054524 /* ItemRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemRowButton.swift; sourceTree = "<group>"; };
+		4E6ABBB82AC111F400054524 /* Stages+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Stages+.swift"; sourceTree = "<group>"; };
 		4E7F30B52A9C007E00555493 /* Splitter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Splitter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4E7F30B82A9C007E00555493 /* SplitterApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitterApp.swift; sourceTree = "<group>"; };
 		4E7F30BA2A9C007E00555493 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -96,6 +98,14 @@
 			path = Subviews;
 			sourceTree = "<group>";
 		};
+		4E6ABBB72AC111EB00054524 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				4E6ABBB82AC111F400054524 /* Stages+.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
 		4E7F30AC2A9C007E00555493 = {
 			isa = PBXGroup;
 			children = (
@@ -118,6 +128,7 @@
 				4E7F30B82A9C007E00555493 /* SplitterApp.swift */,
 				4E7F30BA2A9C007E00555493 /* ContentView.swift */,
 				4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */,
+				4E6ABBB72AC111EB00054524 /* Constants */,
 				4E4B68C22ABA743C000CE063 /* Floating Items List */,
 				4EF902F62AA54CB6004B4ABF /* View Elements */,
 				4EF902F42AA54C88004B4ABF /* Model */,
@@ -258,6 +269,7 @@
 				4E7F30B92A9C007E00555493 /* SplitterApp.swift in Sources */,
 				4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */,
 				4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */,
+				4E6ABBB92AC111F400054524 /* Stages+.swift in Sources */,
 				4E4B68C42ABA7495000CE063 /* FloatingFocusedBar.swift in Sources */,
 				4E6ABBAE2ABFC85600054524 /* OCRResultsFrame.swift in Sources */,
 				4E4B68C12ABA7412000CE063 /* FloatingExpandedList.swift in Sources */,

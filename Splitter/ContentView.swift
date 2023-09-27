@@ -45,12 +45,13 @@ struct ContentView: View {
                         floatingBarState: $floatingBarState
                     )
                 }
+                .ignoresSafeArea()
                 if ocrResults.isEmpty {
                     Text("No text detected from image.")
                         .padding()
                         .background(
                             RoundedRectangle(cornerRadius: 8)
-                                .fill(.regularMaterial)
+                                .fill(.ultraThinMaterial)
                         )
                 }
             case .loading:
@@ -106,6 +107,14 @@ struct ContentView: View {
         }
         .animation(.easeInOut, value: floatingBarState)
         .animation(.easeInOut, value: zoomScale)
+        .statusBarHidden({
+            switch viewModel.imageState {
+            case .success(_):
+                true
+            default:
+                false
+            }
+        }())
     }
     
     func processResults(_ results: [OCRResult]) {

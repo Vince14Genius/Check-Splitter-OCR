@@ -55,7 +55,6 @@ private struct InnerList: View {
                     Divider()
                     ItemDeleteButton(item: item, items: $items)
                 }
-                .font(.title2)
                 Divider()
             }
         }

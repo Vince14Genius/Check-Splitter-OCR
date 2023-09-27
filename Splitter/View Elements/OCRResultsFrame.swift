@@ -28,6 +28,8 @@ struct OCRResultsFrame: View {
     let shouldShowOCRText: Bool
     @Binding var floatingBarState: FloatingBarState
     
+    @State private var isShowingPriceZeroAlert = false
+    
     private func addResultToActiveItem(_ result: OCRResult) {
         var itemToEdit = Item.Initiation()
         if case .focused(let item) = floatingBarState {
@@ -37,7 +39,14 @@ struct OCRResultsFrame: View {
         case .name(let text):
             itemToEdit.name = text
         case .price(let value):
-            itemToEdit.price = value
+            do {
+                try itemToEdit.setPrice(to: value)
+            } catch {
+                if case Item.AssignmentError.itemPriceZero = error {
+                    isShowingPriceZeroAlert = true
+                    return
+                }
+            }
         }
         floatingBarState = .focused(item: itemToEdit)
     }
@@ -70,6 +79,7 @@ struct OCRResultsFrame: View {
             .rotationEffect(isRotated ? .degrees(90) : .zero)
         }
         .frame(width: frameWidthRaw, height: frameHeightRaw)
+        .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
 }
 

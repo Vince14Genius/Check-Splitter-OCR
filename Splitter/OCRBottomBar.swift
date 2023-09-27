@@ -34,7 +34,6 @@ struct OCRBottomBar: View {
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(.regularMaterial)
-                        .stroke(.primary.opacity(0.1))
                 )
                 .padding()
             }
@@ -49,7 +48,7 @@ struct OCRBottomBar: View {
                 .disabled(!isNextButtonEnabled)
             }
             .padding()
-            .background(.regularMaterial)
+            .background(.thinMaterial)
         }
     }
 }
@@ -65,6 +64,7 @@ private struct FloatingButton<T: View>: View {
             label()
                 .padding(.horizontal, 12)
                 .padding(.vertical, 8)
+                .foregroundStyle(Color(.label))
         }
     }
 }

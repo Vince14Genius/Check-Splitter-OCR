@@ -51,8 +51,8 @@ private struct InnerBar: View {
                 )
             } else {
                 HStack {
-                    Text("\(items.count) items")
-                        .font(state == .expanded ? .title.bold() : .title)
+                    Text("**\(items.count)** items")
+                        .font(state == .expanded ? .headline : .body)
                     if case .expanded = state {
                         Spacer()
                     }
@@ -72,7 +72,7 @@ private struct InnerBar: View {
         }
         .padding()
         .background(
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(.regularMaterial)
                 .stroke(shouldShowRedIndicator ? Color.red : .primary.opacity(0.1))
         )
@@ -94,6 +94,7 @@ private struct FoldButton: View {
         } label: {
             Image(systemName: "chevron.down.circle")
                 .rotationEffect(state == .expanded ? .degrees(180) : .zero)
+                .font(.body)
         }
     }
 }

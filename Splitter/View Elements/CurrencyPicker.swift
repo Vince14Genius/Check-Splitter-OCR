@@ -26,7 +26,7 @@ struct CurrencyPicker: View {
         }
         .accessibilityLabel("Change currency. Current currency: \(currency.rawValue)")
         .background(
-            RoundedRectangle(cornerRadius: 16)
+            RoundedRectangle(cornerRadius: 12)
                 .fill(.regularMaterial)
                 .stroke(.primary.opacity(0.1))
         )
@@ -45,7 +45,7 @@ struct CurrencyPicker: View {
                 }
                 .buttonStyle(.borderedProminent)
             }
-            .presentationBackground(.regularMaterial)
+            .presentationBackground(.thinMaterial)
             .presentationDetents([.medium])
         }
     }

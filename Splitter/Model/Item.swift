@@ -15,10 +15,19 @@ struct Item: Identifiable {
 }
 
 extension Item {
+    enum AssignmentError: Error {
+        case itemPriceZero
+    }
+    
     struct Initiation: Equatable {
         var name: String?
-        var price: Decimal?
+        private(set) var price: Decimal?
         var replacementIndex: [Item].Index?
+        
+        mutating func setPrice(to value: Decimal) throws {
+            if value == 0 { throw AssignmentError.itemPriceZero }
+            price = value
+        }
     }
     
     init?(from initiationValue: Initiation) {
