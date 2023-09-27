@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct OCRBottomBar: View {
+struct ReceiptStageNavBar: View {
     let isNextButtonEnabled: Bool
     let isImageToolbarEnabled: Bool
     @Binding var isShowingOCRLabels: Bool

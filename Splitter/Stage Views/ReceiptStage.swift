@@ -77,7 +77,7 @@ struct ReceiptStage: View {
         }
         .background(Color(.secondarySystemBackground))
         .overlay(alignment: .bottom) {
-            OCRBottomBar(
+            ReceiptStageNavBar(
                 isNextButtonEnabled: isNextButtonEnabled,
                 isImageToolbarEnabled: !ocrResults.isEmpty,
                 isShowingOCRLabels: $isShowingOCRLabels,

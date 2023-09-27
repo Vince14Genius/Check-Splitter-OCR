@@ -27,7 +27,7 @@
 		4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */; };
 		4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CC2A9FF79700555493 /* ImagePicker.swift */; };
 		4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */; };
-		4ECC77132ABF92BE00C88D6F /* OCRBottomBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */; };
+		4ECC77132ABF92BE00C88D6F /* ReceiptStageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */; };
 		4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EC2AA42E15004B4ABF /* Item.swift */; };
 		4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */; };
 		4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */; };
@@ -57,7 +57,7 @@
 		4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+OCR Processing.swift"; sourceTree = "<group>"; };
 		4E7F30CC2A9FF79700555493 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPropertyField.swift; sourceTree = "<group>"; };
-		4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRBottomBar.swift; sourceTree = "<group>"; };
+		4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptStageNavBar.swift; sourceTree = "<group>"; };
 		4EF902EC2AA42E15004B4ABF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultLabel.swift; sourceTree = "<group>"; };
 		4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBarState.swift; sourceTree = "<group>"; };
@@ -106,6 +106,15 @@
 			path = Constants;
 			sourceTree = "<group>";
 		};
+		4E6ABBBA2AC3C14700054524 /* Stage Views */ = {
+			isa = PBXGroup;
+			children = (
+				4E7F30BA2A9C007E00555493 /* ReceiptStage.swift */,
+				4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */,
+			);
+			path = "Stage Views";
+			sourceTree = "<group>";
+		};
 		4E7F30AC2A9C007E00555493 = {
 			isa = PBXGroup;
 			children = (
@@ -126,8 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				4E7F30B82A9C007E00555493 /* SplitterApp.swift */,
-				4E7F30BA2A9C007E00555493 /* ReceiptStage.swift */,
-				4ECC77122ABF92BE00C88D6F /* OCRBottomBar.swift */,
+				4E6ABBBA2AC3C14700054524 /* Stage Views */,
 				4E6ABBB72AC111EB00054524 /* Constants */,
 				4E4B68C22ABA743C000CE063 /* Floating Items List */,
 				4EF902F62AA54CB6004B4ABF /* View Elements */,
@@ -259,7 +267,7 @@
 				4EF902F32AA54C52004B4ABF /* FloatingItemsList.swift in Sources */,
 				4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */,
 				4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */,
-				4ECC77132ABF92BE00C88D6F /* OCRBottomBar.swift in Sources */,
+				4ECC77132ABF92BE00C88D6F /* ReceiptStageNavBar.swift in Sources */,
 				4E6ABBB02ABFCC8F00054524 /* TotalCostField.swift in Sources */,
 				4E4B68C72ABD2FBB000CE063 /* Currencies.swift in Sources */,
 				4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */,
