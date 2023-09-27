@@ -25,6 +25,7 @@ struct TotalCostField: View {
                 HStack {
                     if let value {
                         Text("Total: **\(value.formatted(.currency(code: currency.rawValue)))**")
+                            .monospacedDigit()
                     } else {
                         Text("Enter Total Cost")
                             .italic()

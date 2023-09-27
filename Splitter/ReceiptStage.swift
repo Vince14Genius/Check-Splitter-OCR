@@ -1,5 +1,5 @@
 //
-//  ContentView.swift
+//  ReceiptStage.swift
 //  OCRTestApp
 //
 //  Created by Vincent C. on 8/27/23.
@@ -9,7 +9,7 @@ import SwiftUI
 import Vision
 import Foundation
 
-struct ContentView: View {
+struct ReceiptStage: View {
     @State private var viewModel = OCRPhotoModel()
     @State private var ocrResults: [OCRResult] = []
     
@@ -123,7 +123,7 @@ struct ContentView: View {
 }
 
 #Preview {
-    ContentView(items: [
+    ReceiptStage(items: [
         .init(name: "hello", price: 9.99),
         .init(name: "たこわさ", price: 7.99)
     ])

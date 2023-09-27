@@ -29,7 +29,7 @@ struct OCRResult {
     }
 }
 
-extension ContentView {
+extension ReceiptStage {
     func runOCR(imageState: OCRPhotoModel.ImageState) {
         guard case let .success(uiImage) = imageState else {
             print("Image does not exist.")

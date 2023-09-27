@@ -28,6 +28,7 @@ struct OCRBottomBar: View {
                         zoomScale = zoomScale.next()
                     } label: {
                         Label("\(zoomScale.rawValue.formatted(.number.precision(.fractionLength(1))))x", systemImage: "plus.magnifyingglass")
+                            .monospacedDigit()
                     }
                 }
                 .fixedSize(horizontal: false, vertical: true)
@@ -70,7 +71,7 @@ private struct FloatingButton<T: View>: View {
 }
 
 #Preview {
-    ContentView(items: [
+    ReceiptStage(items: [
         .init(name: "hello", price: 9.99),
         .init(name: "たこわさ", price: 7.99)
     ])

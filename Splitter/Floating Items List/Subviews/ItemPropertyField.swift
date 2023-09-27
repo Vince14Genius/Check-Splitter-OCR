@@ -87,6 +87,7 @@ struct ItemPropertyField: View {
                 case .price(let currency):
                     if let price = item.price {
                         Text(price.formatted(.currency(code: currency.rawValue)))
+                            .monospacedDigit()
                             .foregroundStyle(Color(.label))
                     } else {
                         Text("Price")
@@ -124,7 +125,7 @@ struct ItemPropertyField: View {
 }
 
 #Preview {
-    ContentView(items: [
+    ReceiptStage(items: [
         .init(name: "hello", price: 9.99),
         .init(name: "たこわさ", price: 7.99)
     ])

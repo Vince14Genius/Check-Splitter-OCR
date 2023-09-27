@@ -25,6 +25,7 @@ struct ItemRowButton: View {
                 .foregroundStyle(Color(.label))
             Spacer()
             Text(item.price.formatted(.currency(code: currency.rawValue)))
+                .monospacedDigit()
                 .padding(.vertical, 4)
                 .padding(.horizontal, 8)
                 .background(
@@ -32,7 +33,6 @@ struct ItemRowButton: View {
                         .fill(Color.accentColor)
                 )
                 .foregroundStyle(.background)
-                .monospacedDigit()
         }
     }
 }
