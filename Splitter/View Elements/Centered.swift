@@ -1,6 +1,6 @@
 //
 //  Centered.swift
-//  OCRTestApp
+//  Splitter
 //
 //  Created by Vincent C. on 9/19/23.
 //

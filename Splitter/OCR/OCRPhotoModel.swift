@@ -1,6 +1,6 @@
 //
 //  OCRPhotoModel.swift
-//  OCRTestApp
+//  Splitter
 //
 //  Created by Vincent C. on 8/30/23.
 //

@@ -1,6 +1,6 @@
 //
 //  OCRResultLabel.swift
-//  OCRTestApp
+//  Splitter
 //
 //  Created by Vincent C. on 9/2/23.
 //

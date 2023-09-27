@@ -1,6 +1,6 @@
 //
-//  OCRBottomBar.swift
-//  OCRTestApp
+//  ReceiptStageNavBar.swift
+//  Splitter
 //
 //  Created by Vincent C. on 9/23/23.
 //

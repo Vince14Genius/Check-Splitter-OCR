@@ -1,6 +1,6 @@
 //
 //  OCRResultButton.swift
-//  OCRTestApp
+//  Splitter
 //
 //  Created by Vincent C. on 9/3/23.
 //

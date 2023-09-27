@@ -1,6 +1,6 @@
 //
 //  Stages.swift
-//  OCRTestApp
+//  Splitter
 //
 //  Created by Vincent C. on 9/22/23.
 //
