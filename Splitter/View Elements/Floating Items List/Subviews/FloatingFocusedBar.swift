@@ -35,6 +35,7 @@ private struct CancelButton: View {
                 .labelStyle(.iconOnly)
                 .font(.title)
         }
+        .keyboardShortcut(.escape, modifiers: [])
         .foregroundStyle(.gray)
     }
 }
@@ -59,6 +60,7 @@ private struct ConfirmButton: View {
                     .labelStyle(.iconOnly)
                     .font(.title)
             }
+            .keyboardShortcut(.return, modifiers: [])
         } else {
             Button {} label: {
                 Label("Confirm", systemImage: "checkmark.circle.fill")
@@ -71,8 +73,5 @@ private struct ConfirmButton: View {
 }
 
 #Preview {
-    ReceiptStage(items: [
-        .init(name: "hello", price: 9.99),
-        .init(name: "たこわさ", price: 7.99)
-    ])
+    StageSwitcherView(flowState: .sampleData)
 }

@@ -10,7 +10,6 @@ import Foundation
 enum FloatingBarState {
     case minimized
     case focused(item: Item.Initiation)
-    case expanded
 }
 
 extension FloatingBarState: Equatable {
@@ -24,11 +23,6 @@ extension FloatingBarState: Equatable {
         case .focused(let itemA):
             switch rhs {
             case .focused(let itemB): return itemA == itemB
-            default: return false
-            }
-        case .expanded:
-            switch rhs {
-            case .expanded: return true
             default: return false
             }
         }

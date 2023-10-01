@@ -31,9 +31,11 @@ private struct InnerBar: View {
     @Binding var state: FloatingBarState
     let currency: Currency
     
+    @State private var isPresentingListSheet = false
+    
     private var shouldShowRedIndicator: Bool {
         switch state {
-        case .expanded, .minimized:
+        case .minimized:
             items.isEmpty
         case .focused(_):
             false
@@ -50,58 +52,52 @@ private struct InnerBar: View {
                     currency: currency
                 )
             } else {
-                HStack {
-                    Text("**\(items.count)** items")
-                        .font(state == .expanded ? .headline : .body)
-                    if case .expanded = state {
-                        Spacer()
+                Button {
+                    isPresentingListSheet.toggle()
+                } label: {
+                    HStack {
+                        Text("**\(items.count)** items")
+                        Image(systemName: "list.bullet")
                     }
-                    FoldButton(state: $state)
+                    .foregroundColor(Color(.label))
+                    .font(.title3)
                 }
-                .font(.title)
-            }
-            
-            if case .expanded = state {
-                FloatingExpandedList(
-                    items: $items,
-                    state: $state,
-                    currency: currency,
-                    shouldShowRedTitle: shouldShowRedIndicator
-                )
             }
         }
-        .padding()
+        .padding(.horizontal, 14)
+        .padding(.vertical, 10)
         .background(
             RoundedRectangle(cornerRadius: 12)
                 .fill(.regularMaterial)
                 .stroke(shouldShowRedIndicator ? Color.red : .primary.opacity(0.1))
         )
+        .sheet(isPresented: $isPresentingListSheet) {
+            FloatingExpandedList(
+                items: $items,
+                state: $state,
+                currency: currency,
+                shouldShowRedTitle: shouldShowRedIndicator,
+                isPresented: $isPresentingListSheet
+            )
+            .presentationDetents([.fraction(0.75)])
+            .presentationBackground(.thinMaterial)
+        }
     }
 }
 
 private struct FoldButton: View {
-    @Binding var state: FloatingBarState
+    @Binding var isPresentingListSheet: Bool
     
     var body: some View {
         Button {
-            switch state {
-            case .minimized:
-                state = .expanded
-            case .expanded:
-                state = .minimized
-            default: fatalError("Invalid floating button state")
-            }
+            isPresentingListSheet.toggle()
         } label: {
-            Image(systemName: "chevron.down.circle")
-                .rotationEffect(state == .expanded ? .degrees(180) : .zero)
+            Image(systemName: "list.bullet")
                 .font(.body)
         }
     }
 }
 
 #Preview {
-    ReceiptStage(items: [
-        .init(name: "hello", price: 9.99),
-        .init(name: "たこわさ", price: 7.99)
-    ])
+    StageSwitcherView(flowState: .sampleData)
 }

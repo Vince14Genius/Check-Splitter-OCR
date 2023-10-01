@@ -13,6 +13,7 @@ struct ReceiptStageNavBar: View {
     @Binding var isShowingOCRLabels: Bool
     @Binding var zoomScale: OCRResultsFrame.ZoomScale
     @Binding var viewModel: OCRPhotoModel
+    @Binding var stage: Stage
     
     var body: some View {
         VStack(spacing: 0) {
@@ -43,10 +44,11 @@ struct ReceiptStageNavBar: View {
                 ImagePicker(selection: $viewModel.imageSelection)
                 Spacer()
                 Button("Next") {
-                    
+                    stage = .assignPayers
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!isNextButtonEnabled)
+                .keyboardShortcut(.return, modifiers: .command)
             }
             .padding()
             .background(.thinMaterial)
@@ -71,8 +73,5 @@ private struct FloatingButton<T: View>: View {
 }
 
 #Preview {
-    ReceiptStage(items: [
-        .init(name: "hello", price: 9.99),
-        .init(name: "たこわさ", price: 7.99)
-    ])
+    StageSwitcherView(flowState: .sampleData)
 }

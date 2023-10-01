@@ -10,15 +10,16 @@ import Vision
 import Foundation
 
 struct ReceiptStage: View {
+    @Binding var stage: Stage
+    
     @State private var viewModel = OCRPhotoModel()
     @State private var ocrResults: [OCRResult] = []
     
     @State private var isShowingOCRLabels = true
     @State private var floatingBarState: FloatingBarState = .minimized
     
-    @State var items = [Item]()
-    @State var totalCost: Decimal?
-    @AppStorage("currency", store: .standard) var currency: Currency = .usd
+    @Binding var flowState: SplitterFlowState
+    @Binding var currency: Currency
     
     @Environment(\.displayScale) private var displayScale
     @State private var zoomScale: OCRResultsFrame.ZoomScale = .zoom1x
@@ -28,7 +29,7 @@ struct ReceiptStage: View {
     }
     
     private var isNextButtonEnabled: Bool {
-        !items.isEmpty && totalCost != nil
+        !flowState.items.isEmpty && flowState.totalCost != nil
     }
     
     var body: some View {
@@ -82,7 +83,8 @@ struct ReceiptStage: View {
                 isImageToolbarEnabled: !ocrResults.isEmpty,
                 isShowingOCRLabels: $isShowingOCRLabels,
                 zoomScale: $zoomScale,
-                viewModel: $viewModel
+                viewModel: $viewModel, 
+                stage: $stage
             )
         }
         .overlay(alignment: .topLeading) {
@@ -91,8 +93,8 @@ struct ReceiptStage: View {
         }
         .overlay(alignment: .topTrailing) {
             VStack {
-                TotalCostField(value: $totalCost, currency: currency)
-                FloatingItemsList(items: $items, state: $floatingBarState, currency: currency)
+                TotalCostField(value: $flowState.totalCost, currency: currency)
+                FloatingItemsList(items: $flowState.items, state: $floatingBarState, currency: currency)
             }
             .padding()
         }
@@ -115,6 +117,7 @@ struct ReceiptStage: View {
                 false
             }
         }())
+        .transition(.move(edge: .leading).animation(.easeInOut))
     }
     
     func processResults(_ results: [OCRResult]) {
@@ -123,8 +126,5 @@ struct ReceiptStage: View {
 }
 
 #Preview {
-    ReceiptStage(items: [
-        .init(name: "hello", price: 9.99),
-        .init(name: "たこわさ", price: 7.99)
-    ])
+    StageSwitcherView(flowState: .sampleData)
 }

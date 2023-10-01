@@ -31,11 +31,11 @@ struct TotalCostField: View {
                             .italic()
                     }
                     Image(systemName: "pencil")
+                        .font(.title3)
                 }
-                .padding(.horizontal, 12)
-                .padding(.vertical, 8)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 10)
                 .foregroundStyle(Color(.label))
-//                .foregroundStyle(value == nil ? .red : Color(.label))
             }
             .background(
                 RoundedRectangle(cornerRadius: 12)

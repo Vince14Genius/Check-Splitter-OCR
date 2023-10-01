@@ -19,9 +19,10 @@ struct CurrencyPicker: View {
             HStack {
                 Text(currency.rawValue.uppercased())
                 Image(systemName: "pencil")
+                    .font(.title3)
             }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 8)
+            .padding(.horizontal, 14)
+            .padding(.vertical, 12)
             .foregroundStyle(Color(.label))
         }
         .accessibilityLabel("Change currency. Current currency: \(currency.rawValue)")

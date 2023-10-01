@@ -11,7 +11,7 @@ import SwiftUI
 struct SplitterApp: App {
     var body: some Scene {
         WindowGroup {
-            ReceiptStage()
+            StageSwitcherView()
         }
     }
 }

@@ -84,8 +84,5 @@ struct OCRResultsFrame: View {
 }
 
 #Preview {
-    ReceiptStage(items: [
-        .init(name: "hello", price: 9.99),
-        .init(name: "たこわさ", price: 7.99)
-    ])
+    StageSwitcherView(flowState: .sampleData)
 }
