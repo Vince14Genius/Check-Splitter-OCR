@@ -109,6 +109,7 @@ struct QuantityEditorSheet: View {
             Button("Done", action: dismissAction)
                 .buttonStyle(.borderedProminent)
                 .disabled(isInvalid)
+                .keyboardShortcut(.return, modifiers: [])
         }
         .padding()
         .presentationBackground(.thinMaterial)

@@ -5,6 +5,7 @@ struct PayerRow: View {
     @Binding var payer: Payer
     
     @Environment(\.editMode) private var editMode
+    @State private var indexOfShareToEdit: [Share].Index?
     
     @State private var isPresentingPayerEditorSheet = false
     
@@ -24,18 +25,27 @@ struct PayerRow: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            Group {
-                if isEditing {
-                    NameLabel(payer.name)
-                } else {
-                    TextField("Payer Name", text: $payer.name)
-                }
-            }
-                .font(.title2)
             HStack {
+                NameLabel(payer.name)
+                    .font(.title2)
+                Spacer()
                 Text("\(items.count) items")
                     .foregroundColor(.secondary)
                     .font(.body.monospacedDigit())
+            }
+            HStack {
+                if items.isEmpty {
+                    Label("No items assigned", systemImage: "exclamationmark.triangle.fill")
+                        .foregroundColor(.red)
+                    Spacer()
+                } else {
+                    ItemShareList(
+                        payer: payer,
+                        items: items, 
+                        flowState: $flowState,
+                        indexOfShareToEdit: $indexOfShareToEdit
+                    )
+                }
                 Spacer()
                 if !isEditing {
                     Button {
@@ -43,7 +53,6 @@ struct PayerRow: View {
                     } label: {
                         Image(systemName: "pencil")
                     }
-                    .buttonStyle(.borderedProminent)
                 }
             }
         }
@@ -59,6 +68,38 @@ struct PayerRow: View {
             .presentationDetents([.medium])
             .presentationBackground(.thinMaterial)
             .interactiveDismissDisabled()
+        }
+        .sheet(item: $indexOfShareToEdit) { i in
+            QuantityEditorSheet(
+                itemName: items.first { $0.id == flowState.shares[i].itemID }?.name ?? "-",
+                payerName: payer.name,
+                share: $flowState.shares[i]
+            ) {
+                indexOfShareToEdit = nil
+            }
+        }
+    }
+}
+
+private struct ItemShareList: View {
+    let payer: Payer
+    let items: [Item]
+    @Binding var flowState: SplitterFlowState
+    @Binding var indexOfShareToEdit: [Share].Index?
+    
+    var body: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                ForEach(items) { item in
+                    ShareButton(
+                        title: item.name,
+                        itemID: item.id,
+                        payerID: payer.id,
+                        flowState: $flowState,
+                        indexOfShareToEdit: $indexOfShareToEdit
+                    )
+                }
+            }
         }
     }
 }

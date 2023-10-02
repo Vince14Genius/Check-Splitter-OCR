@@ -14,7 +14,7 @@ struct PayerEditor: View {
     let dismissAction: () -> Void
     
     @FocusState private var isNameFieldFocused: Bool
-    @State private var shareToEdit: Binding<Share>?
+    @State private var indexOfShareToEdit: [Share].Index?
     
     private var currentPayerShares: [Share] {
         shares.filter { $0.payerID == payer.id }
@@ -53,7 +53,7 @@ struct PayerEditor: View {
                 .padding([.top, .horizontal])
                 Divider()
                 List {
-                    ForEach($shares) { $share in
+                    ForEach(shares) { share in
                         if
                             share.payerID == payer.id,
                             let item = items.first(where: { $0.id == share.itemID })
@@ -62,7 +62,9 @@ struct PayerEditor: View {
                                 Text(item.name)
                                 Spacer()
                                 Button("× \(share.realQuantity.roundedToTwoPlaces)") {
-                                    shareToEdit = $share
+                                    indexOfShareToEdit = shares.firstIndex {
+                                        $0.id == share.id
+                                    }
                                 }
                                 .buttonStyle(.bordered)
                                 .foregroundStyle(.primary)
@@ -94,6 +96,7 @@ struct PayerEditor: View {
                     Button("Done", action: dismissAction)
                         .buttonStyle(.borderedProminent)
                         .disabled(isInvalid)
+                        .keyboardShortcut(.return, modifiers: .command)
                 }
             }
             .onAppear {
@@ -102,13 +105,13 @@ struct PayerEditor: View {
             .onTapGesture {
                 isNameFieldFocused = false
             }
-            .sheet(item: $shareToEdit) { $share in
+            .sheet(item: $indexOfShareToEdit) { i in
                 QuantityEditorSheet(
-                    itemName: items.first { $0.id == share.itemID }?.name ?? "-",
+                    itemName: items.first { $0.id == shares[i].itemID }?.name ?? "-",
                     payerName: payer.name,
-                    share: $share
+                    share: $shares[i]
                 ) {
-                    shareToEdit = nil
+                    indexOfShareToEdit = nil
                 }
             }
         }

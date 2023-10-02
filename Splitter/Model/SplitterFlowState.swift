@@ -9,7 +9,7 @@ import SwiftUI
 
 @Observable class SplitterFlowState {
     var items = [Item]()
-    var totalCost: Decimal?
+    var totalCost: Double?
     var payers = [Payer]()
     var shares = [Share]()
     

@@ -41,6 +41,14 @@ struct ReceiptStageNavBar: View {
             }
             Divider()
             HStack {
+                Button {
+                    
+                } label: {
+                    Label("Capture", systemImage: "camera.fill")
+                        .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.bordered)
+                .disabled(true)
                 ImagePicker(selection: $viewModel.imageSelection)
                 Spacer()
                 Button("Next") {

@@ -45,6 +45,7 @@ struct CurrencyPicker: View {
                     isShowingPickerSheet = false
                 }
                 .buttonStyle(.borderedProminent)
+                .keyboardShortcut(.return, modifiers: [])
             }
             .presentationBackground(.thinMaterial)
             .presentationDetents([.medium])

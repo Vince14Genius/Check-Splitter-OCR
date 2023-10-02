@@ -68,7 +68,7 @@ extension Array<IndexifiedShare> {
             .init(
                 name: items[$0.itemIndex].name,
                 quantity: $0.quantity,
-                originalPrice: $0.quantity * NSDecimalNumber(decimal: items[$0.itemIndex].price).doubleValue
+                originalPrice: $0.quantity * items[$0.itemIndex].price
             )
         }
     }

@@ -53,7 +53,7 @@ struct ItemPropertyField: View {
             }
             newItem.name = textFieldValue
         case .price(_):
-            guard let newPrice = Decimal(string: textFieldValue) else {
+            guard let newPrice = Double(textFieldValue) else {
                 isShowingPriceInvalidAlert = true
                 return
             }

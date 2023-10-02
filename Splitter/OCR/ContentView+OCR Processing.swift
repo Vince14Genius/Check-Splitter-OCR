@@ -11,7 +11,7 @@ import RegexBuilder
 
 struct OCRResult {
     enum ResultType {
-        case price(value: Decimal)
+        case price(value: Double)
         case name(text: String)
     }
     
@@ -20,14 +20,14 @@ struct OCRResult {
     
     private static let separatorPattern = try! Regex("[\(Currency.symbolsToExclude.joined())]")
     
-    private static func pricesWithOmittedChars(recognizedText: VNRecognizedText) -> [Decimal] {
+    private static func pricesWithOmittedChars(recognizedText: VNRecognizedText) -> [Double] {
         recognizedText.string.split(separator: separatorPattern).compactMap {
-            Decimal(string: String($0))
+            Double(String($0))
         }
     }
     
     init(_ recognizedText: VNRecognizedText) {
-        if let price = Decimal(string: recognizedText.string) {
+        if let price = Double(recognizedText.string) {
             value = .price(value: price)
         } else if let price = OCRResult.pricesWithOmittedChars(recognizedText: recognizedText).first {
             value = .price(value: price)

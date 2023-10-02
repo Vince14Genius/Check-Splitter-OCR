@@ -11,7 +11,7 @@ import SwiftUI
 struct Item: Identifiable {
     var id = UUID()
     var name: String
-    var price: Decimal
+    var price: Double
 }
 
 extension Item {
@@ -21,10 +21,10 @@ extension Item {
     
     struct Initiation: Equatable {
         var name: String?
-        private(set) var price: Decimal?
+        private(set) var price: Double?
         var replacementIndex: [Item].Index?
         
-        mutating func setPrice(to value: Decimal) throws {
+        mutating func setPrice(to value: Double) throws {
             if value == 0 { throw AssignmentError.itemPriceZero }
             price = value
         }

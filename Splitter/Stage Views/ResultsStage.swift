@@ -17,7 +17,7 @@ struct ResultsStage: View {
             return nil
         }
         return .init(
-            totalCost: NSDecimalNumber(decimal: totalCost).doubleValue,
+            totalCost: totalCost,
             payers: flowState.payers,
             items: flowState.items,
             shares: flowState.shares

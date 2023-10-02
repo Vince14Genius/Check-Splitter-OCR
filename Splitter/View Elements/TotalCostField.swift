@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TotalCostField: View {
-    @Binding var value: Decimal?
+    @Binding var value: Double?
     let currency: Currency
     
     @State private var isShowingEditAlert = false
@@ -50,7 +50,7 @@ struct TotalCostField: View {
                 textFieldValue = ""
             }
             Button("Done") {
-                if let newValue = Decimal(string: textFieldValue) {
+                if let newValue = Double(textFieldValue) {
                     value = newValue
                 } else {
                     isShowingCostInvalidAlert = true

@@ -9,34 +9,24 @@ struct ItemRow: View {
     var createNewPayerAction: (() -> Void)?
     
     @Environment(\.editMode) private var editMode
-    @State private var shareToEdit: Binding<Share>?
+    @State private var indexOfShareToEdit: [Share].Index?
     
     private var quantity: Double {
-        let shares = flowState.shares.filter {
+        flowState.shares.filter {
             $0.itemID == item.id
-        }
-
-        return shares.reduce(0) { partialResult, curr in
+        }.reduce(0) { partialResult, curr in
             return partialResult + curr.realQuantity
         }
     }
     
     private var payers: [Payer] {
-        let payerIDs = flowState.shares.filter {
+        flowState.shares.filter {
             $0.itemID == item.id
-        }.map { $0.payerID }
-        var output = [Payer]()
-        
-        for payerID in payerIDs {
-            let payer = flowState.payers.first {
-                $0.id == payerID
-            } 
-            if let payer {
-                output.append(payer)
+        }.compactMap { share in
+            flowState.payers.first {
+                $0.id == share.payerID
             }
         }
-        
-        return output
     }
     
     private var isEditing: Bool {
@@ -65,17 +55,12 @@ struct ItemRow: View {
                         Label("No payers assigned", systemImage: "exclamationmark.triangle.fill")
                             .foregroundColor(.red)
                         Spacer()
-                        Button {
-                            createNewPayerAction?()
-                        } label: {
-                            Image(systemName: "plus")
-                        }
                     } else {
                         PayerShareList(
-                            shareToEdit: $shareToEdit,
                             item: item,
                             payers: payers,
-                            flowState: $flowState
+                            flowState: $flowState,
+                            indexOfShareToEdit: $indexOfShareToEdit
                         )
                         if !isEditing {
                             Button {
@@ -83,53 +68,48 @@ struct ItemRow: View {
                             } label: {
                                 Image(systemName: "pencil")
                             }
-                            CreateShareMenu(
-                                item: $item,
-                                shareToEdit: $shareToEdit,
-                                flowState: $flowState,
-                                payers: payers,
-                                createNewPayerAction: createNewPayerAction
-                            )
                         }
                     }
+                    CreateShareMenu(
+                        item: $item,
+                        indexOfShareToEdit: $indexOfShareToEdit,
+                        flowState: $flowState,
+                        payers: payers,
+                        createNewPayerAction: createNewPayerAction
+                    )
                 }
             }
         }
         .id(item.id)
-        .sheet(item: $shareToEdit) { $share in
+        .sheet(item: $indexOfShareToEdit) { i in
             QuantityEditorSheet(
                 itemName: item.name,
-                payerName: payers.first { $0.id == share.payerID }?.name ?? "-",
-                share: $share
+                payerName: payers.first { $0.id == flowState.shares[i].payerID }?.name ?? "-",
+                share: $flowState.shares[i]
             ) {
-                shareToEdit = nil
+                indexOfShareToEdit = nil
             }
         }
     }
 }
 
 private struct PayerShareList: View {
-    @Binding var shareToEdit: Binding<Share>?
     let item: Item
     let payers: [Payer]
     @Binding var flowState: SplitterFlowState
+    @Binding var indexOfShareToEdit: [Share].Index?
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 ForEach(payers) { payer in
-                    Button(payer.name) {
-                        // if payer is shown on the list
-                        // then the corresponding share is
-                        // guaranteed to be present
-                        let i = flowState.shares.firstIndex {
-                            $0.itemID == item.id &&
-                            $0.payerID == payer.id
-                        }!
-                        shareToEdit = $flowState.shares[i]
-                    }
-                    .buttonStyle(.bordered)
-                    .foregroundStyle(.primary)
+                    ShareButton(
+                        title: payer.name,
+                        itemID: item.id,
+                        payerID: payer.id,
+                        flowState: $flowState,
+                        indexOfShareToEdit: $indexOfShareToEdit
+                    )
                 }
             }
         }
@@ -138,7 +118,7 @@ private struct PayerShareList: View {
 
 private struct CreateShareMenu: View {
     @Binding var item: Item
-    @Binding var shareToEdit: Binding<Share>?
+    @Binding var indexOfShareToEdit: [Share].Index?
     @Binding var flowState: SplitterFlowState
     let payers: [Payer]
     let createNewPayerAction: (() -> Void)?
@@ -159,7 +139,7 @@ private struct CreateShareMenu: View {
                             let i = flowState.shares.firstIndex {
                                 $0.id == newShare.id
                             }!
-                            shareToEdit = $flowState.shares[i]
+                            indexOfShareToEdit = i
                         }
                     }
                 }
