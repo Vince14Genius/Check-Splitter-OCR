@@ -10,6 +10,7 @@
 		4E32D1B92AC96F3C00522A4D /* ResultsStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E32D1B82AC96F3C00522A4D /* ResultsStage.swift */; };
 		4E32D1BB2AC96F4700522A4D /* ResultsStageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E32D1BA2AC96F4700522A4D /* ResultsStageNavBar.swift */; };
 		4E32D1BD2AC9747200522A4D /* Double+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E32D1BC2AC9747200522A4D /* Double+.swift */; };
+		4E32D1BF2ACA713B00522A4D /* Currencies+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E32D1BE2ACA713B00522A4D /* Currencies+.swift */; };
 		4E4B68BF2ABA5DBF000CE063 /* Centered.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68BE2ABA5DBF000CE063 /* Centered.swift */; };
 		4E4B68C12ABA7412000CE063 /* FloatingExpandedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C02ABA7412000CE063 /* FloatingExpandedList.swift */; };
 		4E4B68C42ABA7495000CE063 /* FloatingFocusedBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E4B68C32ABA7495000CE063 /* FloatingFocusedBar.swift */; };
@@ -53,6 +54,7 @@
 		4E32D1B82AC96F3C00522A4D /* ResultsStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStage.swift; sourceTree = "<group>"; };
 		4E32D1BA2AC96F4700522A4D /* ResultsStageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsStageNavBar.swift; sourceTree = "<group>"; };
 		4E32D1BC2AC9747200522A4D /* Double+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+.swift"; sourceTree = "<group>"; };
+		4E32D1BE2ACA713B00522A4D /* Currencies+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Currencies+.swift"; sourceTree = "<group>"; };
 		4E4B68BE2ABA5DBF000CE063 /* Centered.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Centered.swift; sourceTree = "<group>"; };
 		4E4B68C02ABA7412000CE063 /* FloatingExpandedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingExpandedList.swift; sourceTree = "<group>"; };
 		4E4B68C32ABA7495000CE063 /* FloatingFocusedBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingFocusedBar.swift; sourceTree = "<group>"; };
@@ -130,6 +132,7 @@
 			children = (
 				4E6ABBB82AC111F400054524 /* Stages+.swift */,
 				4E32D1BC2AC9747200522A4D /* Double+.swift */,
+				4E32D1BE2ACA713B00522A4D /* Currencies+.swift */,
 			);
 			path = Constants;
 			sourceTree = "<group>";
@@ -340,6 +343,7 @@
 				4E6ABBD22AC8FB7E00054524 /* PayerEditor.swift in Sources */,
 				4EF902F82AA55134004B4ABF /* OCRResultButton.swift in Sources */,
 				4E6ABBB62AC104C200054524 /* ItemRowButton.swift in Sources */,
+				4E32D1BF2ACA713B00522A4D /* Currencies+.swift in Sources */,
 				4E7F30B92A9C007E00555493 /* SplitterApp.swift in Sources */,
 				4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */,
 				4E6ABBC02AC3C55B00054524 /* AssignStageNavBar.swift in Sources */,

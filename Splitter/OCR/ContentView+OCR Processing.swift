@@ -7,6 +7,7 @@
 
 import Vision
 import Foundation
+import RegexBuilder
 
 struct OCRResult {
     enum ResultType {
@@ -17,8 +18,18 @@ struct OCRResult {
     let value: ResultType
     let boundingBox: CGRect?
     
+    private static let separatorPattern = try! Regex("[\(Currency.symbols.joined())]")
+    
+    private static func pricesWithOmittedChars(recognizedText: VNRecognizedText) -> [Decimal] {
+        recognizedText.string.split(separator: separatorPattern).compactMap {
+            Decimal(string: String($0))
+        }
+    }
+    
     init(_ recognizedText: VNRecognizedText) {
         if let price = Decimal(string: recognizedText.string) {
+            value = .price(value: price)
+        } else if let price = OCRResult.pricesWithOmittedChars(recognizedText: recognizedText).first {
             value = .price(value: price)
         } else {
             value = .name(text: recognizedText.string)
