@@ -68,7 +68,7 @@ struct AssignStage: View {
                 }
             }
             .overlay(alignment: .bottom) {
-                AssignStageNavBar(isNextButtonEnabled: false, stage: $stage)
+                AssignStageNavBar(isNextButtonEnabled: flowState.canCalculate, stage: $stage)
             }
             .toolbar {
                 ToolbarItem(placement: .principal) {

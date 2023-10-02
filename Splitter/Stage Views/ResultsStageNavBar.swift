@@ -17,7 +17,7 @@ struct ResultsStageNavBar: View {
             Divider()
             HStack {
                 Button("Back") {
-                    stage = .receipt
+                    stage = .assignPayers
                 }
                 .keyboardShortcut({
                     switch layoutDirection {
@@ -28,8 +28,8 @@ struct ResultsStageNavBar: View {
                 }(), modifiers: .command)
                 Spacer()
                 Button("Restart") {
-                    flowState = .init()
                     stage = .receipt
+                    flowState = .init()
                 }
                 .buttonStyle(.bordered)
                 .keyboardShortcut(.return, modifiers: .command)

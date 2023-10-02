@@ -6,6 +6,8 @@ struct PayerRow: View {
     
     @Environment(\.editMode) private var editMode
     
+    @State private var isPresentingPayerEditorSheet = false
+    
     private var items: [Item] {
         flowState.items.filter { item in
             flowState.shares.filter { share in
@@ -37,7 +39,7 @@ struct PayerRow: View {
                 Spacer()
                 if !isEditing {
                     Button {
-                        
+                        isPresentingPayerEditorSheet = true
                     } label: {
                         Image(systemName: "pencil")
                     }
@@ -46,6 +48,18 @@ struct PayerRow: View {
             }
         }
         .id(payer.id)
+        .sheet(isPresented: $isPresentingPayerEditorSheet) {
+            PayerEditor(
+                payer: $payer,
+                shares: $flowState.shares,
+                items: flowState.items
+            ) {
+                isPresentingPayerEditorSheet = false
+            }
+            .presentationDetents([.medium])
+            .presentationBackground(.thinMaterial)
+            .interactiveDismissDisabled()
+        }
     }
 }
 

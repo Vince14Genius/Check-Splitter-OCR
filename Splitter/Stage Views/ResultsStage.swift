@@ -12,9 +12,12 @@ struct ResultsStage: View {
     @Binding var flowState: SplitterFlowState
     let currency: Currency
     
-    private var result: CalculationResult {
-        .init(
-            totalCost: NSDecimalNumber(decimal: flowState.totalCost!).doubleValue,
+    private var result: CalculationResult? {
+        guard let totalCost = flowState.totalCost else {
+            return nil
+        }
+        return .init(
+            totalCost: NSDecimalNumber(decimal: totalCost).doubleValue,
             payers: flowState.payers,
             items: flowState.items,
             shares: flowState.shares
@@ -25,7 +28,7 @@ struct ResultsStage: View {
         NavigationStack {
             ScrollView(.vertical) {
                 VStack {
-                    ForEach(result.payers, id: \.self) { payer in
+                    ForEach(result?.payers ?? [], id: \.self) { payer in
                         VStack {
                             HStack {
                                 Text(payer.name)
@@ -52,7 +55,7 @@ struct ResultsStage: View {
                     HStack {
                         Text("Total: ")
                         Spacer()
-                        Text(result.totalCost.formatted(.currency(code: currency.rawValue)))
+                        Text(result?.totalCost.formatted(.currency(code: currency.rawValue)) ?? "")
                             .bold()
                     }
                     .font(.title2)

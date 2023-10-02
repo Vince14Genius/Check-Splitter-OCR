@@ -28,7 +28,7 @@ struct AssignStageNavBar: View {
                 }(), modifiers: .command)
                 Spacer()
                 Button("Calculate!") {
-                    stage = .assignPayers
+                    stage = .calculated
                 }
                 .buttonStyle(.borderedProminent)
                 .disabled(!isNextButtonEnabled)

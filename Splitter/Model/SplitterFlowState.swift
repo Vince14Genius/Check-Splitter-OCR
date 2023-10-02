@@ -12,6 +12,12 @@ import SwiftUI
     var totalCost: Decimal?
     var payers = [Payer]()
     var shares = [Share]()
+    
+    var canCalculate: Bool {
+        totalCost != nil && !items.isEmpty && !payers.isEmpty &&
+        items.allSatisfy { item in shares.contains { $0.itemID == item.id } } &&
+        payers.allSatisfy { payer in shares.contains { $0.payerID == payer.id } }
+    }
 }
 
 extension SplitterFlowState {
