@@ -23,6 +23,7 @@ extension SplitterFlowState {
     
     static var sampleData: SplitterFlowState {
         let sample = SplitterFlowState()
+        sample.totalCost = 34.33
         sample.items = [
             .init(id: itemHelloUUID, name: "hello", price: 9.99),
             .init(id: itemTakowasaUUID, name: "たこわさ", price: 7.49),
@@ -50,8 +51,8 @@ extension SplitterFlowState {
                 payerID: payerMarisaUUID,
                 itemID: itemTakowasaUUID,
                 wholeNumberQuantity: 0,
-                fractionPartNumerator: 2,
-                fractionPartDenominator: 3
+                fractionPartNumerator: 3,
+                fractionPartDenominator: 4
             ),
             .init(
                 payerID: payerAaaUUID,

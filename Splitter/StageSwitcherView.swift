@@ -19,7 +19,7 @@ struct StageSwitcherView: View {
         case .assignPayers:
             AssignStage(stage: $stage, flowState: $flowState, currency: currency)
         case .calculated:
-            Text("Calculated Results stage")
+            ResultsStage(stage: $stage, flowState: $flowState, currency: currency)
         }
     }
 }

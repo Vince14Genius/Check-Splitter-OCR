@@ -61,7 +61,7 @@ struct PayerEditor: View {
                             HStack {
                                 Text(item.name)
                                 Spacer()
-                                Button("× \(String(format: "%.2f", share.realQuantity))") {
+                                Button("× \(share.realQuantity.roundedToTwoPlaces)") {
                                     shareToEdit = $share
                                 }
                                 .buttonStyle(.bordered)

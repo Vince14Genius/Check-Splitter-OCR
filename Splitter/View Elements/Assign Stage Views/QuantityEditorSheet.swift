@@ -36,7 +36,7 @@ struct QuantityEditorSheet: View {
             VStack(alignment: .leading) {
                 HStack {
                     Spacer()
-                    Text("Quantity: **\(String(format: "%.2f", share.realQuantity))**")
+                    Text("Quantity: **\(share.realQuantity.roundedToTwoPlaces)**")
                         .foregroundStyle(isInvalid ? .red : .secondary)
                 }
                 Text("Whole Number Part")

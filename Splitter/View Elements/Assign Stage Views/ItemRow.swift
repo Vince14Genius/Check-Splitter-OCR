@@ -54,7 +54,7 @@ struct ItemRow: View {
                 }
                     .font(.title2)
                 if quantity != 0 {
-                    Text("× \(String(format: "%.2f", quantity))")
+                    Text("× \(quantity.roundedToTwoPlaces)")
                         .monospacedDigit()
                         .foregroundStyle(.secondary)
                 }
