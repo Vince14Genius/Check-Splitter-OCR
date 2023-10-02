@@ -18,7 +18,7 @@ struct OCRResult {
     let value: ResultType
     let boundingBox: CGRect?
     
-    private static let separatorPattern = try! Regex("[\(Currency.symbols.joined())]")
+    private static let separatorPattern = try! Regex("[\(Currency.symbolsToExclude.joined())]")
     
     private static func pricesWithOmittedChars(recognizedText: VNRecognizedText) -> [Decimal] {
         recognizedText.string.split(separator: separatorPattern).compactMap {

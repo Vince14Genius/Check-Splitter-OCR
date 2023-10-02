@@ -8,7 +8,8 @@
 import Foundation
 
 extension Currency {
-    static let symbols: Set<String> = [
+    static let symbolsToExclude: Set<String> = [
+        // based on https://www.unicode.org/charts/beta/nameslist/n_20A0.html
         "\u{0024}", // $     dollar sign
         "\u{00A2}", // ¢     cent sign
         "\u{00A3}", // £     pound sign
