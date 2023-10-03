@@ -12,7 +12,7 @@ struct ItemRow: View {
     
     private var quantity: Double {
         flowState.shares.filter {
-            $0.has(item)
+            $0.itemID == item.id
         }.reduce(0) { partialResult, curr in
             return partialResult + curr.realQuantity
         }
@@ -20,10 +20,10 @@ struct ItemRow: View {
     
     private var payers: [Payer] {
         flowState.shares.filter {
-            $0.has(item)
+            $0.itemID == item.id
         }.compactMap { share in
             flowState.payers.first {
-                share.has($0)
+                $0.id == share.payerID
             }
         }
     }
@@ -70,7 +70,7 @@ struct ItemRow: View {
         .sheet(item: $indexOfShareToEdit) { i in
             QuantityEditorSheet(
                 itemName: item.name,
-                payerName: payers.first { flowState.shares[i].has($0) }?.name ?? "-",
+                payerName: payers.first { $0.id == flowState.shares[i].payerID }?.name ?? "-",
                 share: $flowState.shares[i]
             ) {
                 indexOfShareToEdit = nil
@@ -91,8 +91,8 @@ private struct PayerShareList: View {
                 ForEach(payers) { payer in
                     ShareButton(
                         title: payer.name,
-                        item: item,
-                        payer: payer,
+                        itemID: item.id,
+                        payerID: payer.id,
                         flowState: $flowState,
                         indexOfShareToEdit: $indexOfShareToEdit
                     )
@@ -119,14 +119,14 @@ private struct CreateShareMenu: View {
             Section {
                 ForEach(flowState.payers) { payer in
                     Button(payer.name) {
-                        let newShare = Share.from(item: item, payer: payer)
+                        let newShare = Share(payerID: payer.id, itemID: item.id)
                         flowState.shares.append(newShare)
                         let i = flowState.shares.firstIndex {
-                            $0 == newShare
+                            $0.id == newShare.id
                         }!
                         indexOfShareToEdit = i
                     }
-                    .disabled(assignedPayers.contains { $0 == payer })
+                    .disabled(assignedPayers.contains { $0.id == payer.id })
                 }
             }
         } label: {

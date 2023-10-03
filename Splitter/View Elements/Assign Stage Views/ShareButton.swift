@@ -16,19 +16,20 @@ extension Array<Share>.Index: Identifiable {
 
 struct ShareButton: View {
     let title: String
-    let item: Item
-    let payer: Payer
+    let itemID: Item.ID
+    let payerID: Payer.ID
     @Binding var flowState: SplitterFlowState
     @Binding var indexOfShareToEdit: [Share].Index?
     
     var body: some View {
         if let i = flowState.shares.firstIndex(where: {
-            $0.has(item) && $0.has(payer)
+            $0.itemID == itemID &&
+            $0.payerID == payerID
         }) {
             let share = flowState.shares[i]
             Menu {
                 Button("Unassign \(title)") {
-                    flowState.shares.removeAll { $0 == share }
+                    flowState.shares.removeAll { $0.id == share.id }
                 }
             } label: {
                 HStack {

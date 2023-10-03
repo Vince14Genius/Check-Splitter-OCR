@@ -45,7 +45,7 @@ private struct IndexifiedShare {
     private(set) var quantity: Double
     
     private init?(share: Share, items: [Item]) {
-        guard let itemIndex = items.firstIndex(where: { share.has($0) }) else {
+        guard let itemIndex = items.firstIndex(where: { $0.id == share.itemID }) else {
             return nil
         }
         payerID = share.payerID
@@ -58,14 +58,12 @@ private struct IndexifiedShare {
             .init(share: $0, items: items)
         }
     }
-    
-    func has(_ payer: Payer) -> Bool { payerID == payer.id }
 }
 
 extension Array<IndexifiedShare> {
     func itemResults(for payer: Payer, items: [Item]) -> [ResultItem] {
         filter {
-            $0.has(payer)
+            $0.payerID == payer.id
         }.map {
             .init(
                 name: items[$0.itemIndex].name,
