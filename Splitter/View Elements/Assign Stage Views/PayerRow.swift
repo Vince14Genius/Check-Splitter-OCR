@@ -30,29 +30,35 @@ struct PayerRow: View {
                     .font(.title2)
                 Spacer()
                 Text("\(items.count) items")
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(items.isEmpty && isEditing ? .red : .secondary)
                     .font(.body.monospacedDigit())
             }
-            HStack {
-                if items.isEmpty {
-                    Label("No items assigned", systemImage: "exclamationmark.triangle.fill")
-                        .foregroundColor(.red)
+            if !isEditing {
+                HStack {
+                    if items.isEmpty {
+                        Label("No items assigned", systemImage: "exclamationmark.triangle.fill")
+                            .foregroundStyle(.red)
+                        Spacer()
+                    } else {
+                        ItemShareList(
+                            payer: payer,
+                            items: items,
+                            flowState: $flowState,
+                            indexOfShareToEdit: $indexOfShareToEdit
+                        )
+                    }
                     Spacer()
-                } else {
-                    ItemShareList(
-                        payer: payer,
-                        items: items, 
-                        flowState: $flowState,
-                        indexOfShareToEdit: $indexOfShareToEdit
-                    )
-                }
-                Spacer()
-                if !isEditing {
                     Button {
                         isPresentingPayerEditorSheet = true
                     } label: {
                         Image(systemName: "pencil")
                     }
+                    CreateShareMenu(
+                        payer: payer,
+                        assignedItems: items,
+                        indexOfShareToEdit: $indexOfShareToEdit,
+                        flowState: $flowState
+                    )
                 }
             }
         }
@@ -101,6 +107,34 @@ private struct ItemShareList: View {
                 }
             }
         }
+    }
+}
+
+private struct CreateShareMenu: View {
+    let payer: Payer
+    let assignedItems: [Item]
+    @Binding var indexOfShareToEdit: [Share].Index?
+    @Binding var flowState: SplitterFlowState
+    
+    var body: some View {
+        Menu {
+            Section {
+                ForEach(flowState.items) { item in
+                    Button(item.name) {
+                        let newShare = Share(payerID: payer.id, itemID: item.id)
+                        flowState.shares.append(newShare)
+                        let i = flowState.shares.firstIndex {
+                            $0.id == newShare.id
+                        }!
+                        indexOfShareToEdit = i
+                    }
+                    .disabled(assignedItems.contains{ $0.id == item.id })
+                }
+            }
+        } label: {
+            Image(systemName: "plus")
+        }
+        .disabled(assignedItems.count == flowState.items.count)
     }
 }
 

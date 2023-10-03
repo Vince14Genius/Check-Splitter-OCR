@@ -73,7 +73,7 @@ struct ReceiptStage: View {
             case .failure:
                 Image(systemName: "exclamationmark.triangle.fill")
                     .font(.system(size: 40))
-                    .foregroundColor(.white)
+                    .foregroundStyle(.white)
             }
         }
         .background(Color(.secondarySystemBackground))

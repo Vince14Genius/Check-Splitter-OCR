@@ -8,7 +8,6 @@ struct ItemRow: View {
     let currency: Currency
     var createNewPayerAction: (() -> Void)?
     
-    @Environment(\.editMode) private var editMode
     @State private var indexOfShareToEdit: [Share].Index?
     
     private var quantity: Double {
@@ -29,10 +28,6 @@ struct ItemRow: View {
         }
     }
     
-    private var isEditing: Bool {
-        return editMode?.wrappedValue.isEditing ?? false
-    }
-    
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
@@ -49,35 +44,26 @@ struct ItemRow: View {
                         .foregroundStyle(.secondary)
                 }
             }
-            if !isEditing {
-                HStack {
-                    if payers.isEmpty {
-                        Label("No payers assigned", systemImage: "exclamationmark.triangle.fill")
-                            .foregroundColor(.red)
-                        Spacer()
-                    } else {
-                        PayerShareList(
-                            item: item,
-                            payers: payers,
-                            flowState: $flowState,
-                            indexOfShareToEdit: $indexOfShareToEdit
-                        )
-                        if !isEditing {
-                            Button {
-                                //TODO
-                            } label: {
-                                Image(systemName: "pencil")
-                            }
-                        }
-                    }
-                    CreateShareMenu(
-                        item: $item,
-                        indexOfShareToEdit: $indexOfShareToEdit,
-                        flowState: $flowState,
+            HStack {
+                if payers.isEmpty {
+                    Label("No payers assigned", systemImage: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.red)
+                    Spacer()
+                } else {
+                    PayerShareList(
+                        item: item,
                         payers: payers,
-                        createNewPayerAction: createNewPayerAction
+                        flowState: $flowState,
+                        indexOfShareToEdit: $indexOfShareToEdit
                     )
                 }
+                CreateShareMenu(
+                    item: item,
+                    assignedPayers: payers,
+                    indexOfShareToEdit: $indexOfShareToEdit,
+                    flowState: $flowState,
+                    createNewPayerAction: createNewPayerAction
+                )
             }
         }
         .id(item.id)
@@ -117,10 +103,10 @@ private struct PayerShareList: View {
 }
 
 private struct CreateShareMenu: View {
-    @Binding var item: Item
+    let item: Item
+    let assignedPayers: [Payer]
     @Binding var indexOfShareToEdit: [Share].Index?
     @Binding var flowState: SplitterFlowState
-    let payers: [Payer]
     let createNewPayerAction: (() -> Void)?
     
     var body: some View {
@@ -132,16 +118,15 @@ private struct CreateShareMenu: View {
             }
             Section {
                 ForEach(flowState.payers) { payer in
-                    if !payers.contains(where:  { $0.id == payer.id }) {
-                        Button(payer.name) {
-                            let newShare = Share(payerID: payer.id, itemID: item.id)
-                            flowState.shares.append(newShare)
-                            let i = flowState.shares.firstIndex {
-                                $0.id == newShare.id
-                            }!
-                            indexOfShareToEdit = i
-                        }
+                    Button(payer.name) {
+                        let newShare = Share(payerID: payer.id, itemID: item.id)
+                        flowState.shares.append(newShare)
+                        let i = flowState.shares.firstIndex {
+                            $0.id == newShare.id
+                        }!
+                        indexOfShareToEdit = i
                     }
+                    .disabled(assignedPayers.contains { $0.id == payer.id })
                 }
             }
         } label: {

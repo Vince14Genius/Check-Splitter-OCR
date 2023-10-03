@@ -77,7 +77,7 @@ struct OCRResultLabel: View {
                 }
             }())
             .rotationEffect(isRotated ? .degrees(-90) : .zero)
-            .foregroundColor(.primary)
+            .foregroundStyle(.primary)
             .fixedSize(horizontal: false, vertical: true) // SwiftUI text truncation bug workaround
             .opacity(shouldShowOCRText ? 1.0 : 0.1)
         }

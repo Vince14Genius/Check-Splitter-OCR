@@ -26,23 +26,24 @@ struct ShareButton: View {
             $0.itemID == itemID &&
             $0.payerID == payerID
         }) {
-            Button{
-                indexOfShareToEdit = i
+            let share = flowState.shares[i]
+            Menu {
+                Button("Unassign \(title)") {
+                    flowState.shares.removeAll { $0.id == share.id }
+                }
             } label: {
                 HStack {
                     Text(title)
-                    Text("× \(flowState.shares[i].realQuantity.roundedToTwoPlaces)")
+                    Text("× \(share.realQuantity.roundedToTwoPlaces)")
                         .foregroundStyle(.secondary)
                         .font(.caption)
                 }
+            } primaryAction: {
+                indexOfShareToEdit = i
             }
             .buttonStyle(.bordered)
             .foregroundStyle(.primary)
-            .contextMenu {
-                Button("Unassign \(title)") {
-                    flowState.shares.remove(at: i)
-                }
-            }
+            .id(share.id)
         }
     }
 }

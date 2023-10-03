@@ -9,6 +9,6 @@ struct NameLabel: View {
     
     var body: some View {
         Text(text.isEmpty ? "No Name" : text)
-            .foregroundColor(text.isEmpty ? Color(.tertiaryLabel) : .primary)
+            .foregroundStyle(text.isEmpty ? Color(.tertiaryLabel) : .primary)
     }
 }

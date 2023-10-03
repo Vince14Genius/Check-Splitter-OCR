@@ -85,6 +85,7 @@ struct PayerEditor: View {
                         ForEach(items) { item in
                             Button(item.name) {
                                 shares.append(.init(payerID: payer.id, itemID: item.id))
+                                indexOfShareToEdit = shares.count - 1
                             }
                             .disabled(currentPayerShares.contains { $0.itemID == item.id })
                         }

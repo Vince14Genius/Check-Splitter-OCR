@@ -71,20 +71,6 @@ private struct InnerList: View {
     }
 }
 
-private struct ItemDeleteButton: View {
-    let item: Item
-    @Binding var items: [Item]
-    
-    var body: some View {
-        Button(role: .destructive) {
-            items.removeAll { $0.id == item.id }
-        } label: {
-            Label("Delete", systemImage: "trash")
-                .labelStyle(.iconOnly)
-        }
-    }
-}
-
 #Preview {
     StageSwitcherView(flowState: .sampleData)
 }

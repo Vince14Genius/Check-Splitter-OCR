@@ -59,7 +59,7 @@ private struct InnerBar: View {
                         Text("**\(items.count)** items")
                         Image(systemName: "list.bullet")
                     }
-                    .foregroundColor(Color(.label))
+                    .foregroundStyle(Color(.label))
                     .font(.title3)
                 }
             }
