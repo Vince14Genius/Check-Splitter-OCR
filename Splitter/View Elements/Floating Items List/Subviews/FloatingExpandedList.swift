@@ -20,10 +20,11 @@ struct FloatingExpandedList: View {
                 InstructionsBanner(text: "To create items, tap on item names and price numbers from your scanned receipt. Or do it manually here.")
                     .listRowBackground(Color.clear)
                 if items.isEmpty {
-                    Text("No items yet.")
-                        .foregroundStyle(shouldShowRedTitle ? .red : .primary)
-                        .padding()
-                        .listRowBackground(Color.clear)
+                    Centered {
+                        Text("No items yet.")
+                    }
+                    .foregroundStyle(shouldShowRedTitle ? .red : .primary)
+                    .listRowBackground(Color.clear)
                 } else {
                     InnerList(items: $items, state: $state, currency: currency, isPresented: $isPresented)
                         .listRowBackground(Color.clear)

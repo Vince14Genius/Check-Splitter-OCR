@@ -95,8 +95,7 @@ struct AssignStage: View {
             .sheet(isPresented: $isPresentingPayerEditor) {
                 PayerEditor(
                     payer: $payerToEdit,
-                    shares: $flowState.shares,
-                    items: flowState.items
+                    flowState: $flowState
                 ) {
                     defer {
                         payerToEdit = .init(name: "")

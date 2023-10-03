@@ -66,8 +66,7 @@ struct PayerRow: View {
         .sheet(isPresented: $isPresentingPayerEditorSheet) {
             PayerEditor(
                 payer: $payer,
-                shares: $flowState.shares,
-                items: flowState.items
+                flowState: $flowState
             ) {
                 isPresentingPayerEditorSheet = false
             }
