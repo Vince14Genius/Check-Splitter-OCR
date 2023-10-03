@@ -8,10 +8,12 @@
 import Foundation
 import SwiftUI
 
-struct Item: Identifiable {
+struct Item: Identifiable, Equatable {
     var id = UUID()
     var name: String
     var price: Double
+    
+    static func ==(_ lhs: Item, _ rhs: Item) -> Bool { lhs.id == rhs.id }
 }
 
 extension Item {
