@@ -17,7 +17,7 @@ struct PayerEditor: View {
     @State private var indexOfShareToEdit: [Share].Index?
     
     private var currentPayerShares: [Share] {
-        shares.filter { $0.payerID == payer.id }
+        shares.filter { $0.has(payer) }
     }
     
     private var isInvalid: Bool { payer.name.isEmpty }
@@ -55,15 +55,15 @@ struct PayerEditor: View {
                 List {
                     ForEach(shares) { share in
                         if
-                            share.payerID == payer.id,
-                            let item = items.first(where: { $0.id == share.itemID })
+                            share.has(payer),
+                            let item = items.first(where: { share.has($0) })
                         {
                             HStack {
                                 Text(item.name)
                                 Spacer()
                                 Button("× \(share.realQuantity.roundedToTwoPlaces)") {
                                     indexOfShareToEdit = shares.firstIndex {
-                                        $0.id == share.id
+                                        $0 == share
                                     }
                                 }
                                 .buttonStyle(.bordered)
@@ -84,10 +84,10 @@ struct PayerEditor: View {
                     Menu {
                         ForEach(items) { item in
                             Button(item.name) {
-                                shares.append(.init(payerID: payer.id, itemID: item.id))
+                                shares.append(.from(item: item, payer: payer))
                                 indexOfShareToEdit = shares.count - 1
                             }
-                            .disabled(currentPayerShares.contains { $0.itemID == item.id })
+                            .disabled(currentPayerShares.contains { $0.has(item) })
                         }
                     } label: {
                         Image(systemName: "plus")
@@ -108,7 +108,7 @@ struct PayerEditor: View {
             }
             .sheet(item: $indexOfShareToEdit) { i in
                 QuantityEditorSheet(
-                    itemName: items.first { $0.id == shares[i].itemID }?.name ?? "-",
+                    itemName: items.first { shares[i].has($0) }?.name ?? "-",
                     payerName: payer.name,
                     share: $shares[i]
                 ) {

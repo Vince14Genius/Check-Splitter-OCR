@@ -11,10 +11,10 @@ struct PayerRow: View {
     
     private var items: [Item] {
         flowState.items.filter { item in
-            flowState.shares.filter { share in
-                share.payerID == payer.id
+            flowState.shares.filter {
+                $0.has(payer)
             }.contains {
-                $0.itemID == item.id
+                $0.has(item)
             }
         }
     }
@@ -77,7 +77,7 @@ struct PayerRow: View {
         }
         .sheet(item: $indexOfShareToEdit) { i in
             QuantityEditorSheet(
-                itemName: items.first { $0.id == flowState.shares[i].itemID }?.name ?? "-",
+                itemName: items.first { flowState.shares[i].has($0) }?.name ?? "-",
                 payerName: payer.name,
                 share: $flowState.shares[i]
             ) {
@@ -99,8 +99,8 @@ private struct ItemShareList: View {
                 ForEach(items) { item in
                     ShareButton(
                         title: item.name,
-                        itemID: item.id,
-                        payerID: payer.id,
+                        item: item,
+                        payer: payer,
                         flowState: $flowState,
                         indexOfShareToEdit: $indexOfShareToEdit
                     )
@@ -121,14 +121,11 @@ private struct CreateShareMenu: View {
             Section {
                 ForEach(flowState.items) { item in
                     Button(item.name) {
-                        let newShare = Share(payerID: payer.id, itemID: item.id)
+                        let newShare = Share.from(item: item, payer: payer)
                         flowState.shares.append(newShare)
-                        let i = flowState.shares.firstIndex {
-                            $0.id == newShare.id
-                        }!
-                        indexOfShareToEdit = i
+                        indexOfShareToEdit = flowState.shares.count - 1
                     }
-                    .disabled(assignedItems.contains{ $0.id == item.id })
+                    .disabled(assignedItems.contains{ $0 == item })
                 }
             }
         } label: {

@@ -41,7 +41,7 @@ struct AssignStage: View {
                             ) {
                                 createNewPayer()
                                 flowState.shares.append(
-                                    .init(payerID: payerToEdit.id, itemID: item.id)
+                                    .from(item: item, payer: payerToEdit)
                                 )
                             }
                         }
@@ -105,7 +105,7 @@ struct AssignStage: View {
                     guard !payerToEdit.name.isEmpty else {
                         return
                     }
-                    if let i = flowState.payers.firstIndex(where: { $0.id == payerToEdit.id }) {
+                    if let i = flowState.payers.firstIndex(where: { $0 == payerToEdit }) {
                         // editing existing payer
                         flowState.payers[i] = payerToEdit
                     } else {

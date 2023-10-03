@@ -4,6 +4,10 @@ struct Share: Identifiable, Equatable {
     var payerID: Payer.ID
     var itemID: Item.ID
     
+    static func from(item: Item, payer: Payer) -> Share {
+        .init(payerID: payer.id, itemID: item.id)
+    }
+    
     var wholeNumberQuantity: Int = 1
     var fractionPartNumerator: Int = 0
     var fractionPartDenominator: Int = 1
@@ -33,15 +37,18 @@ struct Share: Identifiable, Equatable {
     }
     
     static func ==(_ lhs: Share, _ rhs: Share) -> Bool { lhs.id == rhs.id }
+    
+    func has(_ item: Item) -> Bool { itemID == item.id }
+    func has(_ payer: Payer) -> Bool { payerID == payer.id }
 }
 
 extension Array<Share> {
     func sanitized(payers: [Payer], items: [Item]) -> [Share] {
         filter { share in
             payers.contains {
-                $0.id == share.payerID
+                share.has($0)
             } && items.contains {
-                $0.id == share.itemID
+                share.has($0)
             }
         }
     }
