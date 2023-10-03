@@ -1,8 +1,6 @@
 import Foundation
 
-struct Payer: Identifiable, Equatable {
+struct Payer: Identifiable {
     var id = UUID()
     var name: String
-    
-    static func ==(_ lhs: Payer, _ rhs: Payer) -> Bool { lhs.id == rhs.id }
 }

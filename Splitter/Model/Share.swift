@@ -1,6 +1,6 @@
 import Foundation
 
-struct Share: Identifiable, Equatable {
+struct Share: Identifiable {
     var payerID: Payer.ID
     var itemID: Item.ID
     
@@ -31,8 +31,6 @@ struct Share: Identifiable, Equatable {
     var id: ID {
         .init(payerID: payerID, itemID: itemID)
     }
-    
-    static func ==(_ lhs: Share, _ rhs: Share) -> Bool { lhs.id == rhs.id }
 }
 
 extension Array<Share> {
