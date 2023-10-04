@@ -58,6 +58,14 @@ struct TotalCostField: View {
             }
         }
         .alert("Invalid cost: not a number!", isPresented: $isShowingCostInvalidAlert) {}
+        .dropDestination(for: String.self) { text, _ in
+            if let price = Double(text.first ?? "") {
+                value = price
+                return true
+            } else {
+                return false
+            }
+        }
     }
 }
 
