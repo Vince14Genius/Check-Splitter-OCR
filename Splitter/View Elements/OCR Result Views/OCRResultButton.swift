@@ -38,4 +38,3 @@ struct OCRResultButton: View {
         .environment(\.colorScheme, .light)
     }
 }
-

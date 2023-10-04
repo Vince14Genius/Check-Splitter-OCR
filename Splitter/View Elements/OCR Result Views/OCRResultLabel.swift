@@ -83,9 +83,31 @@ struct OCRResultLabel: View {
         }
         .animation(.easeInOut, value: shouldShowOCRText)
         .scaleEffect(scale)
+        .draggable(result.value.draggableRepresentation) {
+            let rawText = result.value.draggableRepresentation
+            let price = Double(rawText)
+            Text(price?.formatted() ?? rawText)
+                .padding(.horizontal, 8)
+                .padding(.vertical, 4)
+                .background {
+                    RoundedRectangle(cornerRadius: 4)
+                        .stroke(price == nil ? .blue : .green, style: .init(lineWidth: 2))
+                        .fill(Color(.systemBackground).opacity(backgroundOpacity))
+                        .shadow(color: (price == nil ? Color.blue : Color.green).opacity(backgroundOpacity), radius: 4)
+                }
+        }
         .offset(
             x: unnormalizedRect.midX - imageViewSize.width / 2,
             y: -(unnormalizedRect.midY - imageViewSize.height / 2)
         )
+    }
+}
+
+private extension OCRResult.ResultType {
+    var draggableRepresentation: String {
+        switch self {
+        case .price(let value): String(value)
+        case .name(let text): text
+        }
     }
 }

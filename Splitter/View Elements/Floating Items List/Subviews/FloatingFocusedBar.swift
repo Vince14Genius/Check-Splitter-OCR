@@ -36,7 +36,7 @@ private struct CancelButton: View {
                 .font(.title)
         }
         .keyboardShortcut(.escape, modifiers: [])
-        .foregroundStyle(.gray)
+        .foregroundStyle(.primary)
     }
 }
 
