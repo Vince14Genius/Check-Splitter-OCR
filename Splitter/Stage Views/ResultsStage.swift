@@ -42,7 +42,7 @@ struct ResultsStage: View {
                                 HStack {
                                     Text(item.name)
                                     Spacer()
-                                    Text("× \(item.quantity.roundedToTwoPlaces)")
+                                    Text("× \(item.realQuantity.roundedToTwoPlaces)")
                                 }
                             }
                             .foregroundStyle(.secondary)
