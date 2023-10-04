@@ -26,47 +26,8 @@ struct OCRResultsFrame: View {
     let imageState: OCRPhotoModel.ImageState
     let imageScale: Double
     let shouldShowOCRText: Bool
-    @Binding var floatingBarState: FloatingBarState
-    
-    @State private var isShowingPriceZeroAlert = false
-    
-    private func addResultToActiveItem(_ result: OCRResult) {
-        var itemToEdit = Item.Initiation()
-        if case .focused(let item) = floatingBarState {
-            itemToEdit = item
-        }
-        switch result.value {
-        case .name(let text):
-            itemToEdit.name = text
-        case .price(let value):
-            do {
-                try itemToEdit.setPrice(to: value)
-            } catch {
-                if case Item.AssignmentError.itemPriceZero = error {
-                    isShowingPriceZeroAlert = true
-                    return
-                }
-            }
-        }
-        floatingBarState = .focused(item: itemToEdit)
-    }
-    
-    private func addPairToActiveItem(_ name: String, _ price: Double) {
-        var itemToEdit = Item.Initiation()
-        if case .focused(let item) = floatingBarState {
-            itemToEdit = item
-        }
-        do {
-            try itemToEdit.setPrice(to: price)
-        } catch {
-            if case Item.AssignmentError.itemPriceZero = error {
-                isShowingPriceZeroAlert = true
-                return
-            }
-        }
-        itemToEdit.name = name
-        floatingBarState = .focused(item: itemToEdit)
-    }
+    let addResultToActiveItem: (OCRResult) -> Void
+    let addPairToActiveItem: (String, Double) -> Void
     
     var body: some View {
         let isRotated = uiImage.imageOrientation == .right
@@ -89,15 +50,14 @@ struct OCRResultsFrame: View {
                         imageState: imageState,
                         shouldShowOCRText: shouldShowOCRText,
                         isRotated: isRotated,
-                        addResultToActiveItem: addResultToActiveItem(_:),
-                        addPairToActiveItem: addPairToActiveItem(_:_:)
+                        addResultToActiveItem: addResultToActiveItem,
+                        addPairToActiveItem: addPairToActiveItem
                     )
                 }
             }
             .rotationEffect(isRotated ? .degrees(90) : .zero)
         }
         .frame(width: frameWidthRaw, height: frameHeightRaw)
-        .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
 }
 

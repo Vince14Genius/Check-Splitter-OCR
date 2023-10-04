@@ -10,11 +10,14 @@ import SwiftUI
 struct TotalCostField: View {
     @Binding var value: Double?
     let currency: Currency
+    let areOCRResultsAvailable: Bool
     
     @State private var isShowingEditAlert = false
     @State private var textFieldValue = ""
     
     @State private var isShowingCostInvalidAlert = false
+    
+    @State private var scale = 1.0
     
     var body: some View {
         HStack {
@@ -26,9 +29,17 @@ struct TotalCostField: View {
                     if let value {
                         Text("Total: **\(value.formatted(.currency(code: currency.rawValue)))**")
                             .monospacedDigit()
+                            .scaleEffect(scale)
+                            .animation(.easeInOut, value: scale)
                     } else {
-                        Text("Enter Total Cost")
-                            .italic()
+                        VStack(alignment: .trailing) {
+                            Text("Enter Total Cost")
+                                .italic()
+                            if areOCRResultsAvailable {
+                                Text("or Drag and Drop")
+                                    .font(.caption)
+                            }
+                        }
                     }
                     Image(systemName: "pencil")
                         .font(.title3)
@@ -66,12 +77,19 @@ struct TotalCostField: View {
                 return false
             }
         }
+        .onChange(of: value) {
+            scale = 1.2
+            _ = Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                scale = 1.0
+            }
+        }
     }
 }
 
 #Preview {
     Group {
-        TotalCostField(value: .constant(nil), currency: .jpy)
-        TotalCostField(value: .constant(69), currency: .jpy)
+        TotalCostField(value: .constant(nil), currency: .jpy, areOCRResultsAvailable: false)
+        TotalCostField(value: .constant(nil), currency: .jpy, areOCRResultsAvailable: true)
+        TotalCostField(value: .constant(69), currency: .jpy, areOCRResultsAvailable: false)
     }
 }

@@ -33,6 +33,8 @@ private struct InnerBar: View {
     
     @State private var isPresentingListSheet = false
     
+    @State private var scale = 1.0
+    
     private var shouldShowRedIndicator: Bool {
         switch state {
         case .minimized:
@@ -57,6 +59,8 @@ private struct InnerBar: View {
                 } label: {
                     HStack {
                         Text("**\(items.count)** items")
+                            .scaleEffect(scale)
+                            .animation(.easeInOut, value: scale)
                         Image(systemName: "list.bullet")
                     }
                     .foregroundStyle(Color(.label))
@@ -81,6 +85,15 @@ private struct InnerBar: View {
             )
             .presentationDetents([.fraction(0.75)])
             .presentationBackground(.thinMaterial)
+        }
+        .onChange(of: items.count) { oldCount, newCount in
+            if newCount > oldCount {
+                // item appended, play animation
+                scale = 1.2
+                _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+                    scale = 1.0
+                }
+            }
         }
     }
 }

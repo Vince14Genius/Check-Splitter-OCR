@@ -19,6 +19,13 @@ struct OCRResultButton: View {
     
     @State private var scale = 1.0
     
+    private func animatePop() {
+        scale = 1.2
+        _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
+            scale = 1.0
+        }
+    }
+    
     var body: some View {
         OCRResultLabel(
             result: result,
@@ -30,11 +37,8 @@ struct OCRResultButton: View {
         )
         .animation(.bouncy, value: scale)
         .onTapGesture {
-            scale = 1.2
             addResultToActiveItem(result)
-            _ = Timer.scheduledTimer(withTimeInterval: 0.3, repeats: false) { _ in
-                scale = 1.0
-            }
+            animatePop()
         }
         .dropDestination(for: String.self) { droppedStrings, _ in
             if let price = Double(droppedStrings.first ?? "") {
@@ -43,18 +47,21 @@ struct OCRResultButton: View {
                     return false
                 case .name(let name):
                     addPairToActiveItem(name, price)
+                    animatePop()
                     return true
                 }
             } else if let name = droppedStrings.first {
                 switch result.value {
                 case .price(let price):
                     addPairToActiveItem(name, price)
+                    animatePop()
                     return true
                 case .name(_):
                     return false
                 }
+            } else {
+                return false
             }
-            return false
         }
         .environment(\.colorScheme, .light)
     }

@@ -29,13 +29,7 @@ struct ItemRowButton: View {
                 Spacer()
                 Text(item.price.formatted(.currency(code: currency.rawValue)))
                     .monospacedDigit()
-                    .padding(.vertical, 4)
-                    .padding(.horizontal, 8)
-                    .background(
-                        RoundedRectangle(cornerRadius: 6)
-                            .fill(Color.accentColor)
-                    )
-                    .foregroundStyle(.background)
+                    .foregroundStyle(Color(.label))
             }
         }
     }

@@ -18,6 +18,8 @@ struct ReceiptStage: View {
     @State private var isShowingOCRLabels = true
     @State private var floatingBarState: FloatingBarState = .minimized
     
+    @State private var isShowingPriceZeroAlert = false
+    
     @Binding var flowState: SplitterFlowState
     @Binding var currency: Currency
     
@@ -32,6 +34,45 @@ struct ReceiptStage: View {
         !flowState.items.isEmpty && flowState.totalCost != nil
     }
     
+    private func addResultToActiveItem(_ result: OCRResult) {
+        var itemToEdit = Item.Initiation()
+        if case .focused(let item) = floatingBarState {
+            itemToEdit = item
+        }
+        switch result.value {
+        case .name(let text):
+            itemToEdit.name = text
+        case .price(let value):
+            do {
+                try itemToEdit.setPrice(to: value)
+            } catch {
+                if case Item.AssignmentError.itemPriceZero = error {
+                    isShowingPriceZeroAlert = true
+                    return
+                }
+            }
+        }
+        floatingBarState = .focused(item: itemToEdit)
+    }
+    
+    private func addPairToActiveItem(_ name: String, _ price: Double) {
+        var itemToEdit = Item.Initiation()
+        do {
+            try itemToEdit.setPrice(to: price)
+            itemToEdit.name = name
+        } catch {
+            if case Item.AssignmentError.itemPriceZero = error {
+                isShowingPriceZeroAlert = true
+                return
+            }
+        }
+        
+        if let completedItem = Item(from: itemToEdit) {
+            flowState.items.append(completedItem)
+            floatingBarState = .minimized
+        }
+    }
+    
     var body: some View {
         ZStack {
             switch viewModel.imageState {
@@ -43,7 +84,8 @@ struct ReceiptStage: View {
                         imageState: viewModel.imageState,
                         imageScale: imageScale,
                         shouldShowOCRText: isShowingOCRLabels,
-                        floatingBarState: $floatingBarState
+                        addResultToActiveItem: addResultToActiveItem(_:),
+                        addPairToActiveItem: addPairToActiveItem(_:_:)
                     )
                 }
                 .ignoresSafeArea()
@@ -93,7 +135,7 @@ struct ReceiptStage: View {
         }
         .overlay(alignment: .topTrailing) {
             VStack {
-                TotalCostField(value: $flowState.totalCost, currency: currency)
+                TotalCostField(value: $flowState.totalCost, currency: currency, areOCRResultsAvailable: !ocrResults.isEmpty)
                 FloatingItemsList(items: $flowState.items, state: $floatingBarState, currency: currency)
             }
             .padding()
@@ -118,6 +160,7 @@ struct ReceiptStage: View {
             }
         }())
         .transition(.move(edge: .leading).animation(.easeInOut))
+        .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
     
     func processResults(_ results: [OCRResult]) {

@@ -17,9 +17,9 @@ struct FloatingExpandedList: View {
     var body: some View {
         NavigationStack {
             List {
-                InstructionsBanner(text: "To create items, tap on item names and price numbers from your scanned receipt. Or do it manually here.")
-                    .listRowBackground(Color.clear)
                 if items.isEmpty {
+                    InstructionsBanner(text: "To create items, tap on item names and price numbers from your scanned receipt. Or do it manually here.")
+                        .listRowBackground(Color.clear)
                     Centered {
                         Text("No items yet.")
                     }
@@ -27,10 +27,8 @@ struct FloatingExpandedList: View {
                     .listRowBackground(Color.clear)
                 } else {
                     InnerList(items: $items, state: $state, currency: currency, isPresented: $isPresented)
-                        .listRowBackground(Color.clear)
                 }
             }
-            .listStyle(.plain)
             .navigationTitle("Items")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
