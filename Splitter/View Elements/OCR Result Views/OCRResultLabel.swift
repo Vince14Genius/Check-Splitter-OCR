@@ -95,6 +95,7 @@ struct OCRResultLabel: View {
                         .fill(Color(.systemBackground).opacity(backgroundOpacity))
                         .shadow(color: (price == nil ? Color.blue : Color.green).opacity(backgroundOpacity), radius: 4)
                 }
+                .environment(\.colorScheme, .light)
         }
         .offset(
             x: unnormalizedRect.midX - imageViewSize.width / 2,

@@ -51,6 +51,23 @@ struct OCRResultsFrame: View {
         floatingBarState = .focused(item: itemToEdit)
     }
     
+    private func addPairToActiveItem(_ name: String, _ price: Double) {
+        var itemToEdit = Item.Initiation()
+        if case .focused(let item) = floatingBarState {
+            itemToEdit = item
+        }
+        do {
+            try itemToEdit.setPrice(to: price)
+        } catch {
+            if case Item.AssignmentError.itemPriceZero = error {
+                isShowingPriceZeroAlert = true
+                return
+            }
+        }
+        itemToEdit.name = name
+        floatingBarState = .focused(item: itemToEdit)
+    }
+    
     var body: some View {
         let isRotated = uiImage.imageOrientation == .right
         let frameWidthRaw = uiImage.size.width * imageScale
@@ -72,7 +89,8 @@ struct OCRResultsFrame: View {
                         imageState: imageState,
                         shouldShowOCRText: shouldShowOCRText,
                         isRotated: isRotated,
-                        action: addResultToActiveItem(_:)
+                        addResultToActiveItem: addResultToActiveItem(_:),
+                        addPairToActiveItem: addPairToActiveItem(_:_:)
                     )
                 }
             }
