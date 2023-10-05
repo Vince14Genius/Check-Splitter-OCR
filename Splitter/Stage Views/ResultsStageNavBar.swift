@@ -12,6 +12,13 @@ struct ResultsStageNavBar: View {
     @Binding var flowState: SplitterFlowState
     @Environment(\.layoutDirection) private var layoutDirection
     
+    @State private var isPresentingStartOverAlert = false
+    
+    private func startOver() {
+        stage = .receipt
+        flowState = .init()
+    }
+    
     var body: some View {
         VStack(spacing: 0) {
             Divider()
@@ -27,15 +34,18 @@ struct ResultsStageNavBar: View {
                     }
                 }(), modifiers: .command)
                 Spacer()
-                Button("Restart") {
-                    stage = .receipt
-                    flowState = .init()
+                Button("Start Over") {
+                    isPresentingStartOverAlert = true
                 }
                 .buttonStyle(.bordered)
                 .keyboardShortcut(.return, modifiers: .command)
             }
             .padding()
             .background(.thinMaterial)
+        }
+        .alert("Start Over?", isPresented: $isPresentingStartOverAlert) {
+            Button("Cancel", role: .cancel) {}
+            Button("Yes, start over", role: .destructive) { startOver() }
         }
     }
 }
