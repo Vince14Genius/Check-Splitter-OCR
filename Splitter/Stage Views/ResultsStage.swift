@@ -36,6 +36,7 @@ struct ResultsStage: View {
                                 Spacer()
                                 Text(payer.payerTotal.formatted(.currency(code: currency.rawValue)))
                                     .bold()
+                                    .textSelection(.enabled)
                             }
                             .font(.title3)
                             
@@ -58,6 +59,7 @@ struct ResultsStage: View {
                         Spacer()
                         Text(result?.totalCost.formatted(.currency(code: currency.rawValue)) ?? "")
                             .bold()
+                            .textSelection(.enabled)
                     }
                     .font(.title2)
                     .padding(.horizontal)
