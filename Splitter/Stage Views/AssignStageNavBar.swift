@@ -10,36 +10,32 @@ import SwiftUI
 struct AssignStageNavBar: View {
     let isNextButtonEnabled: Bool
     @Binding var stage: Stage
+    @Binding var path: [InfoEntryStage]
     @Environment(\.layoutDirection) private var layoutDirection
     
     var body: some View {
-        VStack(spacing: 0) {
-            Divider()
-            HStack {
-                Button("Back") {
-                    stage = .receipt
-                }
-                .keyboardShortcut({
-                    switch layoutDirection {
-                    case .leftToRight: .leftArrow
-                    case .rightToLeft: .rightArrow
-                    @unknown default: .leftArrow
-                    }
-                }(), modifiers: .command)
-                Spacer()
-                Button("Calculate!") {
-                    stage = .calculated
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(!isNextButtonEnabled)
-                .keyboardShortcut(.return, modifiers: .command)
+        HStack {
+            Button("Back") {
+                path.removeLast()
             }
-            .padding()
-            .background(.thinMaterial)
+            .keyboardShortcut({
+                switch layoutDirection {
+                case .leftToRight: .leftArrow
+                case .rightToLeft: .rightArrow
+                @unknown default: .leftArrow
+                }
+            }(), modifiers: .command)
+            Spacer()
+            Button("Calculate!") {
+                stage = .calculated
+            }
+            .buttonStyle(.borderedProminent)
+            .disabled(!isNextButtonEnabled)
+            .keyboardShortcut(.return, modifiers: .command)
         }
     }
 }
 
 #Preview {
-    AssignStageNavBar(isNextButtonEnabled: true, stage: .constant(.assignPayers))
+    AssignStageNavBar(isNextButtonEnabled: true, stage: .constant(.infoEntry), path: .constant([.assignPayers]))
 }

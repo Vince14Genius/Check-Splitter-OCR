@@ -11,6 +11,7 @@ import Foundation
 
 struct ReceiptStage: View {
     @Binding var stage: Stage
+    @Binding var path: [InfoEntryStage]
     
     @State private var viewModel = OCRPhotoModel()
     @State private var ocrResults: [OCRResult] = []
@@ -120,14 +121,20 @@ struct ReceiptStage: View {
         }
         .background(Color(.secondarySystemBackground))
         .overlay(alignment: .bottom) {
-            ReceiptStageNavBar(
-                isNextButtonEnabled: isNextButtonEnabled,
+            ImageViewerButtons(
                 isImageToolbarEnabled: !ocrResults.isEmpty,
                 isShowingOCRLabels: $isShowingOCRLabels,
-                zoomScale: $zoomScale,
-                viewModel: $viewModel, 
-                stage: $stage
+                zoomScale: $zoomScale
             )
+        }
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                ReceiptStageNavBar(
+                    isNextButtonEnabled: isNextButtonEnabled,
+                    viewModel: $viewModel,
+                    path: $path
+                )
+            }
         }
         .overlay(alignment: .topLeading) {
             CurrencyPicker(currency: $currency)
@@ -159,12 +166,56 @@ struct ReceiptStage: View {
                 false
             }
         }())
-        .transition(.move(edge: .leading).animation(.easeInOut))
         .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
     
     func processResults(_ results: [OCRResult]) {
         ocrResults = results
+    }
+}
+
+private struct ImageViewerButtons: View {
+    let isImageToolbarEnabled: Bool
+    @Binding var isShowingOCRLabels: Bool
+    @Binding var zoomScale: OCRResultsFrame.ZoomScale
+    
+    var body: some View {
+        if isImageToolbarEnabled {
+            HStack(spacing: 0) {
+                Button {
+                    isShowingOCRLabels.toggle()
+                } label: {
+                    Image(systemName: isShowingOCRLabels ? "eye" : "eye.slash")
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                }
+                .foregroundStyle(.primary)
+                Divider()
+                HStack {
+                    Label("Zoom Scale", systemImage: "plus.magnifyingglass")
+                        .labelStyle(.iconOnly)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                    Picker(selection: $zoomScale) {
+                        ForEach(OCRResultsFrame.ZoomScale.allCases, id: \.self) { scaleCase in
+                            Text("\(scaleCase.rawValue.formatted(.number.precision(.fractionLength(1))))x")
+                                .monospacedDigit()
+                                .tag(scaleCase)
+                        }
+                    } label: {
+                        Label("Zoom Scale", systemImage: "plus.magnifyingglass")
+                            .labelStyle(.iconOnly)
+                    }
+                }
+                .tint(.primary)
+            }
+            .fixedSize(horizontal: false, vertical: true)
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(.regularMaterial)
+            )
+            .padding()
+        }
     }
 }
 

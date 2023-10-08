@@ -12,13 +12,6 @@ struct OCRResultsFrame: View {
         case zoom0_5x = 0.5
         case zoom1x = 1.0
         case zoom2x = 2.0
-        
-        func next() -> ZoomScale {
-            let allCases = ZoomScale.allCases
-            let currentIndex = allCases.firstIndex(of: self)!
-            let nextIndex = (currentIndex + 1) % allCases.count
-            return allCases[nextIndex]
-        }
     }
     
     let uiImage: UIImage

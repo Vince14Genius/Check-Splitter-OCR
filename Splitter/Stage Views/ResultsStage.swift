@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ResultsStage: View {
     @Binding var stage: Stage
+    @Binding var path: [InfoEntryStage]
     @Binding var flowState: SplitterFlowState
     let currency: Currency
     
@@ -66,12 +67,16 @@ struct ResultsStage: View {
             .navigationTitle("Your results")
             .monospacedDigit()
         }
-        .overlay(alignment: .bottom) {
-            ResultsStageNavBar(stage: $stage, flowState: $flowState)
+        .toolbar {
+            ToolbarItem(placement: .bottomBar) {
+                ResultsStageNavBar(stage: $stage, path: $path, flowState: $flowState)
+            }
         }
     }
 }
 
 #Preview {
-    ResultsStage(stage: .constant(.calculated), flowState: .constant(.sampleData), currency: .usd)
+    NavigationStack {
+        ResultsStage(stage: .constant(.calculated), path: .constant([.assignPayers]), flowState: .constant(.sampleData), currency: .usd)
+    }
 }

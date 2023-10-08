@@ -9,39 +9,36 @@ import SwiftUI
 
 struct ResultsStageNavBar: View {
     @Binding var stage: Stage
+    @Binding var path: [InfoEntryStage]
     @Binding var flowState: SplitterFlowState
     @Environment(\.layoutDirection) private var layoutDirection
     
     @State private var isPresentingStartOverAlert = false
     
     private func startOver() {
-        stage = .receipt
+        stage = .infoEntry
+        path = []
         flowState = .init()
     }
     
     var body: some View {
-        VStack(spacing: 0) {
-            Divider()
-            HStack {
-                Button("Back") {
-                    stage = .assignPayers
-                }
-                .keyboardShortcut({
-                    switch layoutDirection {
-                    case .leftToRight: .leftArrow
-                    case .rightToLeft: .rightArrow
-                    @unknown default: .leftArrow
-                    }
-                }(), modifiers: .command)
-                Spacer()
-                Button("Start Over") {
-                    isPresentingStartOverAlert = true
-                }
-                .buttonStyle(.bordered)
-                .keyboardShortcut(.return, modifiers: .command)
+        HStack {
+            Button("Back") {
+                stage = .infoEntry
             }
-            .padding()
-            .background(.thinMaterial)
+            .keyboardShortcut({
+                switch layoutDirection {
+                case .leftToRight: .leftArrow
+                case .rightToLeft: .rightArrow
+                @unknown default: .leftArrow
+                }
+            }(), modifiers: .command)
+            Spacer()
+            Button("Start Over") {
+                isPresentingStartOverAlert = true
+            }
+            .buttonStyle(.bordered)
+            .keyboardShortcut(.return, modifiers: .command)
         }
         .alert("Start Over?", isPresented: $isPresentingStartOverAlert) {
             Button("Cancel", role: .cancel) {}
@@ -51,5 +48,5 @@ struct ResultsStageNavBar: View {
 }
 
 #Preview {
-    ResultsStageNavBar(stage: .constant(.calculated), flowState: .constant(.sampleData))
+    ResultsStageNavBar(stage: .constant(.calculated), path: .constant([.assignPayers]), flowState: .constant(.sampleData))
 }

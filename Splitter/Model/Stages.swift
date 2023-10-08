@@ -8,5 +8,9 @@
 import Foundation
 
 enum Stage {
-    case receipt, assignPayers, calculated
+    case infoEntry, calculated
+}
+
+enum InfoEntryStage: Hashable {
+    case assignPayers
 }
