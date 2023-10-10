@@ -86,6 +86,7 @@
 		4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRPhotoModel.swift; sourceTree = "<group>"; };
 		4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+OCR Processing.swift"; sourceTree = "<group>"; };
 		4E7F30CC2A9FF79700555493 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4EC0E2B72AD5562300B80035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPropertyField.swift; sourceTree = "<group>"; };
 		4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptStageNavBar.swift; sourceTree = "<group>"; };
 		4EF902EC2AA42E15004B4ABF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		4E7F30B72A9C007E00555493 /* Splitter */ = {
 			isa = PBXGroup;
 			children = (
+				4EC0E2B72AD5562300B80035 /* Info.plist */,
 				4E7F30B82A9C007E00555493 /* SplitterApp.swift */,
 				4E6ABBBB2AC3C1CB00054524 /* StageSwitcherView.swift */,
 				4EF902F42AA54C88004B4ABF /* Model */,
@@ -495,6 +497,7 @@
 				DEVELOPMENT_TEAM = S5LH6VYMA5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Splitter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Splitter;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -525,6 +528,7 @@
 				DEVELOPMENT_TEAM = S5LH6VYMA5;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Splitter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Splitter;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
