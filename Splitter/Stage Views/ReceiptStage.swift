@@ -185,9 +185,13 @@ private struct ImageViewerButtons: View {
                 Button {
                     isShowingOCRLabels.toggle()
                 } label: {
-                    Image(systemName: isShowingOCRLabels ? "eye" : "eye.slash")
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
+                    Label(
+                        isShowingOCRLabels ? "Hide OCR Labels" : "Show OCR Labels",
+                        systemImage: isShowingOCRLabels ? "eye" : "eye.slash"
+                    )
+                    .labelStyle(.iconOnly)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 8)
                 }
                 .foregroundStyle(.primary)
                 Divider()

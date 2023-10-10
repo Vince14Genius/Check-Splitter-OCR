@@ -51,7 +51,8 @@ struct PayerRow: View {
                     Button {
                         isPresentingPayerEditorSheet = true
                     } label: {
-                        Image(systemName: "pencil")
+                        Label("Edit payer", systemImage: "pencil")
+                            .labelStyle(.iconOnly)
                     }
                     CreateShareMenu(
                         payer: payer,
@@ -131,7 +132,8 @@ private struct CreateShareMenu: View {
                 }
             }
         } label: {
-            Image(systemName: "plus")
+            Label("Assign item", systemImage: "plus")
+                .labelStyle(.iconOnly)
         }
         .disabled(assignedItems.count == flowState.items.count)
     }

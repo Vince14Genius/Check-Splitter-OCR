@@ -39,7 +39,8 @@ struct PayerEditor: View {
                             Button {
                                 isNameFieldFocused = false
                             } label: {
-                                Image(systemName: "checkmark.circle")
+                                Label("Unfocus keyboard", image: "checkmark.circle")
+                                    .labelStyle(.iconOnly)
                             }
                             .font(.title2)
                             .disabled(payer.name.isEmpty)
@@ -75,20 +76,22 @@ struct PayerEditor: View {
             }
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    Menu {
-                        ForEach(flowState.items) { item in
-                            Button(item.name) {
-                                let share = Share(payerID: payer.id, itemID: item.id)
-                                flowState.shares.append(share)
-                                shareToEdit = share
+                    HStack {
+                        EditButton()
+                        Spacer()
+                        Menu {
+                            ForEach(flowState.items) { item in
+                                Button(item.name) {
+                                    let share = Share(payerID: payer.id, itemID: item.id)
+                                    flowState.shares.append(share)
+                                    shareToEdit = share
+                                }
+                                .disabled(currentPayerShares.contains { $0.itemID == item.id })
                             }
-                            .disabled(currentPayerShares.contains { $0.itemID == item.id })
+                        } label: {
+                            Label("Assign item", systemImage: "plus")
+                                .labelStyle(.iconOnly)
                         }
-                    } label: {
-                        Image(systemName: "plus")
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {

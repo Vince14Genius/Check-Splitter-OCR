@@ -98,19 +98,6 @@ private struct InnerBar: View {
     }
 }
 
-private struct FoldButton: View {
-    @Binding var isPresentingListSheet: Bool
-    
-    var body: some View {
-        Button {
-            isPresentingListSheet.toggle()
-        } label: {
-            Image(systemName: "list.bullet")
-                .font(.body)
-        }
-    }
-}
-
 #Preview {
     StageSwitcherView(flowState: .sampleData)
 }

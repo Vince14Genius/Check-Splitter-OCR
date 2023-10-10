@@ -130,7 +130,8 @@ private struct CreateShareMenu: View {
                 }
             }
         } label: {
-            Image(systemName: "plus")
+            Label("Assign payer", systemImage: "plus")
+                .labelStyle(.iconOnly)
         }
     }
 }

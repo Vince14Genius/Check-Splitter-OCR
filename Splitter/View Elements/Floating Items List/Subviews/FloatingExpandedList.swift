@@ -33,14 +33,16 @@ struct FloatingExpandedList: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .bottomBar) {
-                    Button {
-                        state = .focused(item: .init())
-                        isPresented = false
-                    } label: {
-                        Image(systemName: "plus")
+                    HStack {
+                        EditButton()
+                        Spacer()
+                        Button {
+                            state = .focused(item: .init())
+                            isPresented = false
+                        } label: {
+                            Label("Add new item", systemImage: "plus")
+                                .labelStyle(.iconOnly)
+                        }
                     }
                 }
             }

@@ -90,7 +90,7 @@ struct AssignStage: View {
                     Button {
                         createNewPayer()
                     } label: {
-                        Image(systemName: "plus")
+                        Label("Create new payer", systemImage: "plus")
                     }
                 }
             }
