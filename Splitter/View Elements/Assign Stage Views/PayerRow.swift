@@ -38,6 +38,7 @@ struct PayerRow: View {
                     if items.isEmpty {
                         Label("No items assigned", systemImage: "exclamationmark.triangle.fill")
                             .foregroundStyle(.red)
+                            .font(.caption)
                         Spacer()
                     } else {
                         ItemShareList(
@@ -54,16 +55,19 @@ struct PayerRow: View {
                         Label("Edit payer", systemImage: "pencil")
                             .labelStyle(.iconOnly)
                     }
+                    .buttonStyle(.bordered)
                     CreateShareMenu(
                         payer: payer,
                         assignedItems: items,
                         indexOfShareToEdit: $indexOfShareToEdit,
                         flowState: $flowState
                     )
+                    .buttonStyle(.bordered)
                 }
             }
         }
         .id(payer.id)
+        .selectionDisabled()
         .sheet(isPresented: $isPresentingPayerEditorSheet) {
             PayerEditor(
                 payer: $payer,

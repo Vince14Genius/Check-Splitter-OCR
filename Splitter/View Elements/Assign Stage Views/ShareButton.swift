@@ -34,6 +34,7 @@ struct ShareButton: View {
             } label: {
                 HStack {
                     Text(title)
+                        .font(.caption)
                     Text("× \(share.realQuantity.roundedToTwoPlaces)")
                         .foregroundStyle(.secondary)
                         .font(.caption)

@@ -32,6 +32,11 @@ struct FloatingExpandedList: View {
             .navigationTitle("Items")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button("Done") {
+                        isPresented = false
+                    }
+                }
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
                         EditButton()

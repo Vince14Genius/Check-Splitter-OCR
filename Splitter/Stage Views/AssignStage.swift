@@ -29,46 +29,46 @@ struct AssignStage: View {
     }
     
     var body: some View {
-        VStack {
-            switch viewMode {
-            case .items:
-                List {
-                    ForEach($flowState.items) { $item in
-                        ItemRow(
-                            flowState: $flowState,
-                            item: $item,
-                            currency: currency
-                        ) {
-                            createNewPayer()
-                            flowState.shares.append(
-                                .init(payerID: payerToEdit.id, itemID: item.id)
-                            )
-                        }
+        TabView(selection: $viewMode) {
+            List {
+                ForEach($flowState.items) { $item in
+                    ItemRow(
+                        flowState: $flowState,
+                        item: $item,
+                        currency: currency
+                    ) {
+                        createNewPayer()
+                        flowState.shares.append(
+                            .init(payerID: payerToEdit.id, itemID: item.id)
+                        )
                     }
                 }
-                .transition(.move(edge: .leading))
-            case .payers:
-                List {
-                    if flowState.payers.isEmpty {
-                        HStack {
-                            Spacer()
-                            Label {
-                                Text("No payers yet.")
-                            } icon: {
-                                Image(systemName: "exclamationmark.triangle.fill")
-                            }
-                                .foregroundStyle(.red)
-                            Spacer()
-                        }
-                    }
-                    ForEach($flowState.payers) { $payer in
-                        PayerRow(flowState: $flowState, payer: $payer)
-                    }
-                    .onDelete { flowState.payers.remove(atOffsets: $0) }
-                }
-                .transition(.move(edge: .trailing))
             }
+            .tag(ViewMode.items)
+            List {
+                if flowState.payers.isEmpty {
+                    HStack {
+                        Spacer()
+                        Label {
+                            Text("No payers yet.")
+                        } icon: {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                        }
+                            .foregroundStyle(.red)
+                        Spacer()
+                    }
+                }
+                ForEach($flowState.payers) { $payer in
+                    PayerRow(flowState: $flowState, payer: $payer)
+                }
+                .onDelete { flowState.payers.remove(atOffsets: $0) }
+                .onMove { flowState.payers.move(fromOffsets: $0, toOffset: $1) }
+            }
+            .tag(ViewMode.payers)
         }
+        .tabViewStyle(.page(indexDisplayMode: .never))
+        .ignoresSafeArea(edges: [.top, .bottom])
+        .background(Color(.systemGroupedBackground))
         .animation(.easeInOut(duration: 0.3), value: viewMode)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
@@ -82,11 +82,22 @@ struct AssignStage: View {
                 }
                 .pickerStyle(.segmented)
             }
-            if case .payers = viewMode {
-                ToolbarItem(placement: .topBarLeading) {
-                    EditButton()
-                }
-                ToolbarItem(placement: .topBarTrailing) {
+            ToolbarItem(placement: .topBarLeading) {
+                EditButton()
+                    .disabled({
+                        switch viewMode {
+                        case .items: true
+                        case .payers: false
+                        }
+                    }())
+            }
+            ToolbarItem(placement: .topBarTrailing) {
+                switch viewMode {
+                case .items:
+                    Button {} label: {
+                        Image(systemName: "plus").disabled(true)
+                    }
+                case .payers:
                     Button {
                         createNewPayer()
                     } label: {

@@ -31,23 +31,23 @@ struct ItemRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Group {
-                    Text(item.name)
-                    Spacer()
-                    Text("\(item.price.formatted(.currency(code: currency.rawValue)))")
-                        .monospacedDigit()
-                }
-                    .font(.title2)
+                Text(item.name)
+                Spacer()
+                Text("\(item.price.formatted(.currency(code: currency.rawValue)))")
+                    .monospacedDigit()
+                    .bold()
                 if quantity != 0 {
                     Text("× \(quantity.roundedToTwoPlaces)")
                         .monospacedDigit()
                         .foregroundStyle(.secondary)
+                        .font(.caption)
                 }
             }
             HStack {
                 if payers.isEmpty {
                     Label("No payers assigned", systemImage: "exclamationmark.triangle.fill")
                         .foregroundStyle(.red)
+                        .font(.caption)
                     Spacer()
                 } else {
                     PayerShareList(
@@ -64,6 +64,7 @@ struct ItemRow: View {
                     flowState: $flowState,
                     createNewPayerAction: createNewPayerAction
                 )
+                .buttonStyle(.bordered)
             }
         }
         .id(item.id)
