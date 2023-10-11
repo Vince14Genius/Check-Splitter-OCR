@@ -18,6 +18,7 @@ struct ResultItem: Hashable {
     var realQuantity: Double
     var originalUnitPrice: Double
     
+    /// nominal price of the share; `<unit price> * <quantity>`
     var originalSharePrice: Double { originalUnitPrice * realQuantity }
     
     func finalPrice(multiplier: Double) -> Double {
@@ -96,13 +97,7 @@ private struct IntermediateResultPayer {
     }
     
     var subtotal: Double {
-        items.reduce(0) {
-            $0 + $1.originalSharePrice
-        }
-    }
-    
-    func ratio(to globalSubtotal: Double) -> Double {
-        subtotal / globalSubtotal
+        items.reduce(0) { $0 + $1.originalSharePrice }
     }
     
     static func arrayFrom(payers: [Payer], items: [Item], shares: [Share]) -> [IntermediateResultPayer] {
