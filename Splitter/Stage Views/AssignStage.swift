@@ -31,6 +31,16 @@ struct AssignStage: View {
     var body: some View {
         TabView(selection: $viewMode) {
             List {
+                if flowState.shouldShowItemSubtotalZeroWarning {
+                    Label {
+                        Text("The subtotal of assigned items cannot be zero.")
+                    } icon: {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                    }
+                    .foregroundStyle(.red)
+                    .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                }
                 ForEach($flowState.items) { $item in
                     ItemRow(
                         flowState: $flowState,
@@ -54,7 +64,7 @@ struct AssignStage: View {
                         } icon: {
                             Image(systemName: "exclamationmark.triangle.fill")
                         }
-                            .foregroundStyle(.red)
+                        .foregroundStyle(.red)
                         Spacer()
                     }
                 }

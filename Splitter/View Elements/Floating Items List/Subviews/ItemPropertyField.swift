@@ -112,7 +112,7 @@ struct ItemPropertyField: View {
                     case .name:
                         .default
                     case .price(_):
-                        .decimalPad
+                        .numbersAndPunctuation
                     }
                 }())
             Button("Cancel", role: .cancel) { textFieldValue = "" }

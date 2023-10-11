@@ -13,10 +13,41 @@ import SwiftUI
     var payers = [Payer]()
     var shares = [Share]()
     
+    private var hasUnassignedItem: Bool {
+        !items.allSatisfy { item in shares.contains { $0.itemID == item.id } }
+    }
+    
+    private var hasUnassignedPayer: Bool {
+        !payers.allSatisfy { payer in shares.contains { $0.payerID == payer.id } }
+    }
+    
+    private var isItemSubtotalZero: Bool {
+        shares.reduce(0) { partialResult, share in
+            guard let item = items.first(where: { $0.id == share.itemID }) else {
+                return partialResult
+            }
+            return partialResult + share.realQuantity * item.price
+        } == 0
+    }
+    
+    var isReceiptStageIncomplete: Bool {
+        totalCost == nil || items.isEmpty
+    }
+    
+    var isItemAssignmentIncomplete: Bool {
+        hasUnassignedItem || isItemSubtotalZero
+    }
+    
+    var isPayerAssignmentIncomplete: Bool {
+        payers.isEmpty || hasUnassignedPayer
+    }
+    
+    var shouldShowItemSubtotalZeroWarning: Bool {
+        !hasUnassignedItem && isItemSubtotalZero
+    }
+    
     var canCalculate: Bool {
-        totalCost != nil && !items.isEmpty && !payers.isEmpty &&
-        items.allSatisfy { item in shares.contains { $0.itemID == item.id } } &&
-        payers.allSatisfy { payer in shares.contains { $0.payerID == payer.id } }
+        !isReceiptStageIncomplete && !isItemAssignmentIncomplete && !isPayerAssignmentIncomplete
     }
 }
 

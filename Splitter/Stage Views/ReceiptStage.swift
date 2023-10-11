@@ -32,7 +32,7 @@ struct ReceiptStage: View {
     }
     
     private var isNextButtonEnabled: Bool {
-        !flowState.items.isEmpty && flowState.totalCost != nil
+        !flowState.isReceiptStageIncomplete
     }
     
     private func addResultToActiveItem(_ result: OCRResult) {
