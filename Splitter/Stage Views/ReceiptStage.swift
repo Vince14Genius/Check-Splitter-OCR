@@ -143,7 +143,7 @@ struct ReceiptStage: View {
         .overlay(alignment: .topTrailing) {
             VStack {
                 TotalCostField(value: $flowState.totalCost, currency: currency, areOCRResultsAvailable: !ocrResults.isEmpty)
-                FloatingItemsList(items: $flowState.items, state: $floatingBarState, currency: currency)
+                FloatingItemsList(items: $flowState.items, state: $floatingBarState, currency: currency, shouldReturnToItemListSheet: ocrResults.isEmpty)
             }
             .padding()
         }

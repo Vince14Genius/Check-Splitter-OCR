@@ -11,6 +11,7 @@ struct FloatingItemsList: View {
     @Binding var items: [Item]
     @Binding var state: FloatingBarState
     let currency: Currency
+    let shouldReturnToItemListSheet: Bool
     
     var body: some View {
         HStack {
@@ -19,7 +20,7 @@ struct FloatingItemsList: View {
                 if state == .minimized {
                     Spacer()
                 }
-                InnerBar(items: $items, state: $state, currency: currency)
+                InnerBar(items: $items, state: $state, currency: currency, shouldReturnToItemListSheet: shouldReturnToItemListSheet)
             }
             .frame(maxWidth: 500)
         }
@@ -30,6 +31,7 @@ private struct InnerBar: View {
     @Binding var items: [Item]
     @Binding var state: FloatingBarState
     let currency: Currency
+    let shouldReturnToItemListSheet: Bool
     
     @State private var isPresentingListSheet = false
     
@@ -44,6 +46,12 @@ private struct InnerBar: View {
         }
     }
     
+    private func presentListSheetIfNeeded() {
+        if shouldReturnToItemListSheet {
+            isPresentingListSheet = true
+        }
+    }
+    
     var body: some View {
         VStack(spacing: 8) {
             if case .focused(let item) = state {
@@ -51,7 +59,8 @@ private struct InnerBar: View {
                     item: item,
                     items: $items,
                     state: $state,
-                    currency: currency
+                    currency: currency,
+                    presentListSheetIfNeeded: presentListSheetIfNeeded
                 )
             } else {
                 Button {
@@ -76,7 +85,7 @@ private struct InnerBar: View {
                 .stroke(shouldShowRedIndicator ? Color.red : .primary.opacity(0.1))
         )
         .sheet(isPresented: $isPresentingListSheet) {
-            FloatingExpandedList(
+            ItemsListSheet(
                 items: $items,
                 state: $state,
                 currency: currency,

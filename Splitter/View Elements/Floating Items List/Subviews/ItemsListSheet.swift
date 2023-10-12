@@ -1,5 +1,5 @@
 //
-//  FloatingExpandedList.swift
+//  ItemsListSheet.swift
 //  Splitter
 //
 //  Created by Vincent C. on 9/19/23.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct FloatingExpandedList: View {
+struct ItemsListSheet: View {
     @Binding var items: [Item]
     @Binding var state: FloatingBarState
     let currency: Currency
