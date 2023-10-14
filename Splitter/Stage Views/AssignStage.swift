@@ -22,67 +22,33 @@ struct AssignStage: View {
     @State private var payerToEdit: Payer = .init(name: "")
     @State private var isPresentingPayerEditor = false
     
-    private func createNewPayer() {
+    @State private var editMode: EditMode = .inactive
+    private var isEditing: Bool { editMode.isEditing }
+    
+    @discardableResult
+    private func createNewPayer() -> Payer {
         // payerToEdit is reset on every sheet dismissal,
         // so simply present the sheet
         isPresentingPayerEditor = true
+        return payerToEdit
     }
     
     var body: some View {
         TabView(selection: $viewMode) {
-            List {
-                if flowState.shouldShowItemSubtotalZeroWarning {
-                    Label {
-                        Text("The subtotal of assigned items cannot be zero.")
-                    } icon: {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                    }
-                    .foregroundStyle(.red)
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                }
-                ForEach($flowState.items) { $item in
-                    ItemRow(
-                        flowState: $flowState,
-                        item: $item,
-                        currency: currency
-                    ) {
-                        createNewPayer()
-                        flowState.shares.append(
-                            .init(payerID: payerToEdit.id, itemID: item.id)
-                        )
-                    }
-                }
-            }
-            .tag(ViewMode.items)
-            List {
-                if flowState.payers.isEmpty {
-                    HStack {
-                        Spacer()
-                        Label {
-                            Text("No payers yet.")
-                        } icon: {
-                            Image(systemName: "exclamationmark.triangle.fill")
-                        }
-                        .foregroundStyle(.red)
-                        Spacer()
-                    }
-                }
-                ForEach($flowState.payers) { $payer in
-                    PayerRow(flowState: $flowState, payer: $payer)
-                }
-                .onDelete { flowState.payers.remove(atOffsets: $0) }
-                .onMove { flowState.payers.move(fromOffsets: $0, toOffset: $1) }
-            }
-            .tag(ViewMode.payers)
+            AssignItemList(flowState: $flowState, editMode: $editMode, currency: currency, createNewPayer: createNewPayer)
+                .tag(ViewMode.items)
+            AssignPayerList(flowState: $flowState)
+                .tag(ViewMode.payers)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea(edges: [.top, .bottom])
         .background(Color(.systemGroupedBackground))
         .animation(.easeInOut(duration: 0.3), value: viewMode)
         .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                AssignStageNavBar(isNextButtonEnabled: flowState.canCalculate, stage: $stage, path: $path)
+            if !isEditing {
+                ToolbarItem(placement: .bottomBar) {
+                    AssignStageNavBar(isNextButtonEnabled: flowState.canCalculate, stage: $stage, path: $path)
+                }
             }
             ToolbarItem(placement: .principal) {
                 Picker("View Mode", selection: $viewMode) {
@@ -94,12 +60,6 @@ struct AssignStage: View {
             }
             ToolbarItem(placement: .topBarLeading) {
                 EditButton()
-                    .disabled({
-                        switch viewMode {
-                        case .items: true
-                        case .payers: false
-                        }
-                    }())
             }
             ToolbarItem(placement: .topBarTrailing) {
                 switch viewMode {
@@ -140,6 +100,7 @@ struct AssignStage: View {
             .presentationBackground(.thinMaterial)
             .interactiveDismissDisabled()
         }
+        .environment(\.editMode, $editMode)
     }
 }
 

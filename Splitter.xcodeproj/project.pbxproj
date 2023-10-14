@@ -43,6 +43,8 @@
 		4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CC2A9FF79700555493 /* ImagePicker.swift */; };
 		4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */; };
 		4ECC77132ABF92BE00C88D6F /* ReceiptStageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */; };
+		4EE7936E2AD8B9820002C7C0 /* AssignItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7936D2AD8B9820002C7C0 /* AssignItemList.swift */; };
+		4EE793702AD8B98C0002C7C0 /* AssignPayerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7936F2AD8B98C0002C7C0 /* AssignPayerList.swift */; };
 		4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EC2AA42E15004B4ABF /* Item.swift */; };
 		4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */; };
 		4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */; };
@@ -89,6 +91,8 @@
 		4EC0E2B72AD5562300B80035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPropertyField.swift; sourceTree = "<group>"; };
 		4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptStageNavBar.swift; sourceTree = "<group>"; };
+		4EE7936D2AD8B9820002C7C0 /* AssignItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignItemList.swift; sourceTree = "<group>"; };
+		4EE7936F2AD8B98C0002C7C0 /* AssignPayerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignPayerList.swift; sourceTree = "<group>"; };
 		4EF902EC2AA42E15004B4ABF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultLabel.swift; sourceTree = "<group>"; };
 		4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBarState.swift; sourceTree = "<group>"; };
@@ -163,6 +167,8 @@
 		4E6ABBC82AC5088A00054524 /* Assign Stage Views */ = {
 			isa = PBXGroup;
 			children = (
+				4EE7936D2AD8B9820002C7C0 /* AssignItemList.swift */,
+				4EE7936F2AD8B98C0002C7C0 /* AssignPayerList.swift */,
 				4E6ABBC92AC5091C00054524 /* ItemRow.swift */,
 				4E6ABBCB2AC5091C00054524 /* PayerRow.swift */,
 				4E6ABBCA2AC5091C00054524 /* NameLabel.swift */,
@@ -329,6 +335,7 @@
 				4E7F30C72A9FE5DF00555493 /* OCRPhotoModel.swift in Sources */,
 				4E6ABBBE2AC3C54E00054524 /* AssignStage.swift in Sources */,
 				4EF902F32AA54C52004B4ABF /* FloatingItemsList.swift in Sources */,
+				4EE7936E2AD8B9820002C7C0 /* AssignItemList.swift in Sources */,
 				4E32D1BB2AC96F4700522A4D /* ResultsStageNavBar.swift in Sources */,
 				4E6ABBBC2AC3C1CB00054524 /* StageSwitcherView.swift in Sources */,
 				4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */,
@@ -350,6 +357,7 @@
 				4E7F30B92A9C007E00555493 /* SplitterApp.swift in Sources */,
 				4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */,
 				4E6ABBC02AC3C55B00054524 /* AssignStageNavBar.swift in Sources */,
+				4EE793702AD8B98C0002C7C0 /* AssignPayerList.swift in Sources */,
 				4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */,
 				4E6ABBCE2AC5091C00054524 /* PayerRow.swift in Sources */,
 				4E6ABBC22AC3C6D800054524 /* SplitterFlowState.swift in Sources */,

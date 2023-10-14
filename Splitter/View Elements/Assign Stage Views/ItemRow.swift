@@ -10,6 +10,11 @@ struct ItemRow: View {
     
     @State private var indexOfShareToEdit: [Share].Index?
     
+    @Environment(\.editMode) private var editMode
+    private var isEditing: Bool {
+        editMode?.wrappedValue.isEditing ?? false
+    }
+    
     private var quantity: Double {
         flowState.shares.filter {
             $0.itemID == item.id
@@ -66,6 +71,7 @@ struct ItemRow: View {
                 )
                 .buttonStyle(.bordered)
             }
+            .disabled(isEditing)
         }
         .id(item.id)
         .sheet(item: $indexOfShareToEdit) { i in

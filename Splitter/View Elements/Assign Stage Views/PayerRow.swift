@@ -4,7 +4,6 @@ struct PayerRow: View {
     @Binding var flowState: SplitterFlowState
     @Binding var payer: Payer
     
-    @Environment(\.editMode) private var editMode
     @State private var indexOfShareToEdit: [Share].Index?
     
     @State private var isPresentingPayerEditorSheet = false
@@ -19,8 +18,9 @@ struct PayerRow: View {
         }
     }
     
+    @Environment(\.editMode) private var editMode
     private var isEditing: Bool {
-        return editMode?.wrappedValue.isEditing ?? false
+        editMode?.wrappedValue.isEditing ?? false
     }
 
     var body: some View {

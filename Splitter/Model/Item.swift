@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct Item: Identifiable {
+struct Item: Identifiable, Hashable {
     var id = UUID()
     var name: String
     var price: Double
