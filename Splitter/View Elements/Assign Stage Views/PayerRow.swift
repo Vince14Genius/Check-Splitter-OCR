@@ -67,7 +67,7 @@ struct PayerRow: View {
             }
         }
         .id(payer.id)
-        .selectionDisabled()
+        .selectionDisabled(!isEditing)
         .sheet(isPresented: $isPresentingPayerEditorSheet) {
             PayerEditor(
                 payer: $payer,

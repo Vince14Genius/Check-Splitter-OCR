@@ -1,6 +1,6 @@
 import Foundation
 
-struct Payer: Identifiable {
+struct Payer: Identifiable, Hashable {
     var id = UUID()
     var name: String
 }

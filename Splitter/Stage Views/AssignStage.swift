@@ -23,7 +23,6 @@ struct AssignStage: View {
     @State private var isPresentingPayerEditor = false
     
     @State private var editMode: EditMode = .inactive
-    private var isEditing: Bool { editMode.isEditing }
     
     @discardableResult
     private func createNewPayer() -> Payer {
@@ -37,7 +36,7 @@ struct AssignStage: View {
         TabView(selection: $viewMode) {
             AssignItemList(flowState: $flowState, editMode: $editMode, currency: currency, createNewPayer: createNewPayer)
                 .tag(ViewMode.items)
-            AssignPayerList(flowState: $flowState)
+            AssignPayerList(flowState: $flowState, editMode: $editMode)
                 .tag(ViewMode.payers)
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
@@ -45,7 +44,7 @@ struct AssignStage: View {
         .background(Color(.systemGroupedBackground))
         .animation(.easeInOut(duration: 0.3), value: viewMode)
         .toolbar {
-            if !isEditing {
+            if !editMode.isEditing {
                 ToolbarItem(placement: .bottomBar) {
                     AssignStageNavBar(isNextButtonEnabled: flowState.canCalculate, stage: $stage, path: $path)
                 }

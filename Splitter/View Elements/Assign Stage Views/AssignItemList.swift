@@ -15,8 +15,6 @@ struct AssignItemList: View {
     
     @State private var multiSelection = Set<Item>()
     
-    private var isEditing: Bool { editMode.isEditing }
-    
     var body: some View {
         List(selection: $multiSelection) {
             if flowState.shouldShowItemSubtotalZeroWarning {
@@ -43,7 +41,7 @@ struct AssignItemList: View {
             }
         }
         .toolbar {
-            if isEditing {
+            if editMode.isEditing {
                 ToolbarItem(placement: .bottomBar) {
                     HStack {
                         Text("\(multiSelection.count) selected")
