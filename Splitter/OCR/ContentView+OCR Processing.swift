@@ -8,6 +8,7 @@
 import Vision
 import Foundation
 import RegexBuilder
+import UIKit
 
 struct OCRResult {
     enum ResultType {
@@ -41,13 +42,8 @@ struct OCRResult {
 }
 
 extension ReceiptStage {
-    func runOCR(imageState: OCRPhotoModel.ImageState) {
-        guard case let .success(uiImage) = imageState else {
-            print("Image does not exist.")
-            return
-        }
-        
-        guard let cgImage = uiImage.cgImage else {
+    func runOCR(image: UIImage) {
+        guard let cgImage = image.cgImage else {
             print("Unable to extract CGImage from imported image.")
             return
         }

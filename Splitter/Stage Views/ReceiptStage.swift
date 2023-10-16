@@ -13,7 +13,7 @@ struct ReceiptStage: View {
     @Binding var stage: Stage
     @Binding var path: [InfoEntryStage]
     
-    @State private var viewModel = OCRPhotoModel()
+    @State private var imagePickerItem: ImagePickerItem = .empty
     @State private var ocrResults: [OCRResult] = []
     
     @State private var isShowingOCRLabels = true
@@ -76,13 +76,12 @@ struct ReceiptStage: View {
     
     var body: some View {
         ZStack {
-            switch viewModel.imageState {
+            switch imagePickerItem {
             case .success(let uiImage):
                 ScrollView([.horizontal, .vertical]) {
                     OCRResultsFrame(
                         uiImage: uiImage,
                         ocrResults: ocrResults,
-                        imageState: viewModel.imageState,
                         imageScale: imageScale,
                         shouldShowOCRText: isShowingOCRLabels,
                         addResultToActiveItem: addResultToActiveItem(_:),
@@ -131,7 +130,7 @@ struct ReceiptStage: View {
             ToolbarItem(placement: .bottomBar) {
                 ReceiptStageNavBar(
                     isNextButtonEnabled: isNextButtonEnabled,
-                    viewModel: $viewModel,
+                    imagePickerItem: $imagePickerItem,
                     path: $path
                 )
             }
@@ -147,25 +146,16 @@ struct ReceiptStage: View {
             }
             .padding()
         }
-        .onChange(of: viewModel.imageSelection) {
+        .onChange(of: imagePickerItem) {
             ocrResults = []
             floatingBarState = .minimized
-        }
-        .onChange(of: viewModel.imageState) {
-            if case .success(_) = viewModel.imageState {
-                runOCR(imageState: viewModel.imageState)
+            if case .success(let uiImage) = imagePickerItem {
+                runOCR(image: uiImage)
             }
         }
         .animation(.easeInOut, value: floatingBarState)
         .animation(.easeInOut, value: zoomScale)
-        .statusBarHidden({
-            switch viewModel.imageState {
-            case .success(_):
-                true
-            default:
-                false
-            }
-        }())
+        .statusBarHidden(imagePickerItem.hasDisplayImage)
         .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
     

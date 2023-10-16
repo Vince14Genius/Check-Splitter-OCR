@@ -38,13 +38,14 @@
 		4E7F30BB2A9C007E00555493 /* ReceiptStage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30BA2A9C007E00555493 /* ReceiptStage.swift */; };
 		4E7F30BD2A9C007F00555493 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BC2A9C007F00555493 /* Assets.xcassets */; };
 		4E7F30C02A9C007F00555493 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */; };
-		4E7F30C72A9FE5DF00555493 /* OCRPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */; };
+		4E7F30C72A9FE5DF00555493 /* ImagePickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30C62A9FE5DF00555493 /* ImagePickerModel.swift */; };
 		4E7F30CB2A9FF70B00555493 /* ContentView+OCR Processing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */; };
-		4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CC2A9FF79700555493 /* ImagePicker.swift */; };
+		4E7F30CD2A9FF79700555493 /* PhotoLibraryPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E7F30CC2A9FF79700555493 /* PhotoLibraryPicker.swift */; };
 		4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */; };
 		4ECC77132ABF92BE00C88D6F /* ReceiptStageNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */; };
 		4EE7936E2AD8B9820002C7C0 /* AssignItemList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7936D2AD8B9820002C7C0 /* AssignItemList.swift */; };
 		4EE793702AD8B98C0002C7C0 /* AssignPayerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE7936F2AD8B98C0002C7C0 /* AssignPayerList.swift */; };
+		4EE793742ADDEAE60002C7C0 /* CameraPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EE793732ADDEAE60002C7C0 /* CameraPicker.swift */; };
 		4EF902ED2AA42E15004B4ABF /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EC2AA42E15004B4ABF /* Item.swift */; };
 		4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */; };
 		4EF902F12AA54C2A004B4ABF /* FloatingBarState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */; };
@@ -85,14 +86,15 @@
 		4E7F30BA2A9C007E00555493 /* ReceiptStage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptStage.swift; sourceTree = "<group>"; };
 		4E7F30BC2A9C007F00555493 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4E7F30BF2A9C007F00555493 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRPhotoModel.swift; sourceTree = "<group>"; };
+		4E7F30C62A9FE5DF00555493 /* ImagePickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerModel.swift; sourceTree = "<group>"; };
 		4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+OCR Processing.swift"; sourceTree = "<group>"; };
-		4E7F30CC2A9FF79700555493 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		4E7F30CC2A9FF79700555493 /* PhotoLibraryPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoLibraryPicker.swift; sourceTree = "<group>"; };
 		4EC0E2B72AD5562300B80035 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		4ECC77102ABF8B1100C88D6F /* ItemPropertyField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemPropertyField.swift; sourceTree = "<group>"; };
 		4ECC77122ABF92BE00C88D6F /* ReceiptStageNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptStageNavBar.swift; sourceTree = "<group>"; };
 		4EE7936D2AD8B9820002C7C0 /* AssignItemList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignItemList.swift; sourceTree = "<group>"; };
 		4EE7936F2AD8B98C0002C7C0 /* AssignPayerList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignPayerList.swift; sourceTree = "<group>"; };
+		4EE793732ADDEAE60002C7C0 /* CameraPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraPicker.swift; sourceTree = "<group>"; };
 		4EF902EC2AA42E15004B4ABF /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
 		4EF902EE2AA430BA004B4ABF /* OCRResultLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRResultLabel.swift; sourceTree = "<group>"; };
 		4EF902F02AA54C2A004B4ABF /* FloatingBarState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingBarState.swift; sourceTree = "<group>"; };
@@ -220,6 +222,16 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		4E9831072ADDF8FC003A163C /* Image Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				4E7F30C62A9FE5DF00555493 /* ImagePickerModel.swift */,
+				4E7F30CC2A9FF79700555493 /* PhotoLibraryPicker.swift */,
+				4EE793732ADDEAE60002C7C0 /* CameraPicker.swift */,
+			);
+			path = "Image Pickers";
+			sourceTree = "<group>";
+		};
 		4EF902F42AA54C88004B4ABF /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -238,7 +250,6 @@
 			isa = PBXGroup;
 			children = (
 				4E7F30CA2A9FF70B00555493 /* ContentView+OCR Processing.swift */,
-				4E7F30C62A9FE5DF00555493 /* OCRPhotoModel.swift */,
 			);
 			path = OCR;
 			sourceTree = "<group>";
@@ -249,7 +260,7 @@
 				4E4B68C22ABA743C000CE063 /* Floating Items List */,
 				4E6ABBC72AC5085500054524 /* OCR Result Views */,
 				4E6ABBC82AC5088A00054524 /* Assign Stage Views */,
-				4E7F30CC2A9FF79700555493 /* ImagePicker.swift */,
+				4E9831072ADDF8FC003A163C /* Image Pickers */,
 				4E4B68BE2ABA5DBF000CE063 /* Centered.swift */,
 				4E4B68C82ABD30A4000CE063 /* CurrencyPicker.swift */,
 				4E6ABBAF2ABFCC8F00054524 /* TotalCostField.swift */,
@@ -332,14 +343,15 @@
 				4E7F30BB2A9C007E00555493 /* ReceiptStage.swift in Sources */,
 				4EF902EF2AA430BA004B4ABF /* OCRResultLabel.swift in Sources */,
 				4E547BF52ABE44E100196B65 /* Stages.swift in Sources */,
-				4E7F30C72A9FE5DF00555493 /* OCRPhotoModel.swift in Sources */,
+				4E7F30C72A9FE5DF00555493 /* ImagePickerModel.swift in Sources */,
 				4E6ABBBE2AC3C54E00054524 /* AssignStage.swift in Sources */,
 				4EF902F32AA54C52004B4ABF /* FloatingItemsList.swift in Sources */,
 				4EE7936E2AD8B9820002C7C0 /* AssignItemList.swift in Sources */,
 				4E32D1BB2AC96F4700522A4D /* ResultsStageNavBar.swift in Sources */,
 				4E6ABBBC2AC3C1CB00054524 /* StageSwitcherView.swift in Sources */,
+				4EE793742ADDEAE60002C7C0 /* CameraPicker.swift in Sources */,
 				4ECC77112ABF8B1100C88D6F /* ItemPropertyField.swift in Sources */,
-				4E7F30CD2A9FF79700555493 /* ImagePicker.swift in Sources */,
+				4E7F30CD2A9FF79700555493 /* PhotoLibraryPicker.swift in Sources */,
 				4ECC77132ABF92BE00C88D6F /* ReceiptStageNavBar.swift in Sources */,
 				4E6ABBCD2AC5091C00054524 /* NameLabel.swift in Sources */,
 				4E6ABBCC2AC5091C00054524 /* ItemRow.swift in Sources */,
@@ -507,6 +519,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Splitter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Splitter;
+				INFOPLIST_KEY_NSCameraUsageDescription = "You can use the camera to scan receipts in Check Splitter.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -538,6 +551,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Splitter/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Splitter;
+				INFOPLIST_KEY_NSCameraUsageDescription = "You can use the camera to scan receipts in Check Splitter.";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

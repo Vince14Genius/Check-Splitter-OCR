@@ -11,7 +11,7 @@ import Vision
 struct OCRResultButton: View {
     let result: OCRResult
     let frameSize: CGSize
-    let imageState: OCRPhotoModel.ImageState
+    let imageSize: CGSize
     let shouldShowOCRText: Bool
     let isRotated: Bool
     let addResultToActiveItem: (OCRResult) -> Void
@@ -30,7 +30,7 @@ struct OCRResultButton: View {
         OCRResultLabel(
             result: result,
             frameSize: frameSize,
-            imageState: imageState,
+            imageSize: imageSize,
             shouldShowOCRText: shouldShowOCRText,
             isRotated: isRotated,
             scale: scale

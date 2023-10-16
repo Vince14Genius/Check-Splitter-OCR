@@ -12,11 +12,11 @@ struct OCRResultsFrame: View {
         case zoom0_5x = 0.5
         case zoom1x = 1.0
         case zoom2x = 2.0
+        case zoom5x = 5.0
     }
     
     let uiImage: UIImage
     let ocrResults: [OCRResult]
-    let imageState: OCRPhotoModel.ImageState
     let imageScale: Double
     let shouldShowOCRText: Bool
     let addResultToActiveItem: (OCRResult) -> Void
@@ -40,7 +40,7 @@ struct OCRResultsFrame: View {
                     OCRResultButton(
                         result: result,
                         frameSize: frameSize,
-                        imageState: imageState,
+                        imageSize: uiImage.size,
                         shouldShowOCRText: shouldShowOCRText,
                         isRotated: isRotated,
                         addResultToActiveItem: addResultToActiveItem,

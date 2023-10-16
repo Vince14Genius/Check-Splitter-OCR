@@ -11,18 +11,15 @@ import Vision
 struct OCRResultLabel: View {
     let result: OCRResult
     let frameSize: CGSize
-    let imageState: OCRPhotoModel.ImageState
+    let imageSize: CGSize
     let shouldShowOCRText: Bool
     let isRotated: Bool
     let scale: Double
     
-    private func realImageSize(proxySize: CGSize, imageState: OCRPhotoModel.ImageState) -> CGSize {
-        guard case let .success(image) = imageState else {
-            return .zero
-        }
+    private func realImageSize(proxySize: CGSize, imageSize: CGSize) -> CGSize {
         // handle rotation
-        let imageWidth = isRotated ? image.size.height : image.size.width
-        let imageHeight = isRotated ? image.size.width : image.size.height
+        let imageWidth = isRotated ? imageSize.height : imageSize.width
+        let imageHeight = isRotated ? imageSize.width : imageSize.height
         
         // width / height
         let imageDimensionRatio = imageWidth / imageHeight
@@ -54,7 +51,7 @@ struct OCRResultLabel: View {
         }
         let imageViewSize = realImageSize(
             proxySize: frameSize,
-            imageState: imageState
+            imageSize: imageSize
         )
         let unnormalizedRect = VNImageRectForNormalizedRect(
             result.boundingBox ?? .zero,
