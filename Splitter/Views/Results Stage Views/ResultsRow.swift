@@ -1,93 +1,13 @@
 //
-//  ResultsStage.swift
+//  ResultsRow.swift
 //  Splitter
 //
-//  Created by Vincent C. on 10/1/23.
+//  Created by Vincent C. on 10/16/23.
 //
 
 import SwiftUI
 
-struct ResultsStage: View {
-    @Binding var stage: Stage
-    @Binding var path: [InfoEntryStage]
-    @Binding var flowState: SplitterFlowState
-    let currency: Currency
-    
-    private let animationDelayPerRow = 0.2
-    
-    @State private var showsDetailedSteps = false
-    
-    private var result: CalculationResult? {
-        guard let totalCost = flowState.totalCost else {
-            return nil
-        }
-        return .init(
-            totalCost: totalCost,
-            payers: flowState.payers,
-            items: flowState.items,
-            shares: flowState.shares
-        )
-    }
-    
-    var body: some View {
-        NavigationStack {
-            ScrollView(.vertical) {
-                VStack {
-                    if let result {
-                        ForEach(result.payers.indices, id: \.self) { i in
-                            ResultsRow(
-                                payer: result.payers[i],
-                                multiplier: result.multiplier,
-                                totalCost: result.totalCost,
-                                currency: currency,
-                                animationDelay: Double(i) * animationDelayPerRow,
-                                showsDetailedSteps: showsDetailedSteps
-                            )
-                        }
-                        Divider()
-                        if showsDetailedSteps {
-                            HStack {
-                                Text("Subtotal: ")
-                                Spacer()
-                                Text((result.totalCost / result.multiplier).formatted(.currency(code: currency.rawValue)))
-                                    .bold()
-                                    .textSelection(.enabled)
-                            }
-                            .font(.title2)
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal)
-                        }
-                        HStack {
-                            Text("Total: ")
-                            Spacer()
-                            Text(result.totalCost.formatted(.currency(code: currency.rawValue)))
-                                .bold()
-                                .textSelection(.enabled)
-                        }
-                        .font(.title2)
-                        .padding(.horizontal)
-                    }
-                }
-                .padding()
-            }
-            .navigationTitle("Your results")
-            .monospacedDigit()
-        }
-        .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                ResultsStageNavBar(stage: $stage, path: $path, flowState: $flowState)
-            }
-            ToolbarItem(placement: .topBarTrailing) {
-                Button(showsDetailedSteps ? "Hide Steps" : "Show Steps") {
-                    showsDetailedSteps.toggle()
-                }
-            }
-        }
-        .animation(.easeInOut, value: showsDetailedSteps)
-    }
-}
-
-private struct ResultsRow: View {
+struct ResultsRow: View {
     let payer: ResultPayer
     let multiplier: Double
     let totalCost: Double

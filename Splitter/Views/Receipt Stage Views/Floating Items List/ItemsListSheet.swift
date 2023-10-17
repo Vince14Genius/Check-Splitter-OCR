@@ -21,10 +21,15 @@ struct ItemsListSheet: View {
                     InstructionsBanner(text: "To create items, tap on item names and price numbers from your scanned receipt. Or do it manually here.")
                         .listRowBackground(Color.clear)
                     Centered {
-                        Text("No items yet.")
+                        Label {
+                            Text("No items yet.")
+                        } icon: {
+                            Image(systemName: "exclamationmark.triangle.fill")
+                        }
                     }
                     .foregroundStyle(shouldShowRedTitle ? .red : .primary)
                     .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                 } else {
                     InnerList(items: $items, state: $state, currency: currency, isPresented: $isPresented)
                 }

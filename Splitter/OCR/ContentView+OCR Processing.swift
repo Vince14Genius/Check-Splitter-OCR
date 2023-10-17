@@ -75,6 +75,6 @@ extension ReceiptStage {
         }
         
         // Process the recognized strings.
-        processResults(recognizedTexts)
+        processOCRResults(recognizedTexts)
     }
 }

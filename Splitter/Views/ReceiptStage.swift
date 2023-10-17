@@ -35,45 +35,7 @@ struct ReceiptStage: View {
         !flowState.isReceiptStageIncomplete
     }
     
-    private func addResultToActiveItem(_ result: OCRResult) {
-        var itemToEdit = Item.Initiation()
-        if case .focused(let item) = floatingBarState {
-            itemToEdit = item
-        }
-        switch result.value {
-        case .name(let text):
-            itemToEdit.name = text
-        case .price(let value):
-            do {
-                try itemToEdit.setPrice(to: value)
-            } catch {
-                if case Item.AssignmentError.itemPriceZero = error {
-                    isShowingPriceZeroAlert = true
-                    return
-                }
-            }
-        }
-        floatingBarState = .focused(item: itemToEdit)
-    }
-    
-    private func addPairToActiveItem(_ name: String, _ price: Double) {
-        var itemToEdit = Item.Initiation()
-        do {
-            try itemToEdit.setPrice(to: price)
-            itemToEdit.name = name
-        } catch {
-            if case Item.AssignmentError.itemPriceZero = error {
-                isShowingPriceZeroAlert = true
-                return
-            }
-        }
-        
-        if let completedItem = Item(from: itemToEdit) {
-            flowState.items.append(completedItem)
-            floatingBarState = .minimized
-        }
-    }
-    
+    // MARK: main body
     var body: some View {
         ZStack {
             switch imagePickerItem {
@@ -119,8 +81,20 @@ struct ReceiptStage: View {
             }
         }
         .background(Color(.secondarySystemBackground))
+        // MARK: overlays & toolbars
+        .overlay(alignment: .topLeading) {
+            CurrencyPicker(currency: $currency)
+                .padding()
+        }
+        .overlay(alignment: .topTrailing) {
+            VStack {
+                TotalCostField(value: $flowState.totalCost, currency: currency, areOCRResultsAvailable: !ocrResults.isEmpty)
+                FloatingItemsList(items: $flowState.items, state: $floatingBarState, currency: currency, shouldReturnToItemListSheet: ocrResults.isEmpty)
+            }
+            .padding()
+        }
         .overlay(alignment: .bottom) {
-            ImageViewerButtons(
+            ImageViewerControls(
                 isImageToolbarEnabled: !ocrResults.isEmpty,
                 isShowingOCRLabels: $isShowingOCRLabels,
                 zoomScale: $zoomScale
@@ -135,17 +109,7 @@ struct ReceiptStage: View {
                 )
             }
         }
-        .overlay(alignment: .topLeading) {
-            CurrencyPicker(currency: $currency)
-                .padding()
-        }
-        .overlay(alignment: .topTrailing) {
-            VStack {
-                TotalCostField(value: $flowState.totalCost, currency: currency, areOCRResultsAvailable: !ocrResults.isEmpty)
-                FloatingItemsList(items: $flowState.items, state: $floatingBarState, currency: currency, shouldReturnToItemListSheet: ocrResults.isEmpty)
-            }
-            .padding()
-        }
+        // MARK: other modifiers
         .onChange(of: imagePickerItem) {
             ocrResults = []
             floatingBarState = .minimized
@@ -159,60 +123,55 @@ struct ReceiptStage: View {
         .alert("Invalid price: 0 is not allowed", isPresented: $isShowingPriceZeroAlert) {}
     }
     
-    func processResults(_ results: [OCRResult]) {
+    // MARK: Process OCR results
+    func processOCRResults(_ results: [OCRResult]) {
         ocrResults = results
     }
 }
 
-private struct ImageViewerButtons: View {
-    let isImageToolbarEnabled: Bool
-    @Binding var isShowingOCRLabels: Bool
-    @Binding var zoomScale: OCRResultsFrame.ZoomScale
-    
-    var body: some View {
-        if isImageToolbarEnabled {
-            HStack(spacing: 0) {
-                Button {
-                    isShowingOCRLabels.toggle()
-                } label: {
-                    Label(
-                        isShowingOCRLabels ? "Hide OCR Labels" : "Show OCR Labels",
-                        systemImage: isShowingOCRLabels ? "eye" : "eye.slash"
-                    )
-                    .labelStyle(.iconOnly)
-                    .padding(.horizontal, 12)
-                    .padding(.vertical, 8)
+// MARK: Floating bar interactions
+private extension ReceiptStage {
+    func addResultToActiveItem(_ result: OCRResult) {
+        var itemToEdit = Item.Initiation()
+        if case .focused(let item) = floatingBarState {
+            itemToEdit = item
+        }
+        switch result.value {
+        case .name(let text):
+            itemToEdit.name = text
+        case .price(let value):
+            do {
+                try itemToEdit.setPrice(to: value)
+            } catch {
+                if case Item.AssignmentError.itemPriceZero = error {
+                    isShowingPriceZeroAlert = true
+                    return
                 }
-                .foregroundStyle(.primary)
-                Divider()
-                HStack {
-                    Label("Zoom Scale", systemImage: "plus.magnifyingglass")
-                        .labelStyle(.iconOnly)
-                        .padding(.horizontal, 12)
-                        .padding(.vertical, 8)
-                    Picker(selection: $zoomScale) {
-                        ForEach(OCRResultsFrame.ZoomScale.allCases, id: \.self) { scaleCase in
-                            Text("\(scaleCase.rawValue.formatted(.number.precision(.fractionLength(1))))x")
-                                .monospacedDigit()
-                                .tag(scaleCase)
-                        }
-                    } label: {
-                        Label("Zoom Scale", systemImage: "plus.magnifyingglass")
-                            .labelStyle(.iconOnly)
-                    }
-                }
-                .tint(.primary)
             }
-            .fixedSize(horizontal: false, vertical: true)
-            .background(
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(.regularMaterial)
-            )
-            .padding()
+        }
+        floatingBarState = .focused(item: itemToEdit)
+    }
+    
+    func addPairToActiveItem(_ name: String, _ price: Double) {
+        var itemToEdit = Item.Initiation()
+        do {
+            try itemToEdit.setPrice(to: price)
+            itemToEdit.name = name
+        } catch {
+            if case Item.AssignmentError.itemPriceZero = error {
+                isShowingPriceZeroAlert = true
+                return
+            }
+        }
+        
+        if let completedItem = Item(from: itemToEdit) {
+            flowState.items.append(completedItem)
+            floatingBarState = .minimized
         }
     }
 }
 
+// MARK: Preview
 #Preview {
     StageSwitcherView(flowState: .sampleData)
 }

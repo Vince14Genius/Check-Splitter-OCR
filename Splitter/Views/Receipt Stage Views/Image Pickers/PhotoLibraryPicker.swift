@@ -16,7 +16,7 @@ struct PhotoLibraryPicker: View {
     
     var body: some View {
         Group {
-            if selection != nil {
+            if case .success(_) = imageItem {
                 PhotosPicker(selection: $selection,
                              matching: .images,
                              photoLibrary: .shared()) {

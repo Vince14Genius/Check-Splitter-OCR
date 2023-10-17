@@ -26,7 +26,7 @@ struct PayerRow: View {
     var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                NameLabel(payer.name)
+                Text(payer.name)
                     .font(.title2)
                 Spacer()
                 Text("\(items.count) items")
