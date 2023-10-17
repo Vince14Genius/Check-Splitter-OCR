@@ -14,6 +14,7 @@ struct OCRResultButton: View {
     let imageSize: CGSize
     let shouldShowOCRText: Bool
     let isRotated: Bool
+    @Binding var totalCost: Double?
     let addResultToActiveItem: (OCRResult) -> Void
     let addPairToActiveItem: (String, Double) -> Void
     
@@ -33,7 +34,8 @@ struct OCRResultButton: View {
             imageSize: imageSize,
             shouldShowOCRText: shouldShowOCRText,
             isRotated: isRotated,
-            scale: scale
+            scale: scale,
+            totalCost: $totalCost
         )
         .animation(.bouncy, value: scale)
         .onTapGesture {

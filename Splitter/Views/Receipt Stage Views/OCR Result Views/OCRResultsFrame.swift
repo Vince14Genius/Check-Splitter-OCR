@@ -19,6 +19,7 @@ struct OCRResultsFrame: View {
     let ocrResults: [OCRResult]
     let imageScale: Double
     let shouldShowOCRText: Bool
+    @Binding var totalCost: Double?
     let addResultToActiveItem: (OCRResult) -> Void
     let addPairToActiveItem: (String, Double) -> Void
     
@@ -43,6 +44,7 @@ struct OCRResultsFrame: View {
                         imageSize: uiImage.size,
                         shouldShowOCRText: shouldShowOCRText,
                         isRotated: isRotated,
+                        totalCost: $totalCost,
                         addResultToActiveItem: addResultToActiveItem,
                         addPairToActiveItem: addPairToActiveItem
                     )

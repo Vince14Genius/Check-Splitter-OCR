@@ -46,6 +46,7 @@ struct ReceiptStage: View {
                         ocrResults: ocrResults,
                         imageScale: imageScale,
                         shouldShowOCRText: isShowingOCRLabels,
+                        totalCost: $flowState.totalCost,
                         addResultToActiveItem: addResultToActiveItem(_:),
                         addPairToActiveItem: addPairToActiveItem(_:_:)
                     )

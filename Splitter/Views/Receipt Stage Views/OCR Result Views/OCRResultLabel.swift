@@ -15,6 +15,7 @@ struct OCRResultLabel: View {
     let shouldShowOCRText: Bool
     let isRotated: Bool
     let scale: Double
+    @Binding var totalCost: Double?
     
     private func realImageSize(proxySize: CGSize, imageSize: CGSize) -> CGSize {
         // handle rotation
@@ -93,6 +94,16 @@ struct OCRResultLabel: View {
                         .shadow(color: (price == nil ? Color.blue : Color.green).opacity(backgroundOpacity), radius: 4)
                 }
                 .environment(\.colorScheme, .light)
+        }
+        .contextMenu {
+            if
+                case .price(let value) = result.value,
+                value != 0
+            {
+                Button("Use as Total Cost") {
+                    totalCost = value
+                }
+            }
         }
         .offset(
             x: unnormalizedRect.midX - imageViewSize.width / 2,
