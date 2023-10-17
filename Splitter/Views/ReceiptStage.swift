@@ -51,6 +51,12 @@ struct ReceiptStage: View {
                         addPairToActiveItem: addPairToActiveItem(_:_:)
                     )
                 }
+                .simultaneousGesture(MagnifyGesture().onEnded { value in
+                    zoomScale = zoomScale.advanced(by: value.magnification > 1 ? 1 : -1)
+                })
+                .simultaneousGesture(TapGesture(count: 2).onEnded {
+                    zoomScale = zoomScale.rotated()
+                })
                 .ignoresSafeArea()
                 if ocrResults.isEmpty {
                     Text("No text detected from image.")

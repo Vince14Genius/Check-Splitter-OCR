@@ -13,6 +13,19 @@ struct OCRResultsFrame: View {
         case zoom1x = 1.0
         case zoom2x = 2.0
         case zoom5x = 5.0
+        
+        var index: ZoomScale.AllCases.Index {
+            ZoomScale.allCases.firstIndex(of: self) ?? 1
+        }
+        
+        func advanced(by delta: Int) -> ZoomScale {
+            let newIndex = max(0, min(index + delta, ZoomScale.allCases.count - 1))
+            return ZoomScale.allCases[newIndex]
+        }
+        
+        func rotated() -> ZoomScale {
+            ZoomScale.allCases[(index + 1) % ZoomScale.allCases.count]
+        }
     }
     
     let uiImage: UIImage

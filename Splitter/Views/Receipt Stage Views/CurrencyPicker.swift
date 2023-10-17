@@ -18,7 +18,7 @@ struct CurrencyPicker: View {
         } label: {
             HStack {
                 Text(currency.rawValue.uppercased())
-                Image(systemName: "pencil")
+                Image(systemName: "chevron.up.chevron.down")
                     .font(.title3)
             }
             .padding(.horizontal, 14)

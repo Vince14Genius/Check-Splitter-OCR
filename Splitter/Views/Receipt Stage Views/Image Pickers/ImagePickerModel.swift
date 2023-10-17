@@ -35,9 +35,9 @@ enum ImagePickerItem: Equatable {
             case .loading(_): true
             default: false
             }
-        case .success(_):
+        case .success(let lhsImage):
             switch rhs {
-            case .success(_): true
+            case .success(let rhsImage): lhsImage == rhsImage
             default: false
             }
         case .failure(_):
