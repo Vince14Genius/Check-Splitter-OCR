@@ -27,9 +27,8 @@ struct PhotoLibraryPicker: View {
                 PhotosPicker(selection: $selection,
                              matching: .images,
                              photoLibrary: .shared()) {
-                    Label("Pick Image", systemImage: "photo.on.rectangle")
+                    Label("Photo Library", systemImage: "photo.on.rectangle")
                 }
-                .buttonStyle(.borderedProminent)
             }
         }
         .onChange(of: selection) { _, newValue in

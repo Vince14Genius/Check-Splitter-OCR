@@ -73,12 +73,25 @@ struct ReceiptStage: View {
             case .empty:
                 Centered {
                     VStack {
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        Spacer()
                         Image(systemName: "text.viewfinder")
                             .font(.title)
                             .padding(.bottom)
-                        Text("Scan a receipt from your Photo Library")
+                        Text("Scan a receipt to start")
                             .font(.headline)
                         Text("Or enter items manually")
+                        Spacer()
+                        Spacer()
+                        Spacer()
+                        CameraPicker(imageItem: $imagePickerItem)
+                            .labelStyle(.titleAndIcon)
+                            .buttonStyle(.borderedProminent)
+                        PhotoLibraryPicker(imageItem: $imagePickerItem)
+                            .labelStyle(.titleAndIcon)
+                        Spacer()
                     }
                 }
             case .failure:
@@ -108,12 +121,14 @@ struct ReceiptStage: View {
             )
         }
         .toolbar {
-            ToolbarItem(placement: .bottomBar) {
-                ReceiptStageNavBar(
-                    isNextButtonEnabled: isNextButtonEnabled,
-                    imagePickerItem: $imagePickerItem,
-                    path: $path
-                )
+            if imagePickerItem.hasDisplayImage {
+                ToolbarItem(placement: .bottomBar) {
+                    ReceiptStageNavBar(
+                        isNextButtonEnabled: isNextButtonEnabled,
+                        imagePickerItem: $imagePickerItem,
+                        path: $path
+                    )
+                }
             }
         }
         // MARK: other modifiers
