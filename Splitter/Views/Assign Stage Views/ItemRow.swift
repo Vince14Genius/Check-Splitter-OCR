@@ -122,6 +122,8 @@ private struct CreateShareMenu: View {
                 Button("Add New") {
                     createNewPayerAction?()
                 }
+                Button("Select Multiple") {}
+                    .disabled(true) // TODO: implement
             }
             Section {
                 ForEach(flowState.payers) { payer in

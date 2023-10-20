@@ -9,17 +9,11 @@ import SwiftUI
 
 struct ResultsStageNavBar: View {
     @Binding var stage: Stage
-    @Binding var path: [InfoEntryStage]
-    @Binding var flowState: SplitterFlowState
+    let startOver: () -> Void
+    
     @Environment(\.layoutDirection) private var layoutDirection
     
     @State private var isPresentingStartOverAlert = false
-    
-    private func startOver() {
-        stage = .infoEntry
-        path = []
-        flowState = .init()
-    }
     
     var body: some View {
         HStack {
@@ -48,5 +42,5 @@ struct ResultsStageNavBar: View {
 }
 
 #Preview {
-    ResultsStageNavBar(stage: .constant(.calculated), path: .constant([.assignPayers]), flowState: .constant(.sampleData))
+    ResultsStageNavBar(stage: .constant(.calculated)) {}
 }

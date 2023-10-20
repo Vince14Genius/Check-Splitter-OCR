@@ -13,22 +13,40 @@ struct StageSwitcherView: View {
     @State var flowState: SplitterFlowState = .init()
     @State private var enterInfoStagePath: [InfoEntryStage] = []
     
+    // receipt stage OCR persistence
+    @State private var imagePickerItem: ImagePickerItem = .empty
+    @State private var ocrResults: [OCRResult] = []
+    
     var body: some View {
         switch stage {
         case .infoEntry:
             NavigationStack(path: $enterInfoStagePath) {
-                ReceiptStage(stage: $stage, path: $enterInfoStagePath, flowState: $flowState, currency: $currency)
-                    .navigationDestination(for: InfoEntryStage.self) { infoEntryStage in
-                        switch infoEntryStage {
-                        case .assignPayers:
-                            AssignStage(stage: $stage, path: $enterInfoStagePath, flowState: $flowState, currency: currency)
-                                .navigationBarBackButtonHidden()
-                        }
+                ReceiptStage(
+                    stage: $stage,
+                    path: $enterInfoStagePath,
+                    flowState: $flowState,
+                    currency: $currency,
+                    imagePickerItem: $imagePickerItem,
+                    ocrResults: $ocrResults
+                )
+                .navigationDestination(for: InfoEntryStage.self) { infoEntryStage in
+                    switch infoEntryStage {
+                    case .assignPayers:
+                        AssignStage(stage: $stage, path: $enterInfoStagePath, flowState: $flowState, currency: currency)
+                            .navigationBarBackButtonHidden()
                     }
+                }
             }
         case .calculated:
             NavigationStack {
-                ResultsStage(stage: $stage, path: $enterInfoStagePath, flowState: $flowState, currency: currency)
+                ResultsStage(
+                    stage: $stage,
+                    path: $enterInfoStagePath,
+                    flowState: $flowState,
+                    currency: currency,
+                    imagePickerItem: $imagePickerItem,
+                    ocrResults: $ocrResults
+                )
             }
         }
     }

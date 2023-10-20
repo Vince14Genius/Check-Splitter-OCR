@@ -13,9 +13,20 @@ struct ResultsStage: View {
     @Binding var flowState: SplitterFlowState
     let currency: Currency
     
+    @Binding var imagePickerItem: ImagePickerItem
+    @Binding var ocrResults: [OCRResult]
+    
     private let animationDelayPerRow = 0.2
     
     @State private var showsDetailedSteps = false
+    
+    private func startOver() {
+        stage = .infoEntry
+        path = []
+        flowState = .init()
+        imagePickerItem = .empty
+        ocrResults = []
+    }
     
     private var result: CalculationResult? {
         guard let totalCost = flowState.totalCost else {
@@ -74,7 +85,7 @@ struct ResultsStage: View {
         .navigationTitle("Your results")
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
-                ResultsStageNavBar(stage: $stage, path: $path, flowState: $flowState)
+                ResultsStageNavBar(stage: $stage, startOver: startOver)
             }
             ToolbarItem(placement: .topBarTrailing) {
                 Button(showsDetailedSteps ? "Hide Steps" : "Show Steps") {
@@ -87,6 +98,13 @@ struct ResultsStage: View {
 
 #Preview {
     NavigationStack {
-        ResultsStage(stage: .constant(.calculated), path: .constant([.assignPayers]), flowState: .constant(.sampleData), currency: .usd)
+        ResultsStage(
+            stage: .constant(.calculated),
+            path: .constant([.assignPayers]),
+            flowState: .constant(.sampleData),
+            currency: .usd,
+            imagePickerItem: .constant(.empty),
+            ocrResults: .constant([])
+        )
     }
 }

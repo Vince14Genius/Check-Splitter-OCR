@@ -13,16 +13,16 @@ struct ReceiptStage: View {
     @Binding var stage: Stage
     @Binding var path: [InfoEntryStage]
     
-    @State private var imagePickerItem: ImagePickerItem = .empty
-    @State private var ocrResults: [OCRResult] = []
+    @Binding var flowState: SplitterFlowState
+    @Binding var currency: Currency
+    
+    @Binding var imagePickerItem: ImagePickerItem
+    @Binding var ocrResults: [OCRResult]
     
     @State private var isShowingOCRLabels = true
     @State private var floatingBarState: FloatingBarState = .minimized
     
     @State private var isShowingPriceZeroAlert = false
-    
-    @Binding var flowState: SplitterFlowState
-    @Binding var currency: Currency
     
     @Environment(\.displayScale) private var displayScale
     @State private var zoomScale: OCRResultsFrame.ZoomScale = .zoom1x
@@ -86,11 +86,14 @@ struct ReceiptStage: View {
                         Spacer()
                         Spacer()
                         Spacer()
-                        CameraPicker(imageItem: $imagePickerItem)
-                            .labelStyle(.titleAndIcon)
-                            .buttonStyle(.borderedProminent)
-                        PhotoLibraryPicker(imageItem: $imagePickerItem)
-                            .labelStyle(.titleAndIcon)
+                        if !imagePickerItem.hasDisplayImage {
+                            CameraPicker(imageItem: $imagePickerItem)
+                                .labelStyle(.titleAndIcon)
+                                .buttonStyle(.borderedProminent)
+                                .padding()
+                            PhotoLibraryPicker(imageItem: $imagePickerItem)
+                                .labelStyle(.titleAndIcon)
+                        }
                         Spacer()
                     }
                 }
@@ -121,7 +124,7 @@ struct ReceiptStage: View {
             )
         }
         .toolbar {
-            if imagePickerItem.hasDisplayImage {
+            if imagePickerItem.hasDisplayImage || !flowState.isReceiptStageIncomplete {
                 ToolbarItem(placement: .bottomBar) {
                     ReceiptStageNavBar(
                         isNextButtonEnabled: isNextButtonEnabled,

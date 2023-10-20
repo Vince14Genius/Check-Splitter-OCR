@@ -123,6 +123,10 @@ private struct CreateShareMenu: View {
     var body: some View {
         Menu {
             Section {
+                Button("Select Multiple") {}
+                    .disabled(true) // TODO: implement
+            }
+            Section {
                 ForEach(flowState.items) { item in
                     Button(item.name) {
                         let newShare = Share(payerID: payer.id, itemID: item.id)

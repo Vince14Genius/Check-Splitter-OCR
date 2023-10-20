@@ -102,6 +102,13 @@ struct ResultsRow: View {
 
 #Preview {
     NavigationStack {
-        ResultsStage(stage: .constant(.calculated), path: .constant([.assignPayers]), flowState: .constant(.sampleData), currency: .usd)
+        ResultsStage(
+            stage: .constant(.calculated),
+            path: .constant([.assignPayers]),
+            flowState: .constant(.sampleData),
+            currency: .usd,
+            imagePickerItem: .constant(.empty),
+            ocrResults: .constant([])
+        )
     }
 }

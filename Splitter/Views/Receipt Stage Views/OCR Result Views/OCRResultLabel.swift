@@ -42,7 +42,7 @@ struct OCRResultLabel: View {
     }
     
     private var backgroundOpacity: Double {
-        shouldShowOCRText ? 0.7 : 0.4
+        shouldShowOCRText ? 0.7 : 0.1
     }
     
     var body: some View {
@@ -77,7 +77,7 @@ struct OCRResultLabel: View {
             .rotationEffect(isRotated ? .degrees(-90) : .zero)
             .foregroundStyle(.primary)
             .fixedSize(horizontal: false, vertical: true) // SwiftUI text truncation bug workaround
-            .opacity(shouldShowOCRText ? 1.0 : 0.1)
+            .opacity(shouldShowOCRText ? 1.0 : 0.0)
         }
         .animation(.easeInOut, value: shouldShowOCRText)
         .scaleEffect(scale)

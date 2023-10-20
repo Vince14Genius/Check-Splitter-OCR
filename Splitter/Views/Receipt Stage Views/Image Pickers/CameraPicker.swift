@@ -7,6 +7,7 @@
 
 import SwiftUI
 import UIKit
+import Photos
 
 struct CameraPicker: View {
     @Binding var imageItem: ImagePickerItem
@@ -16,7 +17,7 @@ struct CameraPicker: View {
         Button {
             isPresentingCamera = true
         } label: {
-            Label("Camera", systemImage: "camera.fill")
+            Label("Take Photo", systemImage: "camera.fill")
         }
         .sheet(isPresented: $isPresentingCamera) {
             CameraView(imageItem: $imageItem, isPresented: $isPresentingCamera)
@@ -27,6 +28,43 @@ struct CameraPicker: View {
 private struct CameraView: View {
     @Binding var imageItem: ImagePickerItem
     @Binding var isPresented: Bool
+    
+    @State private var hasAddAccess = false
+    
+    private func requestAddAccess() {
+        Task {
+            PHPhotoLibrary.requestAuthorization(for: .addOnly) { status in
+                switch status {
+                case .authorized, .limited:
+                    hasAddAccess = true
+                default:
+                    hasAddAccess = false
+                }
+            }
+//            switch await PHPhotoLibrary.requestAuthorization(for: .addOnly) {
+//            case .authorized, .limited:
+//                hasAddAccess = true
+//            default:
+//                hasAddAccess = false
+//            }
+        }
+    }
+    
+    private func addToPhotoLibrary(_ image: ImagePickerItem) {
+        guard
+            hasAddAccess,
+            case .success(let image) = image,
+            let imageData = image.heicData()
+        else {
+            return
+        }
+        Task {
+            try await PHPhotoLibrary.shared().performChanges {
+                let creationRequest = PHAssetCreationRequest.forAsset()
+                creationRequest.addResource(with: .photo, data: imageData, options: nil)
+            }
+        }
+    }
     
     var body: some View {
         #if os(macOS) || (os(iOS) && targetEnvironment(macCatalyst))
@@ -51,6 +89,10 @@ private struct CameraView: View {
             }
         }
         .background(.black)
+        .onAppear(perform: requestAddAccess)
+        .onChange(of: imageItem) { _, newValue in
+            addToPhotoLibrary(newValue)
+        }
         #endif
     }
 }
