@@ -105,6 +105,7 @@ struct PayerEditor: View {
                 }
                 ToolbarItem(placement: .primaryAction) {
                     Button("Done", action: dismissAction)
+                        .bold()
                         .disabled(isInvalid)
                         .keyboardShortcut(.return, modifiers: .command)
                 }
