@@ -116,14 +116,17 @@ private struct CreateShareMenu: View {
     @Binding var flowState: SplitterFlowState
     let createNewPayerAction: (() -> Void)?
     
+    @State private var isPresentingMultiSelectMenu = false
+    
     var body: some View {
         Menu {
             Section {
                 Button("Add New") {
                     createNewPayerAction?()
                 }
-                Button("Select Multiple") {}
-                    .disabled(true) // TODO: implement
+                Button("Select Multiple") {
+                    isPresentingMultiSelectMenu = true
+                }
             }
             Section {
                 ForEach(flowState.payers) { payer in
@@ -141,6 +144,13 @@ private struct CreateShareMenu: View {
         } label: {
             Label("Assign payer", systemImage: "plus")
                 .labelStyle(.iconOnly)
+        }
+        .sheet(isPresented: $isPresentingMultiSelectMenu) {
+            MultiSelectSheet(
+                data: .payers(item: item),
+                flowState: $flowState,
+                isPresenting: $isPresentingMultiSelectMenu
+            )
         }
     }
 }

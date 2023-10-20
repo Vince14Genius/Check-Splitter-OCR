@@ -120,11 +120,14 @@ private struct CreateShareMenu: View {
     @Binding var indexOfShareToEdit: [Share].Index?
     @Binding var flowState: SplitterFlowState
     
+    @State private var isPresentingMultiSelectMenu = false
+    
     var body: some View {
         Menu {
             Section {
-                Button("Select Multiple") {}
-                    .disabled(true) // TODO: implement
+                Button("Select Multiple") {
+                    isPresentingMultiSelectMenu = true
+                }
             }
             Section {
                 ForEach(flowState.items) { item in
@@ -144,6 +147,13 @@ private struct CreateShareMenu: View {
                 .labelStyle(.iconOnly)
         }
         .disabled(assignedItems.count == flowState.items.count)
+        .sheet(isPresented: $isPresentingMultiSelectMenu) {
+            MultiSelectSheet(
+                data: .items(payer: payer),
+                flowState: $flowState,
+                isPresenting: $isPresentingMultiSelectMenu
+            )
+        }
     }
 }
 

@@ -15,6 +15,8 @@ struct PayerEditor: View {
     @FocusState private var isNameFieldFocused: Bool
     @State private var shareToEdit: Share?
     
+    @State private var isPresentingMultiSelectMenu = false
+    
     private var currentPayerShares: [Share] {
         flowState.shares.filter { $0.payerID == payer.id }
     }
@@ -80,13 +82,20 @@ struct PayerEditor: View {
                         EditButton()
                         Spacer()
                         Menu {
-                            ForEach(flowState.items) { item in
-                                Button(item.name) {
-                                    let share = Share(payerID: payer.id, itemID: item.id)
-                                    flowState.shares.append(share)
-                                    shareToEdit = share
+                            Section {
+                                Button("Select Multiple") {
+                                    isPresentingMultiSelectMenu = true
                                 }
-                                .disabled(currentPayerShares.contains { $0.itemID == item.id })
+                            }
+                            Section {
+                                ForEach(flowState.items) { item in
+                                    Button(item.name) {
+                                        let share = Share(payerID: payer.id, itemID: item.id)
+                                        flowState.shares.append(share)
+                                        shareToEdit = share
+                                    }
+                                    .disabled(currentPayerShares.contains { $0.itemID == item.id })
+                                }
                             }
                         } label: {
                             Label("Assign item", systemImage: "plus")
@@ -114,6 +123,13 @@ struct PayerEditor: View {
                 ) {
                     shareToEdit = nil
                 }
+            }
+            .sheet(isPresented: $isPresentingMultiSelectMenu) {
+                MultiSelectSheet(
+                    data: .items(payer: payer),
+                    flowState: $flowState,
+                    isPresenting: $isPresentingMultiSelectMenu
+                )
             }
         }
     }
