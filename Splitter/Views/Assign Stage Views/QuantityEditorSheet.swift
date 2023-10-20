@@ -17,6 +17,8 @@ struct QuantityEditorSheet: View {
         share.isDenominatorZero || share.isZero
     }
     
+    @State private var showsFractionEditor = false
+    
     var body: some View {
         VStack {
             HStack {
@@ -39,8 +41,10 @@ struct QuantityEditorSheet: View {
                     Text("Quantity: **\(share.realQuantity.roundedToTwoPlaces)**")
                         .foregroundStyle(isInvalid ? .red : .secondary)
                 }
-                Text("Whole Number Part")
-                    .font(.headline)
+                if showsFractionEditor {
+                    Text("Whole Number Part")
+                        .font(.headline)
+                }
                 HStack {
                     Stepper("Count", value: $share.wholeNumberQuantity)
                     Text("\(share.wholeNumberQuantity)")
@@ -48,61 +52,66 @@ struct QuantityEditorSheet: View {
                         .foregroundStyle(share.isZero ? .red : .primary)
                         .frame(minWidth: 40)
                 }
-                Text("Fractional Part")
-                    .font(.headline)
-                VStack(spacing: 2) {
-                    HStack {
-                        Stepper("Numerator", value: $share.fractionPartNumerator)
-                        Text("\(share.fractionPartNumerator)")
-                            .font(.title2)
-                            .foregroundStyle(share.isZero ? .red : .primary)
-                            .frame(minWidth: 40)
-                        
+                if showsFractionEditor {
+                    Text("Fractional Part")
+                        .font(.headline)
+                    VStack(spacing: 2) {
+                        HStack {
+                            Stepper("Numerator", value: $share.fractionPartNumerator)
+                            Text("\(share.fractionPartNumerator)")
+                                .font(.title2)
+                                .foregroundStyle(share.isZero ? .red : .primary)
+                                .frame(minWidth: 40)
+                            
+                        }
+                        HStack {
+                            Spacer()
+                            Rectangle()
+                                .padding(.horizontal, 6)
+                                .frame(width: 40, height: 1)
+                                .padding(.bottom, 2)
+                        }
+                        HStack {
+                            Stepper("Denominator", value: $share.fractionPartDenominator)
+                            Text("\(share.fractionPartDenominator)")
+                                .foregroundStyle({
+                                    switch share.fractionPartDenominator {
+                                    case 0: Color.red
+                                    case 1: Color.secondary
+                                    default: Color.primary
+                                    }
+                                }())
+                                .font(.title2)
+                                .frame(minWidth: 40)
+                        }
                     }
+                }
+                if !showsFractionEditor {
                     HStack {
+                        Text("Quick Fractions")
+                            .foregroundStyle(.secondary)
                         Spacer()
-                        Rectangle()
-                            .padding(.horizontal, 6)
-                            .frame(width: 40, height: 1)
-                            .padding(.bottom, 2)
+                        Button("1/2") {
+                            share.wholeNumberQuantity = 0
+                            share.fractionPartNumerator = 1
+                            share.fractionPartDenominator = 2
+                        }
+                        Button("1/3") {
+                            share.wholeNumberQuantity = 0
+                            share.fractionPartNumerator = 1
+                            share.fractionPartDenominator = 3
+                        }
+                        Button("1/4") {
+                            share.wholeNumberQuantity = 0
+                            share.fractionPartNumerator = 1
+                            share.fractionPartDenominator = 4
+                        }
                     }
-                    HStack {
-                        Stepper("Denominator", value: $share.fractionPartDenominator)
-                        Text("\(share.fractionPartDenominator)")
-                            .foregroundStyle({
-                                switch share.fractionPartDenominator {
-                                case 0: Color.red
-                                case 1: Color.secondary
-                                default: Color.primary
-                                }
-                            }())
-                            .font(.title2)
-                            .frame(minWidth: 40)
-                    }
+                    .padding(.top)
+                    .buttonStyle(.bordered)
+                    .foregroundStyle(.primary)
                 }
-                HStack {
-                    Text("Quick Fractions")
-                        .foregroundStyle(.secondary)
-                    Spacer()
-                    Button("1/2") {
-                        share.wholeNumberQuantity = 0
-                        share.fractionPartNumerator = 1
-                        share.fractionPartDenominator = 2
-                    }
-                    Button("1/3") {
-                        share.wholeNumberQuantity = 0
-                        share.fractionPartNumerator = 1
-                        share.fractionPartDenominator = 3
-                    }
-                    Button("1/4") {
-                        share.wholeNumberQuantity = 0
-                        share.fractionPartNumerator = 1
-                        share.fractionPartDenominator = 4
-                    }
-                }
-                .padding(.top)
-                .buttonStyle(.bordered)
-                .foregroundStyle(.primary)
+                Toggle("Show fraction editor", isOn: $showsFractionEditor)
             }
             .monospacedDigit()
             Spacer()
@@ -115,6 +124,7 @@ struct QuantityEditorSheet: View {
         .presentationBackground(.thinMaterial)
         .presentationDetents([.medium])
         .interactiveDismissDisabled()
+        .animation(.easeInOut, value: showsFractionEditor)
     }
 }
 

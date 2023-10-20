@@ -57,7 +57,7 @@ struct ResultsStage: View {
                     Divider()
                     if showsDetailedSteps {
                         HStack {
-                            Text("Ratio: ")
+                            Text("RATIO: ")
                             Spacer()
                             Text(result.multiplier.formatted())
                                 .bold()
