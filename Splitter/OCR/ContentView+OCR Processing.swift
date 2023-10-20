@@ -27,10 +27,23 @@ struct OCRResult {
         }
     }
     
+    private static func priceFromUSGroceryReceipt(recognizedText: VNRecognizedText) -> Double? {
+        var text = recognizedText.string
+        guard
+            let last = text.last,
+            let penultimate = text.suffix(2).first,
+            last.isASCII, last.isUppercase, penultimate.isWhitespace
+        else { return nil }
+        text.removeLast(2)
+        return Double(text)
+    }
+    
     init(_ recognizedText: VNRecognizedText) {
         if let price = Double(recognizedText.string) {
             value = .price(value: price)
         } else if let price = OCRResult.pricesWithOmittedChars(recognizedText: recognizedText).first {
+            value = .price(value: price)
+        } else if let price = OCRResult.priceFromUSGroceryReceipt(recognizedText: recognizedText) {
             value = .price(value: price)
         } else {
             value = .name(text: recognizedText.string)

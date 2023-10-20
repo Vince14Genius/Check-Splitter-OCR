@@ -57,6 +57,16 @@ struct ResultsStage: View {
                     Divider()
                     if showsDetailedSteps {
                         HStack {
+                            Text("Ratio: ")
+                            Spacer()
+                            Text(result.multiplier.formatted())
+                                .bold()
+                                .textSelection(.enabled)
+                        }
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .padding(.horizontal)
+                        HStack {
                             Text("Subtotal: ")
                             Spacer()
                             Text((result.totalCost / result.multiplier).formatted(.currency(code: currency.rawValue)))
