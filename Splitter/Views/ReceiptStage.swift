@@ -128,6 +128,7 @@ struct ReceiptStage: View {
                 ToolbarItem(placement: .bottomBar) {
                     ReceiptStageNavBar(
                         isNextButtonEnabled: isNextButtonEnabled,
+                        areImagePickersNeeded: imagePickerItem.hasDisplayImage,
                         imagePickerItem: $imagePickerItem,
                         path: $path
                     )
