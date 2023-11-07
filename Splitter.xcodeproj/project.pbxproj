@@ -182,10 +182,8 @@
 				4EE7936F2AD8B98C0002C7C0 /* AssignPayerList.swift */,
 				4E6ABBC92AC5091C00054524 /* ItemRow.swift */,
 				4E6ABBCB2AC5091C00054524 /* PayerRow.swift */,
-				4E6ABBCF2AC8F5AA00054524 /* QuantityEditorSheet.swift */,
-				4E6ABBD12AC8FB7E00054524 /* PayerEditor.swift */,
 				4E32D1C02ACB780200522A4D /* ShareButton.swift */,
-				4E6A58F82AE223780094C318 /* MultiSelectSheet.swift */,
+				4EFFE0332AFAEF460064CC96 /* Sheets */,
 			);
 			path = "Assign Stage Views";
 			sourceTree = "<group>";
@@ -289,6 +287,16 @@
 				4E6ABBB32AC0FEBE00054524 /* InstructionsBanner.swift */,
 			);
 			path = "View Elements";
+			sourceTree = "<group>";
+		};
+		4EFFE0332AFAEF460064CC96 /* Sheets */ = {
+			isa = PBXGroup;
+			children = (
+				4E6ABBCF2AC8F5AA00054524 /* QuantityEditorSheet.swift */,
+				4E6ABBD12AC8FB7E00054524 /* PayerEditor.swift */,
+				4E6A58F82AE223780094C318 /* MultiSelectSheet.swift */,
+			);
+			path = Sheets;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

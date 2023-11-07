@@ -22,7 +22,9 @@ struct PayerEditor: View {
     }
     
     private var isNameAlreadyPresent: Bool {
-        flowState.payers.contains { $0.name == payer.name }
+        flowState.payers.contains {
+            $0.name == payer.name && $0.id != payer.id
+        }
     }
     
     private var isInvalid: Bool {
