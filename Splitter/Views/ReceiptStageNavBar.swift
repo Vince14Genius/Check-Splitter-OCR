@@ -21,12 +21,17 @@ struct ReceiptStageNavBar: View {
                     .labelStyle(.iconOnly)
                 PhotoLibraryPicker(imageItem: $imagePickerItem)
                     .labelStyle(.titleAndIcon)
+                Spacer()
+                NavigationLink("Next", value: InfoEntryStage.assignPayers)
+                    .disabled(!isNextButtonEnabled)
+                    .keyboardShortcut(.return, modifiers: .command)
+                    .buttonStyle(.borderedProminent)
+            } else {
+                Spacer()
+                NavigationLink("Next", value: InfoEntryStage.assignPayers)
+                    .disabled(!isNextButtonEnabled)
+                    .keyboardShortcut(.return, modifiers: .command)
             }
-            Spacer()
-            NavigationLink("Next", value: InfoEntryStage.assignPayers)
-                .buttonStyle(.borderedProminent)
-                .disabled(!isNextButtonEnabled)
-                .keyboardShortcut(.return, modifiers: .command)
         }
     }
 }

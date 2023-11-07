@@ -124,15 +124,13 @@ struct ReceiptStage: View {
             )
         }
         .toolbar {
-            if imagePickerItem.hasDisplayImage || !flowState.isReceiptStageIncomplete {
-                ToolbarItem(placement: .bottomBar) {
-                    ReceiptStageNavBar(
-                        isNextButtonEnabled: isNextButtonEnabled,
-                        areImagePickersNeeded: imagePickerItem.hasDisplayImage,
-                        imagePickerItem: $imagePickerItem,
-                        path: $path
-                    )
-                }
+            ToolbarItem(placement: .bottomBar) {
+                ReceiptStageNavBar(
+                    isNextButtonEnabled: isNextButtonEnabled,
+                    areImagePickersNeeded: imagePickerItem.hasDisplayImage,
+                    imagePickerItem: $imagePickerItem,
+                    path: $path
+                )
             }
         }
         // MARK: other modifiers
