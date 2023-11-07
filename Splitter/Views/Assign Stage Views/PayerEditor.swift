@@ -21,7 +21,13 @@ struct PayerEditor: View {
         flowState.shares.filter { $0.payerID == payer.id }
     }
     
-    private var isInvalid: Bool { payer.name.isEmpty }
+    private var isNameAlreadyPresent: Bool {
+        flowState.payers.contains { $0.name == payer.name }
+    }
+    
+    private var isInvalid: Bool {
+        payer.name.isEmpty || isNameAlreadyPresent
+    }
     
     var body: some View {
         NavigationStack {
@@ -36,6 +42,11 @@ struct PayerEditor: View {
                                 .bold()
                                 .focused($isNameFieldFocused)
                             Divider()
+                            if isNameAlreadyPresent {
+                                Text("There is already a payer with the same name")
+                                    .foregroundStyle(.red)
+                                    .font(.caption2)
+                            }
                         }
                         if isNameFieldFocused {
                             Button {
