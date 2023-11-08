@@ -12,6 +12,7 @@ struct QuantityEditorSheet: View {
     let payerName: String
     @Binding var share: Share
     let dismissAction: () -> Void
+    let unassignAction: () -> Void
     
     private var isInvalid: Bool {
         share.isDenominatorZero || share.isZero
@@ -119,6 +120,8 @@ struct QuantityEditorSheet: View {
                 .buttonStyle(.borderedProminent)
                 .disabled(isInvalid)
                 .keyboardShortcut(.return, modifiers: [])
+            Button("Unassign", role: .destructive, action: unassignAction)
+                .buttonStyle(.bordered)
         }
         .padding()
         .presentationBackground(.thinMaterial)
@@ -132,7 +135,7 @@ private struct QuantityEditor_PreviewWrapper: View {
     @State private var share = Share(payerID: UUID(), itemID: UUID())
     
     var body: some View {
-        QuantityEditorSheet(itemName: "TestItemName", payerName: "TestPayerName", share: $share) {}
+        QuantityEditorSheet(itemName: "TestItemName", payerName: "TestPayerName", share: $share) {} unassignAction: {}
     }
 }
 

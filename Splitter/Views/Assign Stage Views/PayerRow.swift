@@ -86,6 +86,11 @@ struct PayerRow: View {
                 share: $flowState.shares[i]
             ) {
                 indexOfShareToEdit = nil
+            } unassignAction: {
+                if let indexOfShareToEdit {
+                    flowState.shares.remove(at: indexOfShareToEdit)
+                }
+                indexOfShareToEdit = nil
             }
         }
     }

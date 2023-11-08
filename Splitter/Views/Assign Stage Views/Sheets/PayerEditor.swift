@@ -136,6 +136,11 @@ struct PayerEditor: View {
                     share: $flowState.shares[flowState.shares.firstIndex { $0.id == share.id }!]
                 ) {
                     shareToEdit = nil
+                } unassignAction: {
+                    if let shareID = shareToEdit?.id {
+                        flowState.shares.removeAll { $0.id == shareID }
+                    }
+                    shareToEdit = nil
                 }
             }
             .sheet(isPresented: $isPresentingMultiSelectMenu) {
