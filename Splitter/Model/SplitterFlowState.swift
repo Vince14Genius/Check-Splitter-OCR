@@ -21,13 +21,13 @@ import SwiftUI
         !payers.allSatisfy { payer in shares.contains { $0.payerID == payer.id } }
     }
     
-    private var isItemSubtotalZero: Bool {
+    private var isItemSubtotalZeroOrLess: Bool {
         shares.reduce(0) { partialResult, share in
             guard let item = items.first(where: { $0.id == share.itemID }) else {
                 return partialResult
             }
             return partialResult + share.realQuantity * item.price
-        } == 0
+        } <= 0
     }
     
     var isReceiptStageIncomplete: Bool {
@@ -35,7 +35,7 @@ import SwiftUI
     }
     
     var isItemAssignmentIncomplete: Bool {
-        hasUnassignedItem || isItemSubtotalZero
+        hasUnassignedItem || isItemSubtotalZeroOrLess
     }
     
     var isPayerAssignmentIncomplete: Bool {
@@ -43,11 +43,28 @@ import SwiftUI
     }
     
     var shouldShowItemSubtotalZeroWarning: Bool {
-        !hasUnassignedItem && isItemSubtotalZero
+        !hasUnassignedItem && isItemSubtotalZeroOrLess
+    }
+    
+    func isSubtotalNegative(for payer: Payer) -> Bool {
+        shares.reduce(0) { partialResult, share in
+            guard 
+                share.payerID == payer.id,
+                let item = items.first(where: { $0.id == share.itemID })
+            else {
+                return partialResult
+            }
+            return partialResult + share.realQuantity * item.price
+        } < 0
+    }
+    
+    var hasPayerWithNegativeSubtotal: Bool {
+        payers.contains(where: isSubtotalNegative(for:))
     }
     
     var canCalculate: Bool {
-        !isReceiptStageIncomplete && !isItemAssignmentIncomplete && !isPayerAssignmentIncomplete
+        !isReceiptStageIncomplete && !isItemAssignmentIncomplete &&
+        !isPayerAssignmentIncomplete && !hasPayerWithNegativeSubtotal
     }
 }
 

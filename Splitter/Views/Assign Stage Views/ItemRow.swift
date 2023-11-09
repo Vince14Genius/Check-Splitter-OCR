@@ -48,12 +48,11 @@ struct ItemRow: View {
                         .font(.caption)
                 }
             }
-            HStack {
+            HStack(alignment: .bottom) {
                 if payers.isEmpty {
                     Label("No payers assigned", systemImage: "exclamationmark.triangle.fill")
                         .foregroundStyle(.red)
                         .font(.caption)
-                    Spacer()
                 } else {
                     PayerShareList(
                         item: item,
@@ -62,6 +61,7 @@ struct ItemRow: View {
                         indexOfShareToEdit: $indexOfShareToEdit
                     )
                 }
+                Spacer()
                 CreateShareMenu(
                     item: item,
                     assignedPayers: payers,
@@ -85,7 +85,6 @@ struct ItemRow: View {
                 if let indexOfShareToEdit {
                     flowState.shares.remove(at: indexOfShareToEdit)
                 }
-                indexOfShareToEdit = nil
             }
         }
     }
@@ -98,17 +97,15 @@ private struct PayerShareList: View {
     @Binding var indexOfShareToEdit: [Share].Index?
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(payers) { payer in
-                    ShareButton(
-                        title: payer.name,
-                        itemID: item.id,
-                        payerID: payer.id,
-                        flowState: $flowState,
-                        indexOfShareToEdit: $indexOfShareToEdit
-                    )
-                }
+        VStack(alignment: .leading) {
+            ForEach(payers) { payer in
+                ShareButton(
+                    title: payer.name,
+                    itemID: item.id,
+                    payerID: payer.id,
+                    flowState: $flowState,
+                    indexOfShareToEdit: $indexOfShareToEdit
+                )
             }
         }
     }

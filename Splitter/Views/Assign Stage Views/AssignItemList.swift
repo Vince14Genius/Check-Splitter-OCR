@@ -19,7 +19,7 @@ struct AssignItemList: View {
         List(selection: $multiSelection) {
             if flowState.shouldShowItemSubtotalZeroWarning {
                 Label {
-                    Text("The subtotal of assigned items cannot be zero.")
+                    Text("The subtotal of assigned items cannot be zero or less.")
                 } icon: {
                     Image(systemName: "exclamationmark.triangle.fill")
                 }

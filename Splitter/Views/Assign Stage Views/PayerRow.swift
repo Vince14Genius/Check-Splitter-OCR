@@ -28,43 +28,42 @@ struct PayerRow: View {
             HStack {
                 Text(payer.name)
                     .font(.title2)
+                Button {
+                    isPresentingPayerEditorSheet = true
+                } label: {
+                    Label("Edit payer", systemImage: "pencil")
+                        .labelStyle(.iconOnly)
+                }
+                .buttonStyle(.borderless)
+                .disabled(isEditing)
                 Spacer()
                 Text("\(items.count) items")
                     .foregroundStyle(items.isEmpty && isEditing ? .red : .secondary)
                     .font(.body.monospacedDigit())
             }
-            if !isEditing {
-                HStack {
-                    if items.isEmpty {
-                        Label("No items assigned", systemImage: "exclamationmark.triangle.fill")
-                            .foregroundStyle(.red)
-                            .font(.caption)
-                        Spacer()
-                    } else {
-                        ItemShareList(
-                            payer: payer,
-                            items: items,
-                            flowState: $flowState,
-                            indexOfShareToEdit: $indexOfShareToEdit
-                        )
-                    }
-                    Spacer()
-                    Button {
-                        isPresentingPayerEditorSheet = true
-                    } label: {
-                        Label("Edit payer", systemImage: "pencil")
-                            .labelStyle(.iconOnly)
-                    }
-                    .buttonStyle(.bordered)
-                    CreateShareMenu(
+            HStack(alignment: .bottom) {
+                if items.isEmpty {
+                    Label("No items assigned", systemImage: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.red)
+                        .font(.caption)
+                } else {
+                    ItemShareList(
                         payer: payer,
-                        assignedItems: items,
-                        indexOfShareToEdit: $indexOfShareToEdit,
-                        flowState: $flowState
+                        items: items,
+                        flowState: $flowState,
+                        indexOfShareToEdit: $indexOfShareToEdit
                     )
-                    .buttonStyle(.bordered)
                 }
+                Spacer()
+                CreateShareMenu(
+                    payer: payer,
+                    assignedItems: items,
+                    indexOfShareToEdit: $indexOfShareToEdit,
+                    flowState: $flowState
+                )
+                .buttonStyle(.bordered)
             }
+            .disabled(isEditing)
         }
         .id(payer.id)
         .selectionDisabled(!isEditing)
@@ -90,7 +89,6 @@ struct PayerRow: View {
                 if let indexOfShareToEdit {
                     flowState.shares.remove(at: indexOfShareToEdit)
                 }
-                indexOfShareToEdit = nil
             }
         }
     }
@@ -103,17 +101,20 @@ private struct ItemShareList: View {
     @Binding var indexOfShareToEdit: [Share].Index?
     
     var body: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(items) { item in
-                    ShareButton(
-                        title: item.name,
-                        itemID: item.id,
-                        payerID: payer.id,
-                        flowState: $flowState,
-                        indexOfShareToEdit: $indexOfShareToEdit
-                    )
-                }
+        VStack(alignment: .leading) {
+            if flowState.isSubtotalNegative(for: payer) {
+                Label("The subtotal for this payer is negative", systemImage: "exclamationmark.triangle.fill")
+                    .foregroundStyle(.red)
+                    .font(.caption2)
+            }
+            ForEach(items) { item in
+                ShareButton(
+                    title: item.name,
+                    itemID: item.id,
+                    payerID: payer.id,
+                    flowState: $flowState,
+                    indexOfShareToEdit: $indexOfShareToEdit
+                )
             }
         }
     }

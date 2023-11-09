@@ -120,13 +120,15 @@ struct QuantityEditorSheet: View {
                 .buttonStyle(.borderedProminent)
                 .disabled(isInvalid)
                 .keyboardShortcut(.return, modifiers: [])
-            Button("Unassign", role: .destructive, action: unassignAction)
-                .buttonStyle(.bordered)
+            Button("Unassign", role: .destructive) {
+                unassignAction()
+                dismissAction()
+            }
+            .buttonStyle(.bordered)
         }
         .padding()
         .presentationBackground(.thinMaterial)
         .presentationDetents([.medium])
-        .interactiveDismissDisabled()
         .animation(.easeInOut, value: showsFractionEditor)
     }
 }
