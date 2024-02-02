@@ -10,7 +10,8 @@ import SwiftUI
 struct PayerEditor: View {
     @Binding var payer: Payer
     @Binding var flowState: SplitterFlowState
-    let dismissAction: () -> Void
+    let doneAction: () -> Void
+    var cancelAction: (() -> Void)?
     
     @FocusState private var isNameFieldFocused: Bool
     @State private var shareToEdit: Share?
@@ -117,10 +118,16 @@ struct PayerEditor: View {
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    Button("Done", action: dismissAction)
+                    Button("Done", action: doneAction)
                         .bold()
                         .disabled(isInvalid)
                         .keyboardShortcut(.return, modifiers: .command)
+                }
+                if let cancelAction {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("Cancel", action: cancelAction)
+                            .keyboardShortcut(.escape, modifiers: [])
+                    }
                 }
             }
             .onAppear {
@@ -164,7 +171,7 @@ struct PayerEditor: View {
     PayerEditor(
         payer: .constant(SplitterFlowState.sampleData.payers[0]),
         flowState: .constant(.init())
-    ) {}
+    ) {} cancelAction: {}
 }
 
 #Preview {

@@ -94,6 +94,9 @@ struct AssignStage: View {
                     // adding new payer
                     flowState.payers.append(payerToEdit)
                 }
+            } cancelAction: {
+                payerToEdit = .init(name: "")
+                isPresentingPayerEditor = false
             }
             .presentationDetents([.medium])
             .presentationBackground(.thinMaterial)
