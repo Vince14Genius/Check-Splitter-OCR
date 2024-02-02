@@ -23,18 +23,15 @@ struct QuantityEditorSheet: View {
     var body: some View {
         VStack {
             HStack {
-                Text("Item")
-                    .fontWeight(.light)
+                Text("Item").fontWeight(.light)
                 Spacer()
-                Text("for Payer")
-                    .fontWeight(.light)
+                Text(itemName).bold()
             }
             HStack {
-                Text(itemName)
+                Text("Payer").fontWeight(.light)
                 Spacer()
-                Text(payerName)
+                Text(payerName).bold()
             }
-            .bold()
             Divider()
             VStack(alignment: .leading) {
                 HStack {
