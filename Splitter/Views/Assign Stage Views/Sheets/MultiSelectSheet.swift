@@ -162,6 +162,43 @@ struct MultiSelectSheet: View {
                         .disabled(multiSelection.isEmpty)
                     }
                 }
+                ToolbarItem(placement: .bottomBar) {
+                    HStack {
+                        Button("Select All") {
+                            switch data {
+                            case .items(let payer):
+                                flowState.items.filter {
+                                    !hasShare(item: $0, payer: payer)
+                                }.forEach {
+                                    multiSelection.insert($0)
+                                }
+                            case .payers(let item):
+                                flowState.payers.filter {
+                                    !hasShare(item: item, payer: $0)
+                                }.forEach {
+                                    multiSelection.insert($0)
+                                }
+                            }
+                        }
+                        .disabled({
+                            switch data {
+                            case .items(let payer):
+                                flowState.items.filter {
+                                    !hasShare(item: $0, payer: payer)
+                                }.count
+                            case .payers(let item):
+                                flowState.payers.filter {
+                                    !hasShare(item: item, payer: $0)
+                                }.count
+                            }
+                        }() == multiSelection.count)
+                        Divider()
+                        Button("Deselect All") {
+                            multiSelection = []
+                        }
+                        .disabled(multiSelection.isEmpty)
+                    }
+                }
             }
             .environment(\.editMode, $editMode)
             .onAppear {
